@@ -1,0 +1,140 @@
+/**
+ * layout.scss
+ */
+
+html {
+
+}
+
+
+
+body {
+
+}
+
+
+
+/**
+ * list of headings
+ * @string {String}
+ */
+// $headings: "h1, h2, h3, h4, h5, h6";
+
+// @each $item in $headings {
+// 	#{$item} {
+// 		font-style: normal;
+// 		font-weight: inherit;
+// 	}
+// }
+
+
+
+/**
+ * Processwire related
+ */
+ul, ol {
+	margin-left: 0;
+	padding-left: 0;
+	list-style: none;
+}
+
+// Styles in CKEditor => mystyles.js
+.align_right {
+	float: left;
+	margin-right: $inuit-base-spacing-unit;
+	margin-bottom: $inuit-base-spacing-unit;
+
+	@include media-query(desk) {
+		float: right;
+		margin-left: $inuit-base-spacing-unit--large;
+		margin-bottom: $inuit-base-spacing-unit;
+	}
+}
+
+
+
+
+header[role='banner'] {
+
+}
+
+
+
+header[role='banner'] .nav {
+
+	li {
+		margin-right: $inuit-base-spacing-unit;
+
+		&:last-of-type {
+			margin-right: 0;
+		}
+	}
+
+	a, .current {
+		color: $base-link-color;
+		text-decoration: none;
+		transition: all .1s;
+
+		&:hover, &:active, &:focus {
+			color: $base-link-hover-color;
+		}
+	}
+}
+
+
+
+
+main[role='main'] {
+
+}
+
+
+
+/*section*/.content {
+
+}
+
+
+
+/*aside*/.sidebar {
+
+}
+
+
+
+footer[role='contentinfo'] {
+
+}
+
+
+
+.section-heading {
+
+}
+
+
+
+.section-body {
+
+}
+
+
+.logo {
+	background: transparent url(../img/logo.svg) 0 0 no-repeat;
+	background-size: contain;
+	text-indent: -9999px;
+	width: 200px;
+	height: 47px;
+	line-height: 1;
+	margin-bottom: 0;
+}
+
+
+
+
+.btn {
+	transition: all .1s;
+	&:hover, &:active, &:focus {
+		color: $btn-color-hover;
+	}
+}

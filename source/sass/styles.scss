@@ -1,0 +1,17 @@
+/**
+ * The compiled sass output of this file becomes
+ * the main CSS stylesheet to adress in your HTML
+ */
+
+// Project configuration
+@import "configuration";
+
+// Global bootstrap of inuit modules
+@import "bootstrap";
+
+// project section styles
+@import "core/vertical-rhythm";
+@import "core/classes";
+
+// project section styles
+@import "project/layout";
