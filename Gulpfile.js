@@ -340,7 +340,7 @@ gulp.task('watch', function() {
   ).on('change', bs.reload);
 
 
-  gulp.watch('source/img/svg/sprites/icons/*',
+  gulp.watch('source/img/icon-sprite/*',
     [
       'process:icons'
     ]
