@@ -1,0 +1,78 @@
+# Sass source input
+# scss_files: 'source/sass/**/*.scss'
+
+# Exclude third party files
+exclude: 'source/sass/core/_core.normalize.scss'
+
+linters:
+  Comment:
+    enabled: false
+
+  LeadingZero:
+    enabled: true
+    style: include_zero
+
+  BemDepth:
+    enabled: true
+    max_elements: 2
+
+  EmptyRule:
+    enabled: false
+
+  MergeableSelector:
+    enabled: true
+    force_nesting: false
+
+  NameFormat:
+    enabled: true
+    allow_leading_underscore: false
+    convention: hyphenated_lowercase
+
+  NestingDepth:
+    enabled: true
+    max_depth: 3
+
+  SelectorDepth:
+    enabled: true
+    max_depth: 3
+
+  SelectorFormat:
+    enabled: true
+    convention: hyphenated_BEM
+
+  SingleLinePerSelector:
+    enabled: false
+
+  StringQuotes:
+    enabled: true
+    style: single_quotes
+
+  ImportantRule:
+    enabled: false
+
+  PropertySortOrder:
+    enabled: false
+    order:
+      - extend
+      - include
+      -
+      - content
+      - display
+      - position
+      - z-index
+      - left
+      - right
+      - top
+      - bottom
+      -
+      - width
+      - height
+      - margin
+      - padding
+      -
+      - color
+      - background
+      - background-size
+      - opacity
+    separate_groups: false
+

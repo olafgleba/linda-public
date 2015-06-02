@@ -1,0 +1,141 @@
+/**
+ * Core button component
+ *
+ * Heavily inspired by <https://github.com/suitcss/components-grid/>
+ *
+ * DO NOT apply dimension or offset utilities to the `grid` element. All cell
+ * widths and offsets should be applied to child grid cells only.
+ */
+
+$button-font:             inherit !default;
+$button-font-size:        $base-font-size !default;
+$button-border-width:     1px !default;
+$button-border-style:     solid !default;
+$button-border-radius:    0 !default;
+$button-color:            currentColor !default;
+$button-bg-color:         transparent !default;
+$button-disabled-opacity: 0.5 !default;
+$button-padding:          $base-spacing-unit !default;
+
+// Button Sizes
+$button-padding--tiny:  quarter($button-padding) !default;
+$button-padding--small: halve($button-padding) !default;
+$button-padding--large: double($button-padding) !default;
+$button-padding--huge:  quadruple($button-padding) !default;
+
+
+/**
+ * The button classes are best applied to links, buttons, and submit inputs.
+ * These components can be used in forms, as calls to action, or as part of the
+ * general UI of the site/app.
+ */
+
+/**
+ * 1. Corrects inability to style clickable `input` types in iOS.
+ * 2. Normalize `box-sizing` across all elements that this component could be
+ *    applied to.
+ * 3. Inherit text color from ancestor.
+ * 4. Inherit font styles from ancestor.
+ * 5. Normalize `line-height`. For `input`, it can't be changed from `normal` in Firefox 4+.
+ * 6. Prevent button text from being selectable.
+ * 7. Make sure `input` will wrap text across multiple lines.
+ */
+
+// scss-lint:disable DuplicateProperty
+
+.button {
+  -webkit-appearance: none; /* 1 */
+  background: $button-bg-color;
+  border-color: $button-color;
+  border-style: $button-border-style;
+  border-width: $button-border-width;
+  box-sizing: border-box; /* 2 */
+  color: $button-color; /* 3 */
+  cursor: pointer;
+  display: inline-block;
+  font: $button-font; /* 4 */
+  line-height: normal; /* 5 */
+  margin: 0;
+  padding: halve($button-padding) $button-padding;
+  border-radius: $button-border-radius;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none; /* 6 */
+  white-space: normal; /* 7 */
+}
+
+/**
+ * Remove excess padding and border in Firefox 4+
+ */
+
+.button::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+/**
+ * Work around a Firefox/IE bug where the transparent `button` background
+ * results in a loss of the default `button` focus styles.
+ */
+
+.button:focus {
+  outline: 1px dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+}
+
+/**
+ * UI states
+ */
+
+.button:hover,
+.button:focus,
+.button:active {
+  text-decoration: none;
+}
+
+.button:disabled,
+.button.is-disabled {
+  cursor: default;
+  opacity: $button-disabled-opacity;
+}
+
+
+/**
+ * Modifiers: Blow/shrink buttons
+ */
+.button--tiny {
+  padding: halve($button-padding--tiny) $button-padding--tiny;
+}
+
+.button--small {
+  padding: halve($button-padding--small) $button-padding--small;
+}
+
+.button--large {
+  padding: halve($button-padding--large) $button-padding--large;
+}
+
+.button--huge {
+  padding: halve($button-padding--huge) $button-padding--huge;
+}
+
+
+/**
+ * Modifier: Take away any rectangle borders
+ */
+
+.button--pill {
+  border-radius: 100px;
+}
+
+
+/**
+ * Modifier: Make the button fill the width of its parent
+ */
+
+.button--full {
+  width: 100%;
+}
+
+// scss-lint:enable DuplicateProperty

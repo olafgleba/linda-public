@@ -2,14 +2,89 @@
  * layout.scss
  */
 
-html {
+html { }
 
+
+body { }
+
+
+.page {
+  margin: 0 auto;
+  max-width: 64em;
+  padding: $base-spacing-unit;
 }
 
 
 
-body {
+.icon {
+  width: ($base-font-size / 16px) * 1em;
+  height: ($base-font-size / 16px) * 1em;
+  vertical-align: middle;
+  display: inline-block;
 
+  transition: all 0.5s;
+  fill: $black;
+
+  a:hover & {
+    fill: $orange;
+  }
+}
+
+
+
+
+a {
+  //background-color: #f2f2f2;
+
+  transition: all 0.5s;
+  text-decoration: none;
+
+  &:hover {
+    color: $orange;
+  }
+}
+
+
+
+
+
+
+
+
+// For automatic calculation of srcset and sizes
+// img[data-sizes="auto"] {
+//   display: block;
+//   max-width: none;
+//   width: 100%;
+//   height: auto;
+// }
+
+
+.lazyload,
+.lazyloading {
+  opacity: 0 !important;
+}
+
+.lazyloaded {
+  opacity: 1;
+  transition: opacity 0.2s ease-in !important;
+}
+
+
+
+
+
+
+
+// just testing, remove if ready
+.grid__cell > div {
+  background-color: $orange;
+  margin-bottom: 1em;
+}
+
+.grid__cell {
+
+  margin-bottom: 1em;
 }
 
 
@@ -21,10 +96,10 @@ body {
 // $headings: "h1, h2, h3, h4, h5, h6";
 
 // @each $item in $headings {
-// 	#{$item} {
-// 		font-style: normal;
-// 		font-weight: inherit;
-// 	}
+//  #{$item} {
+//    font-style: normal;
+//    font-weight: inherit;
+//  }
 // }
 
 
@@ -32,65 +107,72 @@ body {
 /**
  * Processwire related
  */
-ul, ol {
-	margin-left: 0;
-	padding-left: 0;
-	list-style: none;
-}
+// ul, ol {
+//   margin-left: 0;
+//   padding-left: 0;
+//   list-style: none;
+// }
 
 // Styles in CKEditor => mystyles.js
+// scss-lint:disable SelectorFormat
 .align_right {
-	float: left;
-	margin-right: $inuit-base-spacing-unit;
-	margin-bottom: $inuit-base-spacing-unit;
+  float: left;
+  margin-right: $base-spacing-unit;
+  margin-bottom: $base-spacing-unit;
 
-	@include media-query(desk) {
-		float: right;
-		margin-left: $inuit-base-spacing-unit--large;
-		margin-bottom: $inuit-base-spacing-unit;
-	}
+  @include media-query(desk) {
+    float: right;
+    margin-left: $base-spacing-unit--large;
+    margin-bottom: $base-spacing-unit;
+  }
+}
+// scss-lint:enable SelectorFormat
+
+
+
+/*header*/.page-header {
+
 }
 
-
-
-
-header[role='banner'] {
-
-}
-
-
-
-header[role='banner'] .nav {
-
-	li {
-		margin-right: $inuit-base-spacing-unit;
-
-		&:last-of-type {
-			margin-right: 0;
-		}
-	}
-
-	a, .current {
-		color: $base-link-color;
-		text-decoration: none;
-		transition: all .1s;
-
-		&:hover, &:active, &:focus {
-			color: $base-link-hover-color;
-		}
-	}
-}
-
-
-
-
-main[role='main'] {
+/*header*/.page-header--banner {
 
 }
 
 
+/*footer*/.page-footer {
 
-/*section*/.content {
+}
+
+/*footer*/.page-footer--contentinfo {
+
+}
+
+
+// .nav {
+
+//   li {
+//     margin-right: $base-spacing-unit;
+
+//     &:last-of-type {
+//       margin-right: 0;
+//     }
+//   }
+
+//   a, .current {
+//     color: $base-link-color;
+//     text-decoration: none;
+//     transition: all 0.1s;
+
+//     &:hover, &:active, &:focus {
+//       color: $base-link-hover-color;
+//     }
+//   }
+// }
+
+
+
+
+/*main*/.page-content {
 
 }
 
@@ -102,39 +184,35 @@ main[role='main'] {
 
 
 
-footer[role='contentinfo'] {
+/*hx*/.section-heading {
 
 }
 
 
 
-.section-heading {
+/*div*/.section-body {
 
 }
 
-
-
-.section-body {
-
-}
 
 
 .logo {
-	background: transparent url(../img/logo.svg) 0 0 no-repeat;
-	background-size: contain;
-	text-indent: -9999px;
-	width: 200px;
-	height: 47px;
-	line-height: 1;
-	margin-bottom: 0;
+  // width: 200px;
+  // height: 47px;
+  // background: transparent url('../img/logo.svg') 0 0 no-repeat;
+  // background-size: contain;
+  // text-indent: -9999px;
+  // line-height: 1;
+  // margin-bottom: 0;
 }
 
 
 
 
 .btn {
-	transition: all .1s;
-	&:hover, &:active, &:focus {
-		color: $btn-color-hover;
-	}
+  transition: all 0.1s;
+
+  &:hover, &:active, &:focus {
+    color: $btn-color-hover;
+  }
 }

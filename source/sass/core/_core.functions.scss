@@ -1,0 +1,38 @@
+/**
+ * Core fucntions. They are heavily used within nearly all core and
+ * project files.
+ */
+
+/* ===================================================================== */
+
+
+/**
+ * Math helpers. Returning rounded quarter, halve, double and
+ * quadruple integers.
+ *
+ * Usage example:
+ *  .foo {
+ *    padding: halve(10px);
+ *  }
+ *
+ * Output:
+ *  .foo {
+ *    padding: 5px;
+ *  }
+ */
+
+@function quarter($math-number) {
+  @return round($math-number / 4);
+}
+
+@function halve($math-number) {
+  @return round($math-number / 2);
+}
+
+@function double($math-number) {
+  @return round($math-number * 2);
+}
+
+@function quadruple($math-number) {
+  @return round($math-number * 4);
+}

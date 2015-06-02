@@ -1,0 +1,72 @@
+/**
+ * Static and responsive width classes
+ *
+ * This generates utility width classes for every breakpoint we've
+ * initially defined in `_core.variables.scss` through a extension of the
+ * @widths mixin. By default this will create wholes, halves, thirds,
+ * quarters and fifths. Override/extend this Map in `_configuration.scss`
+ * as needed.
+ */
+
+
+/**
+ * Define how many columns do we want.
+ */
+
+$widths-columns: (
+    1,
+    2,
+    3,
+    4,
+    5
+) !default;
+
+
+
+/**
+ * Iterate over given columns and create static width classes.
+ *
+ * Output:
+ *
+ * // $use-fraction: true;
+ * .u-1/2
+ *
+ * // $use-fraction: false;
+ * .u-1of2
+ */
+
+@each $widths-column in $widths-columns {
+  @include widths($widths-column);
+}
+
+
+
+/**
+ * Iterate over given columns and breakpoints and create
+ * responsive width classes.
+ *
+ * Output:
+ *
+ * // $use-fraction: true;
+ * .u-1/2-palm
+ *
+ * // $use-fraction: false;
+ * .u-1of2-palm
+ */
+
+@each $breakpoint in $breakpoints {
+
+  // Get the name of the breakpoint.
+  $alias: nth($breakpoint, 1);
+
+  @include media-query($alias) {
+
+    // Loop through each of our column sizes and generate its responsive width
+    // classes.
+    @each $widths-column in $widths-columns {
+      @include widths($widths-column, -#{$alias});
+    }
+
+  }
+
+}

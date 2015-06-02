@@ -1,0 +1,123 @@
+/**
+ * Core button group component
+ *
+ * Heavily inspired by <https://github.com/suitcss/components-grid/>
+ */
+
+$button-group-font-size:     $base-font-size !default;
+$button-group-border-radius: 0 !default;
+
+
+/**
+ * Create a visual connection between UI actions that belong together.
+ * Must only contain `button-group__item` objects as children.
+ *
+ * Example HTML:
+ *
+ * <div class="button-group [button-group--horizontal] [button-group--collapse]">
+ *   <div class="button-group__item">
+ *     <a class="button" href="#">Dashboard</a>
+ *   </div>
+ *   <div class="button-group__item">
+ *     <a class="button" href="#">Account</a>
+ *   </div>
+ *   <div class="button-group__item">
+ *     <a class="button" href="#">Logout</a>
+ *   </div>
+ * </div>
+ */
+
+/**
+ * Button group
+ *
+ * 1. Ensure component is full-width if applied to elements that are
+ *    `inline-block` by default.
+ * 2. Collapse whitespace between child elements. Only necessary for the
+ *    `button-group--horizontal` modifier which lays items out as
+ *    `inline-block`, but included in the base component so that affects
+ *    on `font-size` are consistent.
+ * 3. Remove any default styles that might be present when `ol` or `ul` are the
+ *    root element.
+ */
+
+// scss-lint:disable SelectorDepth
+
+.button-group {
+  display: block; /* 1 */
+  font-size: 0; /* 2 */
+  margin: 0; /* 3 */
+  list-style: none; /* 3 */
+  padding: 0; /* 3 */
+}
+
+/**
+ * Button group item
+ *
+ * 1. Make it full-width if applied to elements that are `inline-block` by
+ *    default.
+ * 2. Reset the font size of the buttons to the root font size.
+ */
+
+.button-group__item {
+  display: block; /* 1 */
+  font-size: $button-group-font-size; /* 2 */
+}
+
+.button-group__item > .button {
+  display: block;
+  width: 100%;
+}
+
+/**
+ * Ensure that interactions with a button make it sit on top of other buttons
+ * in the group.
+ */
+
+.button-group__item > .button:hover,
+.button-group__item > .button:focus,
+.button-group__item > .button:active,
+.button-group__item > .button.is-pressed {
+  z-index: 1;
+}
+
+
+/**
+ * Modifier: horizontal buttons
+ */
+
+.button-group--horizontal > .button-group__item {
+  display: inline-block;
+}
+
+
+/**
+ * Modifier: get rid of overlaping borders, apply border-radius as needed
+ */
+
+.button-group--collapse:not(.button-group--horizontal) > .button-group__item {
+  margin-top: -$button-border-width;
+}
+
+.button-group--collapse.button-group--horizontal > .button-group__item {
+  margin-left: -$button-border-width;
+}
+
+.button-group--collapse.button-group--horizontal > .button-group__item > .button {
+  border-radius: $button-group-border-radius;
+}
+
+.button-group--collapse.button-group--horizontal > .button-group__item:not(:first-child):not(:last-child) > .button {
+  border-radius: 0;
+}
+
+.button-group--collapse.button-group--horizontal > .button-group__item:first-child:not(:only-child) > .button {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.button-group--collapse.button-group--horizontal > .button-group__item:last-child:not(:only-child) > .button {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+
+// scss-lint:enable SelectorDepth

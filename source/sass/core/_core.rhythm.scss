@@ -1,0 +1,48 @@
+/**
+ * These elements' values are usually the same as the base line-height.
+ * Add/remove elements if needed. Make sure you only add elements which
+ * margin-bottom values are unlikely to redefine later.
+ *
+ * This concept features the `single-direction` approach:
+ * Info: csswizardry.com/2012/06/single-direction-margin-declarations
+ */
+
+h1, h2, h3, h4, h5, h6,
+ul, ol, dl,
+blockquote, p, address,
+hr,
+table,
+fieldset, figure,
+pre,
+%margin-bottom {
+  margin-bottom: ($base-spacing-unit / $base-font-size) * 1rem;
+}
+
+
+
+/**
+ * Some extra placeholders for our laziness ;-)
+ * Extends vertical rhythm placeholder `%margin-bottom` (s. above)
+ *
+ * Example:
+ *
+ * .foo {
+ *    @extend %margin-bottom-quarter;
+ *  }
+ */
+
+%margin-bottom--quarter {
+  margin-bottom: (quarter($base-spacing-unit) / $base-font-size) * 1rem;
+}
+
+%margin-bottom--half {
+  margin-bottom: (halve($base-spacing-unit) / $base-font-size) * 1rem;
+}
+
+%margin-bottom--double {
+  margin-bottom: (double($base-spacing-unit) / $base-font-size) * 1rem;
+}
+
+%margin-bottom--quadruple {
+  margin-bottom: (quadruple($base-spacing-unit) / $base-font-size) * 1rem;
+}

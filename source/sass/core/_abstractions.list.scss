@@ -1,0 +1,212 @@
+/**
+ * Core list component
+ *
+ * Several raw list abstractions which solves daily "bread and butter"
+ * lists. Additionally these abstractions helps us to build meaningful
+ * components.
+ */
+
+$list-padding:   $base-spacing-unit !default;
+$list-font-size: $base-font-size !default;
+
+$list-padding--tiny:  quarter($list-padding) !default;
+$list-padding--small: halve($list-padding) !default;
+$list-padding--large: double($list-padding) !default;
+$list-padding--huge:  quadruple($list-padding) !default;
+
+
+// scss-lint:disable NameFormat
+
+/**
+ * List bare
+ *
+ * Simply removes the list-style and get rid of margin/paddings
+ * that might be present. The abstraction is used in nearly all other
+ * list abstractions per @extend as we probably never want list styles
+ * to appear within those components.
+ */
+
+.list-bare,
+%list-bare {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+
+
+
+
+/**
+ * List inline block
+ *
+ * Set a list in horizontal inline block mode.
+ *
+ * 1. Remove inter-cell whitespace that appears between
+ *    `inline-block` child elements.
+ * 2. Reset font size change made in `list-inline-block`.
+ */
+
+.list-inline-block {
+  @extend %list-bare;
+
+  font-size: 0; /* 1 */
+
+  > li {
+    @extend %list-inline-block__item;
+  }
+}
+
+/**
+ * Child of `.list-inline-block`
+ */
+
+.list-inline-block__item,
+%list-inline-block__item {
+  display: inline-block;
+  font-size: $list-font-size; /* 2 */
+}
+
+
+
+
+/**
+ * List stacked
+ *
+ * Set a list in vertical block mode.
+ */
+
+.list-stacked {
+  @extend %list-bare;
+
+  > li {
+    @extend %list-stacked__item;
+  }
+}
+
+/**
+ * Child of `.list-stacked`
+ */
+
+.list-stacked__item,
+%list-stacked__item {
+  display: block;
+}
+
+
+
+
+
+
+/**
+ * List table
+ *
+ * Set list in table mode. Spreads every list item to have equal widths.
+ *
+ * 1. Spread the list to assume whole viewport width, regardless of how
+ *    many (list) columns are applied.
+ * 2. Give all list items a equal width.
+ */
+
+.list-table {
+  @extend %list-bare;
+
+  display: table; // [1]
+  table-layout: fixed; // [2]
+  width: 100%;
+
+  > li {
+    @extend %list-table__item;
+  }
+}
+
+/**
+ * Child of `.list-table`
+ */
+
+.list-table__item,
+%list-table__item {
+  display: table-cell;
+  width: 1%; // [3]
+  text-align: left;
+}
+
+
+
+
+
+
+/**
+ * List chart
+ *
+ *
+ */
+
+.list-chart {
+  @extend %list-bare;
+
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.list-chart__label {
+  width: 50%;
+}
+
+.list-chart__value {
+  white-space: nowrap;
+}
+
+
+
+
+
+/**
+ * Modifiers: Align the content of list items
+ */
+
+.list--align-center {
+  > li {
+    text-align: center;
+  }
+}
+
+.list--align-right {
+  > li {
+    text-align: right;
+  }
+}
+
+
+
+
+
+/**
+ * Modifiers: Blow/shrink list items
+ */
+.list--tiny {
+  > li {
+    padding: $list-padding--tiny;
+  }
+}
+
+.list--small {
+  > li {
+    padding: $list-padding--small;
+  }
+}
+
+.list--large {
+  > li {
+    padding: $list-padding--large;
+  }
+}
+
+.list--huge {
+  > li {
+    padding: $list-padding--huge;
+  }
+}
+
+// scss-lint:enable NameFormat

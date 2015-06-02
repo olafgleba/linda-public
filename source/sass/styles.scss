@@ -4,14 +4,10 @@
  */
 
 // Project configuration
-@import "configuration";
+@import 'configuration';
 
-// Global bootstrap of inuit modules
-@import "bootstrap";
-
-// project section styles
-@import "core/vertical-rhythm";
-@import "core/classes";
+// Global bootstrap core modules
+@import 'bootstrap';
 
 // project section styles
-@import "project/layout";
+@import 'project/layout';

@@ -1,0 +1,21 @@
+/**
+ * Partial to reset several defaults, e.g. box model related
+ * values of arbitrary element to establish a vertical rhythm
+ * (s. `_core.rhythm.scss` also).
+ */
+
+
+/**
+ * To establish a vertical rhythm we reset the browser defaults.
+ */
+body,
+h1, h2, h3, h4, h5, h6,
+p, blockquote, pre,
+dl, dd, ol, ul,
+form, fieldset, legend,
+figure,
+table, th, td, caption,
+hr {
+  margin: 0;
+  padding: 0;
+}

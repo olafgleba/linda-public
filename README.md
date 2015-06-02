@@ -2,8 +2,15 @@
 
 ## Getting started
 
-* * Clone the git repo: `$ git clone https://github.com/olafgleba/linda.git`
+* Clone the git repo: `$ git clone https://github.com/olafgleba/linda.git`
 * `npm install`, `bower install`
-* `$ gulp`
 
-Processwire CMS is not part of the environment. Install it in the **app/** folder. After installation replace the template folder within your site folder with the contents of the **processwire-transfer** folder.
+## Development
+
+* `$ gulp build`
+
+## Production
+
+* `$ gulp build --production`
+
+Processwire CMS is not part of the environment. Install a fresh copy in the **app/** folder. When the installation is done replace site folder files (`app/site/`) with their counterparts youl'll find in the **processwire-transfer** folder. At least enter your DB credentials in the `config.php` file.

@@ -1,0 +1,45 @@
+/**
+ * Core SASS default settings
+ *
+ * Core variables used throughout several objects/plugins
+ */
+
+
+/**
+ * Default variables
+ */
+
+$base-font-size:              16px !default;
+$base-line-height:            24px !default;
+$base-text-color:             #222 !default;
+$base-background-color:       #fff !default;
+
+
+
+/**
+ * Framework variables
+ */
+
+$base-spacing-unit:           $base-line-height;
+$base-spacing-unit--tiny:     round($base-spacing-unit / 4);
+$base-spacing-unit--small:    round($base-spacing-unit / 2);
+$base-spacing-unit--large:    round($base-spacing-unit * 2);
+$base-spacing-unit--huge:     round($base-spacing-unit * 4);
+
+
+
+/**
+ * Framework media queries breakpoints
+ *
+ * Hold our breakpoint aliases and conditions in a list. Invoked through
+ * `media-query()` mixin.
+ */
+
+$breakpoints: (
+  'palm'          'screen and (max-width: 44.9375em)',
+  'lap'           'screen and (min-width: 45em) and (max-width: 63.9375em)',
+  'lap-and-down'  'screen and (max-width: 63.9375em)',
+  'lap-and-up'    'screen and (min-width: 45em)',
+  'desk'          'screen and (min-width: 64em)',
+  'desk-wide'     'screen and (min-width: 75em)'
+) !default;
