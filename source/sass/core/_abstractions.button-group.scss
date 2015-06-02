@@ -82,7 +82,7 @@ $button-group-border-radius: 0 !default;
 
 
 /**
- * Modifier: horizontal buttons
+ * Modifier: Horizontal buttons
  */
 
 .button-group--horizontal > .button-group__item {
@@ -91,7 +91,7 @@ $button-group-border-radius: 0 !default;
 
 
 /**
- * Modifier: get rid of overlaping borders, apply border-radius as needed
+ * Modifier: Get rid of overlaping borders, apply border-radius as needed
  */
 
 .button-group--collapse:not(.button-group--horizontal) > .button-group__item {

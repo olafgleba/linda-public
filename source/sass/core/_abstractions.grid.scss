@@ -39,7 +39,7 @@ $grid-gutter-size--huge:  quadruple($grid-gutter-size) !default;
 }
 
 /**
- * Modifier: center align all grid cells
+ * Modifier: Center align all grid cells
  */
 
 .grid--align-center {
@@ -47,7 +47,7 @@ $grid-gutter-size--huge:  quadruple($grid-gutter-size) !default;
 }
 
 /**
- * Modifier: right align all grid cells
+ * Modifier: Right align all grid cells
  */
 
 .grid--align-right {
@@ -63,7 +63,7 @@ $grid-gutter-size--huge:  quadruple($grid-gutter-size) !default;
 }
 
 /**
- * Modifier: bottom-align grid cells
+ * Modifier: Bottom-align grid cells
  */
 
 .grid--align-bottom > .grid__cell {
@@ -73,7 +73,7 @@ $grid-gutter-size--huge:  quadruple($grid-gutter-size) !default;
 
 
 /**
- * Modifier: gutters
+ * Modifier: Gutters
  *
  * NOTE: this can trigger a horizontal scrollbar if the component is as wide as
  * the viewport. Use padding on a container, or `overflow-x:hidden` to protect
@@ -90,7 +90,7 @@ $grid-gutter-size--huge:  quadruple($grid-gutter-size) !default;
 
 
 /**
- * Gutters size modifier
+ * Modifiers: Blow/shrink gutters
  */
 
 // tiny
@@ -158,7 +158,7 @@ $grid-gutter-size--huge:  quadruple($grid-gutter-size) !default;
 }
 
 /**
- * Modifier: horizontally center one unit
+ * Modifier: Horizontally center one unit
  * Set a specific unit to be horizontally centered. Doesn't affect
  * any other units. Can still contain a child `grid` object.
  */

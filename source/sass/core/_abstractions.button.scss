@@ -101,6 +101,7 @@ $button-padding--huge:  quadruple($button-padding) !default;
 /**
  * Modifiers: Blow/shrink buttons
  */
+
 .button--tiny {
   padding: halve($button-padding--tiny) $button-padding--tiny;
 }
