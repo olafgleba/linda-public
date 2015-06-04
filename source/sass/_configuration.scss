@@ -17,15 +17,12 @@
  * 2. Project aware colors
  */
 
-
 /**
  * 1. Project agnostic colors
  */
 $white:  #fff;
 $black:  #000;
 $orange: #f60;
-
-
 
 
 /**
@@ -35,10 +32,10 @@ $orange: #f60;
 $base-link-color:       $orange;
 $base-link-hover-color: lighten($orange, 10%);
 
-
 $btn-color:             $orange;
 $btn-bg-color:          $white;
 $btn-color-hover:       lighten($orange, 10%);
+
 
 
 
@@ -51,6 +48,8 @@ $btn-color-hover:       lighten($orange, 10%);
  */
 
 // ...
+
+
 
 
 
@@ -75,6 +74,7 @@ $base-background-color: $white;
 
 
 
+
 // Redefine those core variables related to possible overrides within
 // the above section.
 
@@ -85,6 +85,8 @@ $base-spacing-unit--large: round($base-spacing-unit * 2);
 $base-spacing-unit--huge:  round($base-spacing-unit * 4);
 
 
+
+
 // See `_core.defaults.scss`
 
 $heading-size-1: 36px !default;
@@ -93,7 +95,6 @@ $heading-size-3: 24px !default;
 $heading-size-4: 20px !default;
 $heading-size-5: 16px !default;
 $heading-size-6: 14px !default;
-
 
 
 
@@ -112,10 +113,8 @@ $breakpoints: (
 
 
 
-
 // See `_core.mixins.scss`, @mixin widths
 $use-fractions: true;
-
 
 
 
@@ -128,7 +127,6 @@ $widths-columns: (
     4,
     5
 );
-
 
 
 
@@ -165,188 +163,3 @@ $button-group-border-radius: 0 !default;
 // List
 $list-padding:   $base-spacing-unit;
 $list-font-size: $base-font-size !default;
-
-
-
-
-
-
-
-
-
-
-
-
-// /*------------------------------------*\
-//     #LAYOUT
-// \*------------------------------------*/
-
-// /**
-//  * The inuitcss layout system uses `box-sizing: border-box;` and
-//  * `display: inline-block;` to create an extremely powerful, flexible
-//  * alternative to the traditional grid system. Combine the layout items with
-//  * the widths found in `trumps.widths`.
-//  */
-// $inuit-enable-layout--tiny:     false !default;
-// $inuit-enable-layout--small:    false !default;
-// $inuit-enable-layout--large:    false !default;
-// $inuit-enable-layout--huge:     false !default;
-// $inuit-enable-layout--flush:    false !default;
-// $inuit-enable-layout--rev:      false !default;
-// $inuit-enable-layout--middle:   false !default;
-// $inuit-enable-layout--bottom:   false !default;
-// $inuit-enable-layout--right:    false !default;
-// $inuit-enable-layout--center:   false !default;
-// $inuit-enable-layout--auto:     false !default;
-
-
-
-
-// /*------------------------------------*\
-//     #LIST-BARE
-// \*------------------------------------*/
-
-// /**
-//  * The list-bare object simply removes any indents and bullet points from lists.
-//  */
-
-
-
-
-// /*------------------------------------*\
-//     #LIST-BLOCK
-// \*------------------------------------*/
-
-// /**
-//  * The list-block object creates blocky list items out of a `ul` or `ol`.
-//  */
-// $inuit-enable-list-block--tiny:     false !default;
-// $inuit-enable-list-block--small:    false !default;
-// $inuit-enable-list-block--large:    false !default;
-// $inuit-enable-list-block--huge:     false !default;
-
-
-
-
-// /*------------------------------------*\
-//     #LIST-INLINE
-// \*------------------------------------*/
-
-// /**
-//  * The list-inline object simply displays a list of items in one line.
-//  */
-// $inuit-enable-list-inline--delimited:   false !default;
-// $inuit-list-inline-delimit-character:   ',\00A0' !default;
-
-
-
-
-// /*------------------------------------*\
-//     #LIST-UI
-// \*------------------------------------*/
-
-// /**
-//  * The UI list object creates blocky list items with a keyline separator out of
-//  * a `ul` or `ol`.
-//  */
-// $inuit-list-ui-border-width:    1px !default;
-// $inuit-list-ui-border-style:    solid !default;
-// $inuit-list-ui-border-color:    #ccc !default;
-
-// $inuit-enable-list-ui--tiny:    false !default;
-// $inuit-enable-list-ui--small:   false !default;
-// $inuit-enable-list-ui--large:   false !default;
-// $inuit-enable-list-ui--huge:    false !default;
-
-
-
-
-// /*------------------------------------*\
-//     #BUTTONS
-// \*------------------------------------*/
-
-// /**
-//  * A simple button object.
-//  */
-// $inuit-btn-background:      $btn-bg-color;
-// $inuit-btn-color:           $btn-color;
-// $inuit-btn-border-width:    1px !default;
-// $inuit-btn-border-style:    solid !default;
-// $inuit-btn-border-color:    $inuit-btn-background;
-// $inuit-btn-radius:          0 !default;
-
-// $inuit-enable-btn--small:   false !default;
-// $inuit-enable-btn--large:   false !default;
-// $inuit-enable-btn--full:    false !default;
-// $inuit-enable-btn--pill:    false !default;
-
-
-
-
-// /*------------------------------------*\
-//     #MEDIA
-// \*------------------------------------*/
-
-// /**
-//  * Place any image- and text-like content side-by-side, as per:
-//  * stubbornella.org/content/2010/06/25/the-media-object-saves-hundreds-of-lines-of-code
-//  */
-// $inuit-enable-media--tiny:          false !default;
-// $inuit-enable-media--small:         false !default;
-// $inuit-enable-media--large:         false !default;
-// $inuit-enable-media--huge:          false !default;
-// $inuit-enable-media--rev:           false !default;
-// $inuit-enable-media--flush:         false !default;
-// $inuit-enable-media--responsive:    false !default;
-// $inuit-media-collapse-at:           720px !default;
-
-
-
-
-// /*------------------------------------*\
-//     #FLAG
-// \*------------------------------------*/
-
-// /**
-//  * The flag object is a design pattern similar to the media object, however it
-//  * utilises `display: table[-cell];` to give us control over the vertical
-//  * alignments of the text and image. csswizardry.com/2013/05/the-flag-object
-//  */
-// $inuit-enable-flag--tiny:       false !default;
-// $inuit-enable-flag--small:      false !default;
-// $inuit-enable-flag--large:      false !default;
-// $inuit-enable-flag--huge:       false !default;
-// $inuit-enable-flag--rev:        false !default;
-// $inuit-enable-flag--flush:      false !default;
-// $inuit-enable-flag--top:        false !default;
-// $inuit-enable-flag--bottom:     false !default;
-// $inuit-enable-flag--responsive: false !default;
-// $inuit-flag-collapse-at:        720px !default;
-
-
-
-
-// /*------------------------------------*\
-//     #TABS
-// \*------------------------------------*/
-
-// /**
-//  * A simple abstraction for making equal-width navigation tabs.
-//  */
-
-
-
-
-// /*------------------------------------*\
-//     #WIDTHS
-// \*------------------------------------*/
-
-// /**
-//  * A series of width helper classes that you can use to size things like grid
-//  * systems. Classes can take a fraction-like format (e.g. `.2/3`) or a spoken-
-//  * word format (e.g. `two-thirds`). Toggle formats by overriding the
-//  * `$inuit-use-fractions` variable defined below.
-//  */
-// $inuit-use-fractions:   true;
-
-

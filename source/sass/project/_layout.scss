@@ -16,6 +16,12 @@ body { }
 
 
 
+
+
+/**
+ * SVG icon sprite
+ */
+
 .icon {
   width: ($base-font-size / 16px) * 1em;
   height: ($base-font-size / 16px) * 1em;
@@ -33,33 +39,38 @@ body { }
 
 
 
-a {
-  //background-color: #f2f2f2;
+// a {
+//   transition: all 0.5s;
+//   text-decoration: none;
 
-  transition: all 0.5s;
-  text-decoration: none;
+//   &:hover {
+//     color: $orange;
+//   }
+// }
 
-  &:hover {
-    color: $orange;
-  }
+
+
+
+
+
+
+/**
+ * Enable automativ calculation of `srcset` and `sizes`
+ */
+
+img[data-sizes="auto"] {
+  display: block;
+  max-width: none;
+  width: 100%;
+  height: auto;
 }
 
 
 
-
-
-
-
-
-// For automatic calculation of srcset and sizes
-// img[data-sizes="auto"] {
-//   display: block;
-//   max-width: none;
-//   width: 100%;
-//   height: auto;
-// }
-
-
+/**
+ * Enable transitions for layzy loaded images
+ *
+ */
 .lazyload,
 .lazyloading {
   opacity: 0 !important;
@@ -114,7 +125,9 @@ a {
 // }
 
 // Styles in CKEditor => mystyles.js
+//
 // scss-lint:disable SelectorFormat
+//
 .align_right {
   float: left;
   margin-right: $base-spacing-unit;
@@ -126,6 +139,7 @@ a {
     margin-bottom: $base-spacing-unit;
   }
 }
+
 // scss-lint:enable SelectorFormat
 
 
@@ -206,13 +220,3 @@ a {
   // margin-bottom: 0;
 }
 
-
-
-
-.btn {
-  transition: all 0.1s;
-
-  &:hover, &:active, &:focus {
-    color: $btn-color-hover;
-  }
-}

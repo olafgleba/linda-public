@@ -50,7 +50,7 @@ $list-padding--huge:  quadruple($list-padding) !default;
 .list-inline-block {
   @extend %list-bare;
 
-  font-size: 0; /* 1 */
+  font-size: 0; // [1]
 
   > li {
     @extend %list-inline-block__item;
@@ -64,7 +64,7 @@ $list-padding--huge:  quadruple($list-padding) !default;
 .list-inline-block__item,
 %list-inline-block__item {
   display: inline-block;
-  font-size: $list-font-size; /* 2 */
+  font-size: $list-font-size; // [2]
 }
 
 
@@ -105,7 +105,9 @@ $list-padding--huge:  quadruple($list-padding) !default;
  *
  * 1. Spread the list to assume whole viewport width, regardless of how
  *    many (list) columns are applied.
- * 2. Give all list items a equal width.
+ * 2. Parse faster and  more predictable behaviour as all children
+ *    occupies equal width.
+ * 3. Spread parent element to available space.
  */
 
 .list-table {
@@ -113,7 +115,7 @@ $list-padding--huge:  quadruple($list-padding) !default;
 
   display: table; // [1]
   table-layout: fixed; // [2]
-  width: 100%;
+  width: 100%; // [3]
 
   > li {
     @extend %list-table__item;
@@ -122,13 +124,15 @@ $list-padding--huge:  quadruple($list-padding) !default;
 
 /**
  * Child of `.list-table`
+ *
+ * 1. Automatic divide words with hyphenation.
  */
 
 .list-table__item,
 %list-table__item {
   display: table-cell;
-  width: 1%; // [3]
-  text-align: left;
+  text-align: center;
+  hyphens: auto; // [1]
 }
 
 
@@ -139,7 +143,13 @@ $list-padding--huge:  quadruple($list-padding) !default;
 /**
  * List chart
  *
+ * Gives a 1:1 comparison layout of label > value structure. Takes all
+ * available space of parent. Intend to use for any table alike layouts
+ * like price includes etc. which are semantically no tables at all.
  *
+ * Applicable to div, ul/ol and dl.
+ *
+ * 1. By default children take all the available space of parent.
  */
 
 .list-chart {
@@ -147,7 +157,7 @@ $list-padding--huge:  quadruple($list-padding) !default;
 
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
+  justify-content: space-between; // [1]
 }
 
 .list-chart__label {
@@ -156,6 +166,27 @@ $list-padding--huge:  quadruple($list-padding) !default;
 
 .list-chart__value {
   white-space: nowrap;
+}
+
+
+/**
+ * Modifiers: Change flex container horizontal alignment
+ */
+
+.list-chart--start {
+  justify-content: flex-start;
+}
+
+.list-chart--end {
+  justify-content: flex-end;
+}
+
+.list-chart--center {
+  justify-content: center;
+}
+
+.list-chart--around {
+  justify-content: flex-start;
 }
 
 

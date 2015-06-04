@@ -58,8 +58,8 @@
 
 /**
  * 1. Fix for Firefox bug: an image styled `max-width:100%` within an
- * inline-block will display at its default size, and not limit its width to
- * 100% of an ancestral container.
+ *    inline-block will display at its default size, and not limit its
+ *    width to 100% of an ancestral container.
  */
 
 .u-inline-block {
