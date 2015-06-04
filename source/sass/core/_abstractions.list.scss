@@ -103,19 +103,17 @@ $list-padding--huge:  quadruple($list-padding) !default;
  *
  * Set list in table mode. Spreads every list item to have equal widths.
  *
- * 1. Spread the list to assume whole viewport width, regardless of how
- *    many (list) columns are applied.
- * 2. Parse faster and  more predictable behaviour as all children
+ * 1. Parse faster and get more predictable behaviour as all children
  *    occupies equal width.
- * 3. Spread parent element to available space.
+ * 2. Spread parent element to available space.
  */
 
 .list-table {
   @extend %list-bare;
 
-  display: table; // [1]
-  table-layout: fixed; // [2]
-  width: 100%; // [3]
+  display: table;
+  table-layout: fixed; // [1]
+  width: 100%; // [2]
 
   > li {
     @extend %list-table__item;
@@ -123,9 +121,10 @@ $list-padding--huge:  quadruple($list-padding) !default;
 }
 
 /**
- * Child of `.list-table`
+ * Childs of `.list-table`
  *
  * 1. Automatic divide words with hyphenation.
+ * 2. Dedicated link takes all available space
  */
 
 .list-table__item,
@@ -133,6 +132,10 @@ $list-padding--huge:  quadruple($list-padding) !default;
   display: table-cell;
   text-align: center;
   hyphens: auto; // [1]
+}
+
+.list-table__link {
+  display: block; // [2]
 }
 
 
