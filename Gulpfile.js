@@ -10,13 +10,14 @@ var concat = require('gulp-concat');
 var filter = require('gulp-filter');
 var gutil = require('gulp-util');
 var order = require('gulp-order');
-var jshint = require('gulp-jshint');
+var eslint = require('gulp-eslint');
 var uglify = require('gulp-uglify');
 var scsslint = require('gulp-scss-lint');
 var svgstore = require('gulp-svgstore');
 var connect = require('gulp-connect-php');
 var csso = require('gulp-csso');
 var postcss = require('gulp-postcss');
+var modernizr = require('gulp-modernizr');
 var autoprefixer = require('autoprefixer-core');
 var imagemin = require('gulp-imagemin');
 var pngquant = require('imagemin-pngquant');
@@ -102,13 +103,27 @@ gulp.task('clean:assets', function(ca) {
 
 
 /**
- * Lint our base javascript file
+ * Lint base javascript file
+ */
+
+// gulp.task('lint:js', function() {
+//   return gulp.src('source/libs/base.js')
+//     .pipe(jshint('.jshintrc'))
+//     .pipe(jshint.reporter('jshint-stylish'));
+// });
+
+/**
+ *
+ *
+ *
+ * 1 = make it a warning, 2 = mak it an error, simple '0' disables
+ * rules (which is good for disabling some defaults)
  */
 
 gulp.task('lint:js', function() {
   return gulp.src('source/libs/base.js')
-    .pipe(jshint('.jshintrc'))
-    .pipe(jshint.reporter('jshint-stylish'));
+    .pipe(eslint())
+    .pipe(eslint.format());
 });
 
 
@@ -119,7 +134,7 @@ gulp.task('lint:js', function() {
  */
 
 gulp.task('lint:scss', function() {
-  return gulp.src('source/sass/**/*.scss')
+  return gulp.src(['source/sass/**/*.scss', '!source/sass/vendor/*'])
     .pipe(scsslint({
         config: './scss-lint.yml'
     }))
@@ -201,6 +216,30 @@ gulp.task('process:icons', function() {
 
 
 /**
+ * Spawn over all `scss` and `js` files and build a custom modernizr
+ * build. Shove it to source vendor folder, so it can be concatenated
+ * in `plugins.min.js` afterwards, e.g. we don't want to reference
+ * it as a seperate file. So this task has to run before any compilation
+ * or concatenation, e.g. outside the runSquenze.
+ *
+ * 1. Set classes on html tag
+ */
+
+gulp.task('process:modernizr', function() {
+  return gulp.src('source/**/*.{js,scss}')
+    .pipe(modernizr('modernizr-custom.js', {
+        "options": [
+          "setClasses"
+        ]
+    }))
+    .pipe(gulp.dest("source/libs/vendor"))
+});
+
+
+
+
+
+/**
  * Minify our base javascript file (depending on task state (dev/production))
  * and shove it to destination folder.
  *
@@ -227,7 +266,7 @@ gulp.task('process:base', function() {
  * and shove it to destination folder.
  *
  * 1. Source code order within the plugin file
- * 2. Condition wether to execute a plugin or pipe passthru
+ * 2. Condition wether to execute minification or pipe passthru
  */
 
 gulp.task('concat:plugins', function() {
@@ -238,6 +277,7 @@ gulp.task('concat:plugins', function() {
     gulp.src('source/libs/vendor/*.js')
     )
     .pipe(order([ // [1]
+      '**/modernizr-custom.js',
       '**/fastclick.js',
       '*'
     ]))
@@ -251,7 +291,7 @@ gulp.task('concat:plugins', function() {
 
 
 /**
- * Get a dedicated set of vendor javascript plugins which
+ * Get a dedicated set of vendor javascript plugins (respimages) which
  * are available in `bower_components`, concatenate
  * them to a new file, minify it and shove it to destination
  * folder.
@@ -282,33 +322,11 @@ gulp.task('copy:jquery', function() {
 
 
 
-// Doesn't work right now, because the custom build does
-// not provide `csslasses` as extra.
-// So we cling to static injected modernizr v. 2.8.3
-
-// gulp.task('modernizr', function() {
-//   return gulp.src('source/**/*.{js,scss}')
-//     .pipe(modernizr('modernizr-custom.min.js', {
-//         "options": ["setClasses"]
-//     }))
-//     //.pipe(uglify())
-//     .pipe(gulp.dest("app/assets/libs/vendor"))
-// });
-
-// Till its functional we just copy the static build to the app folder
-// gulp.task('modernizr-copy', function() {
-//   return gulp.src('source/libs/vendor/modernizr/modernizr-custom.min.js')
-//     .pipe(gulp.dest("app/assets/libs/vendor"))
-// });
-
-
-
-
 /**
  * Watch several files and folder for changes.
  *
  * While scss/css is supposed to be injected without
- * reloading, we like to reload the page(s) whenever
+ * reloading, we want to reload the page(s) whenever
  * there are changes in other files (e.g. javascript,
  * images etc.).
  */
@@ -323,14 +341,22 @@ gulp.task('watch', function() {
   );
 
 
-  gulp.watch('source/libs/**/*.js',
+  gulp.watch('source/libs/base.js',
     [
       'lint:js',
-      'process:base',
-      'concat:plugins',
-      'concat:plugins-respimages'
+      'process:base'
     ]
   ).on('change', bs.reload);
+
+
+  // gulp.watch('source/libs/**/*.js',
+  //   [
+  //     'lint:js',
+  //     'process:base',
+  //     'concat:plugins',
+  //     'concat:plugins-respimages'
+  //   ]
+  // ).on('change', bs.reload);
 
 
   gulp.watch('source/img/*',
@@ -374,10 +400,9 @@ gulp.task('build', function() {
 
   if (isDeployment) {
 
-    runSequence('clean:assets',
+    runSequence('clean:assets', 'process:modernizr',
       [
         'compile:sass',
-        'process:images',
         'copy:jquery',
         'process:base',
         'concat:plugins',
@@ -389,7 +414,7 @@ gulp.task('build', function() {
 
   } else {
 
-    runSequence('clean:assets',
+    runSequence('clean:assets', 'process:modernizr',
       [
         'lint:scss',
         'compile:sass',

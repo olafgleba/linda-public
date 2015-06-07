@@ -1,0 +1,22 @@
+{
+  "env": {
+    "browser": true
+  },
+  "globals": {
+    "$": true
+  },
+  "rules": {
+    // demand strict within functions only
+    "strict": [2, "function"],
+    // only use single quotes
+    "quotes": [1, "single"],
+    // indent to 2 spaces
+    "indent": [1, 2],
+    // bad: function () {}, good: function() {}
+    "space-before-function-paren": [2, "never"],
+    // bad: foo( 'bar' ), good: foo('bar')
+    "space-in-parens": [2, "never"],
+    // bad: [ 'bar' ] or { 'bar' }, good: ['bar'] or {'bar'}
+    "space-in-brackets": [2, "never"]
+  }
+}

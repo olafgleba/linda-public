@@ -9,5 +9,8 @@
 // Global bootstrap core modules
 @import 'bootstrap';
 
+// Include vendor styles
+@import 'vendor/owl.carousel';
+
 // project section styles
 @import 'project/layout';

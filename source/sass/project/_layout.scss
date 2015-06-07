@@ -17,7 +17,6 @@ body { }
 
 
 
-
 /**
  * SVG icon sprite
  */
@@ -28,11 +27,11 @@ body { }
   vertical-align: middle;
   display: inline-block;
 
-  transition: all 0.5s;
+  transition: all 0.25s;
   fill: $black;
 
   a:hover & {
-    fill: $orange;
+    fill: lighten($black, 40%);
   }
 }
 
@@ -78,7 +77,7 @@ img[data-sizes="auto"] {
 
 .lazyloaded {
   opacity: 1;
-  transition: opacity 0.2s ease-in !important;
+  transition: opacity 0.5s ease-in !important;
 }
 
 
@@ -94,9 +93,12 @@ img[data-sizes="auto"] {
 }
 
 .grid__cell {
-
   margin-bottom: 1em;
 }
+
+
+
+
 
 
 
@@ -210,13 +212,13 @@ img[data-sizes="auto"] {
 
 
 
-.logo {
-  // width: 200px;
-  // height: 47px;
-  // background: transparent url('../img/logo.svg') 0 0 no-repeat;
-  // background-size: contain;
-  // text-indent: -9999px;
-  // line-height: 1;
-  // margin-bottom: 0;
-}
+// .logo {
+//   width: 200px;
+//   height: 47px;
+//   background: transparent url('../img/logo.svg') 0 0 no-repeat;
+//   background-size: contain;
+//   text-indent: -9999px;
+//   line-height: 1;
+//   margin-bottom: 0;
+// }
 
