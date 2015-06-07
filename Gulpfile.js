@@ -55,18 +55,24 @@ if(gutil.env.production === true) {
  * Paths
  */
 
-// var paths = {
-//   src: {
-//     src: 'source'
-//   }
-//   img: {
-//     src: src + '/img'
-//   },
-//   site: {
+var app = 'app/site/templates/';
+var src = 'source/';
 
-//   }
-// }
-
+var paths = {
+  app: {
+    root: 'app/',
+    local: 'localhost/devel-environments/linda/app/',
+    assets: app + 'assets/',
+    css: app + 'assets/css/',
+    libs: app + 'assets/libs/',
+    img: app + 'assets/img/'
+  },
+  src: {
+    sass: src + 'sass/',
+    libs: src + 'libs/',
+    img: src + 'img/'
+  }
+}
 
 
 
@@ -80,10 +86,11 @@ if(gutil.env.production === true) {
 
 gulp.task('connect-sync', function() {
   connect.server({
-    base: './app'
+    base: paths.app.root,
+    port: 8080
     }, function (){
     bs.init({
-      proxy: 'localhost/devel-environments/linda/app' // [1]
+      proxy: paths.app.local // [1]
     });
   });
 });
@@ -96,7 +103,7 @@ gulp.task('connect-sync', function() {
  */
 
 gulp.task('clean:assets', function(ca) {
-    return del('app/site/templates/assets/{css,libs,img,fonts,docs}/**/*', ca)
+    return del(paths.app.assets + '/{css,libs,img,fonts,docs}/**/*', ca)
 });
 
 
@@ -121,7 +128,7 @@ gulp.task('clean:assets', function(ca) {
  */
 
 gulp.task('lint:js', function() {
-  return gulp.src('source/libs/base.js')
+  return gulp.src(paths.src.libs + 'base.js')
     .pipe(eslint())
     .pipe(eslint.format());
 });
@@ -134,7 +141,7 @@ gulp.task('lint:js', function() {
  */
 
 gulp.task('lint:scss', function() {
-  return gulp.src(['source/sass/**/*.scss', '!source/sass/vendor/*'])
+  return gulp.src([paths.src.sass + '**/*.scss', '!' + paths.src.sass + 'vendor/*'])
     .pipe(scsslint({
         config: './scss-lint.yml'
     }))
@@ -153,14 +160,14 @@ gulp.task('lint:scss', function() {
  */
 
 gulp.task('compile:sass', function() {
-  return gulp.src('source/sass/**/*.scss')
+  return gulp.src(paths.src.sass + '**/*.scss')
     .pipe(isDeployment ? gutil.noop() : sourcemaps.init()) // [1]
     .pipe(sass({outputStyle: 'expanded' }))
     .pipe(rename({suffix: '.min'}))
     .pipe(postcss([ autoprefixer({ browsers: ['last 2 version'] }) ]))
     .pipe(isDeployment ? gutil.noop() : sourcemaps.write('./')) // [1]
     .pipe(isDeployment ? csso() : gutil.noop()) // [1]
-    .pipe(gulp.dest('app/site/templates/assets/css'))
+    .pipe(gulp.dest(paths.app.css))
     .pipe(isDeployment ? gutil.noop() : bs.stream({match: '**/*.css'}));
 });
 
@@ -173,12 +180,12 @@ gulp.task('compile:sass', function() {
  */
 
 gulp.task('process:images', function() {
-  return gulp.src(['source/img/*.{svg,png,jpg}'])
+  return gulp.src([paths.src.img + '*.{svg,png,jpg}'])
     .pipe(imagemin({
       progressive: true,
       use: [pngquant()]
     }))
-    .pipe(gulp.dest('app/site/templates/assets/img'));
+    .pipe(gulp.dest(paths.app.img));
 });
 
 
@@ -203,13 +210,13 @@ gulp.task('process:images', function() {
  */
 
 gulp.task('process:icons', function() {
-  return gulp.src('source/img/icon-sprite/*.svg')
+  return gulp.src(paths.src.img + 'icon-sprite/*.svg')
     .pipe(imagemin({
       svgoPlugins: [{removeViewBox: false}]
     }))
     .pipe(rename({prefix: 'icon-'}))
     .pipe(svgstore())
-    .pipe(gulp.dest('app/site/templates/assets/img'));
+    .pipe(gulp.dest(paths.app.img));
 });
 
 
@@ -226,13 +233,13 @@ gulp.task('process:icons', function() {
  */
 
 gulp.task('process:modernizr', function() {
-  return gulp.src('source/**/*.{js,scss}')
+  return gulp.src(paths.src + '**/*.{js,scss}')
     .pipe(modernizr('modernizr-custom.js', {
         "options": [
           "setClasses"
         ]
     }))
-    .pipe(gulp.dest("source/libs/vendor"))
+    .pipe(gulp.dest(paths.src.libs + 'vendor'))
 });
 
 
@@ -247,10 +254,10 @@ gulp.task('process:modernizr', function() {
  */
 
 gulp.task('process:base', function() {
-  return gulp.src('source/libs/base.js')
+  return gulp.src(paths.src.libs + 'base.js')
     .pipe(rename({suffix: '.min'}))
     .pipe(isDeployment ? uglify() : gutil.noop()) // [1]
-    .pipe(gulp.dest('app/site/templates/assets/libs'));
+    .pipe(gulp.dest(paths.app.libs));
 });
 
 
@@ -274,7 +281,7 @@ gulp.task('concat:plugins', function() {
     gulp.src(mainBowerFiles(), { base: 'bower_components'})
       .pipe(filter(['**/*.js', '!**/{jquery.min,lazysizes,respimage}.{js,map}']))
     ,
-    gulp.src('source/libs/vendor/*.js')
+    gulp.src(paths.src.libs + 'vendor/*.js')
     )
     .pipe(order([ // [1]
       '**/modernizr-custom.js',
@@ -284,7 +291,7 @@ gulp.task('concat:plugins', function() {
     .pipe(concat('plugins.js'))
     .pipe(rename({suffix: '.min'}))
     .pipe(isDeployment ? uglify() : gutil.noop()) // [2]
-    .pipe(gulp.dest('app/site/templates/assets/libs/vendor'));
+    .pipe(gulp.dest(paths.app.libs + 'vendor/'));
 });
 
 
@@ -304,7 +311,7 @@ gulp.task('concat:plugins-respimages', function() {
     .pipe(concat('plugins.images.js'))
     .pipe(rename({suffix: '.min'}))
     .pipe(uglify())
-    .pipe(gulp.dest('app/site/templates/assets/libs/vendor'));
+    .pipe(gulp.dest(paths.app.libs + 'vendor/'));
 });
 
 
@@ -316,7 +323,7 @@ gulp.task('concat:plugins-respimages', function() {
 
 gulp.task('copy:jquery', function() {
     return gulp.src(mainBowerFiles({ filter: '**/jquery.min.{js,map}'}), { base: 'bower_components/jquery/dist'})
-        .pipe(gulp.dest('app/site/templates/assets/libs/vendor'));
+        .pipe(gulp.dest(paths.app.libs + 'vendor/'));
 });
 
 
@@ -333,7 +340,7 @@ gulp.task('copy:jquery', function() {
 
 gulp.task('watch', function() {
 
-  gulp.watch('source/sass/**/*.scss',
+  gulp.watch(paths.src.sass + '**/*.scss',
     [
       'lint:scss',
       'compile:sass'
@@ -341,7 +348,7 @@ gulp.task('watch', function() {
   );
 
 
-  gulp.watch('source/libs/base.js',
+  gulp.watch(paths.src.libs + 'base.js',
     [
       'lint:js',
       'process:base'
@@ -359,21 +366,21 @@ gulp.task('watch', function() {
   // ).on('change', bs.reload);
 
 
-  gulp.watch('source/img/*',
+  gulp.watch(paths.src.img + '*',
     [
       'process:images'
     ]
   ).on('change', bs.reload);
 
 
-  gulp.watch('source/img/icon-sprite/*',
+  gulp.watch(paths.src.img + 'icon-sprite/*',
     [
       'process:icons'
     ]
   ).on('change', bs.reload);
 
 
-  gulp.watch('app/site/templates/**/*.php').on('change', bs.reload);
+  gulp.watch(paths.app + '**/*.php').on('change', bs.reload);
 });
 
 
