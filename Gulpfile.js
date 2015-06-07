@@ -31,6 +31,7 @@ var del = require('del');
 
 
 
+
 /**
  * Some state variables
  *
@@ -46,7 +47,6 @@ var isDeployment = false;
 if(gutil.env.production === true) {
   isDeployment = true;
 }
-
 
 
 
@@ -111,20 +111,8 @@ gulp.task('clean:assets', function(ca) {
 
 /**
  * Lint base javascript file
- */
-
-// gulp.task('lint:js', function() {
-//   return gulp.src('source/libs/base.js')
-//     .pipe(jshint('.jshintrc'))
-//     .pipe(jshint.reporter('jshint-stylish'));
-// });
-
-/**
  *
- *
- *
- * 1 = make it a warning, 2 = mak it an error, simple '0' disables
- * rules (which is good for disabling some defaults)
+ * Uses `./.eslintrc` file for configuration rules and such.
  */
 
 gulp.task('lint:js', function() {
