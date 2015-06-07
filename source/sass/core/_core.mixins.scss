@@ -2,6 +2,8 @@
  * Core mixins
  *
  * They are heavily used within core and project files.
+ *
+ * Heavily based on <https://github.com/inuitcss>
  */
 
 
@@ -116,7 +118,8 @@
  * A mixin to spit out our width classes. Pass in the columns we
  * want the widths to have, and an optional suffix for responsive widths.
  *
- * This mixin is not applicable directly. Instead the mixin extension in `_utils.sizes.scss` generates all width- and breakpoint classes.
+ * This mixin is not applicable directly. Instead the mixin extension in
+ * `_utils.sizes.scss` generates all width- and breakpoint classes.
  */
 
 // Do we want to use classes like `<div class="u-1/4">` instead of
