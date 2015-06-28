@@ -50,7 +50,7 @@ $list-padding--huge:  quadruple($list-padding) !default;
 .list-inline-block {
   @extend %list-bare;
 
-  font-size: 0; // [1]
+  font-size: 0; /* 1 */
 
   > li {
     @extend %list-inline-block__item;
@@ -64,7 +64,7 @@ $list-padding--huge:  quadruple($list-padding) !default;
 .list-inline-block__item,
 %list-inline-block__item {
   display: inline-block;
-  font-size: $list-font-size; // [2]
+  font-size: $list-font-size; /* 2 */
 }
 
 
@@ -112,8 +112,8 @@ $list-padding--huge:  quadruple($list-padding) !default;
   @extend %list-bare;
 
   display: table;
-  table-layout: fixed; // [1]
-  width: 100%; // [2]
+  table-layout: fixed; /* 1 */
+  width: 100%; /* 2 */
 
   > li {
     @extend %list-table__item;
@@ -131,11 +131,11 @@ $list-padding--huge:  quadruple($list-padding) !default;
 %list-table__item {
   display: table-cell;
   text-align: center;
-  hyphens: auto; // [1]
+  hyphens: auto; /* 1 */
 }
 
 .list-table__link {
-  display: block; // [2]
+  display: block; /* 2 */
 }
 
 
@@ -160,7 +160,7 @@ $list-padding--huge:  quadruple($list-padding) !default;
 
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between; // [1]
+  justify-content: space-between; /* 1 */
 }
 
 .list-chart__label {

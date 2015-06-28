@@ -3,9 +3,10 @@
  *
  * Section: example
  *
- * COLORS      - Project agnostic colors and project aware colors
- * INTERFACE   - Element variables
- * CORE        - Define/override core values to fit project requirements
+ * COLORS       - Project agnostic colors and project aware colors
+ * INTERFACE    - Element variables
+ * CORE         - Define/override core values to fit project requirements
+ * ABSTRACTIONS - Defaults values for abstractions
  */
 
 
@@ -131,8 +132,14 @@ $widths-columns: (
 
 
 
+
 /**
- * Abstractions
+ * $ABSTRACTIONS
+ *
+ * Override default variable values.
+ *
+ * Whenever a value is adjusted, remove the `!default` flag. Otherwise
+ * leave it as is to pass by the defaults.
  */
 
 // Grid

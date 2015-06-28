@@ -3,41 +3,12 @@
  */
 
 var gulp = require('gulp');
-// var sourcemaps = require('gulp-sourcemaps');
-// var sass = require('gulp-sass');
-// var rename = require('gulp-rename');
-// var concat = require('gulp-concat');
-// var filter = require('gulp-filter');
-// var gutil = require('gulp-util');
-// var order = require('gulp-order');
-// var eslint = require('gulp-eslint');
-// var uglify = require('gulp-uglify');
-// var scsslint = require('gulp-scss-lint');
-// var svgstore = require('gulp-svgstore');
-// var connect = require('gulp-connect-php');
-// var csso = require('gulp-csso');
-// var postcss = require('gulp-postcss');
-// var modernizr = require('gulp-modernizr');
-// var autoprefixer = require('autoprefixer-core');
-// var imagemin = require('gulp-imagemin');
-// var pngquant = require('imagemin-pngquant');
-// var order = require('gulp-order');
-// var bs = require('browser-sync').create();
-// var opn = require('opn');
-// var mainBowerFiles = require('main-bower-files');
-// var merge = require('merge-stream');
-// var runSequence = require('run-sequence');
-// var del = require('del');
-
-
-
 var plugins = require('gulp-load-plugins')();
 
 /**
- * Load plugins manually
- *
- * Non `gulp-*` prefixed plugins
+ * Load non `gulp-*` prefixed plugins
  */
+
 var autoprefixer = require('autoprefixer-core');
 var bs = require('browser-sync').create();
 var opn = require('opn');
@@ -70,7 +41,7 @@ if(plugins.util.env.production === true) {
 
 
 /**
- * Paths
+ * Base vars and paths
  */
 
 var app = 'app/site/templates/';
@@ -108,7 +79,7 @@ gulp.task('connect-sync', function() {
     port: 8080
     }, function (){
     bs.init({
-      proxy: paths.app.local // [1]
+      proxy: paths.app.local /* 1 */
     });
   });
 });
@@ -167,12 +138,12 @@ gulp.task('lint:scss', function() {
 
 gulp.task('compile:sass', function() {
   return gulp.src(paths.src.sass + '**/*.scss')
-    .pipe(isDeployment ? plugins.util.noop() : plugins.sourcemaps.init()) // [1]
+    .pipe(isDeployment ? plugins.util.noop() : plugins.sourcemaps.init()) /* 1 */
     .pipe(plugins.sass({outputStyle: 'expanded' }))
     .pipe(plugins.rename({suffix: '.min'}))
     .pipe(plugins.postcss([ autoprefixer({ browsers: ['last 2 version'] }) ]))
-    .pipe(isDeployment ? plugins.util.noop() : plugins.sourcemaps.write('./')) // [1]
-    .pipe(isDeployment ? plugins.csso() : plugins.util.noop()) // [1]
+    .pipe(isDeployment ? plugins.util.noop() : plugins.sourcemaps.write('./')) /* 1 */
+    .pipe(isDeployment ? plugins.csso() : plugins.util.noop()) /* 1 */
     .pipe(gulp.dest(paths.app.css))
     .pipe(isDeployment ? plugins.util.noop() : bs.stream({match: '**/*.css'}));
 });
@@ -229,20 +200,21 @@ gulp.task('process:icons', function() {
 
 
 /**
- * Spawn over all `scss` and `js` files and build a custom modernizr
- * build. Shove it to source vendor folder, so it can be concatenated
- * in `plugins.min.js` afterwards, e.g. we don't want to reference
- * it as a seperate file. So this task has to run before any compilation
- * or concatenation, e.g. outside the runSquenze.
+ * Spawn over all `scss` and `js` files for relevant attributes
+ * and build a custom modernizr build. Shove it to source vendor
+ * folder, so it can be concatenated in `plugins.min.js` afterwards,
+ * e.g. we don't want to reference it as a seperate file. So this
+ * task has to run before any compilation or concatenation, e.g.
+ * outside the runSequenze task array.
  *
- * 1. Set classes on html tag
+ * 1. Set classes on html tag related to found attributes
  */
 
 gulp.task('process:modernizr', function() {
   return gulp.src(paths.src + '**/*.{js,scss}')
     .pipe(plugins.modernizr('modernizr-custom.js', {
         "options": [
-          "setClasses"
+          "setClasses" /* 1 */
         ]
     }))
     .pipe(gulp.dest(paths.src.libs + 'vendor'))
@@ -262,7 +234,7 @@ gulp.task('process:modernizr', function() {
 gulp.task('process:base', function() {
   return gulp.src(paths.src.libs + 'base.js')
     .pipe(plugins.rename({suffix: '.min'}))
-    .pipe(isDeployment ? plugins.uglify() : plugins.util.noop()) // [1]
+    .pipe(isDeployment ? plugins.uglify() : plugins.util.noop()) /* 1 */
     .pipe(gulp.dest(paths.app.libs));
 });
 
@@ -289,14 +261,14 @@ gulp.task('concat:plugins', function() {
     ,
     gulp.src(paths.src.libs + 'vendor/*.js')
     )
-    .pipe(plugins.order([ // [1]
+    .pipe(plugins.order([ /* 1 */
       '**/modernizr-custom.js',
       '**/fastclick.js',
       '*'
     ]))
     .pipe(plugins.concat('plugins.js'))
     .pipe(plugins.rename({suffix: '.min'}))
-    .pipe(isDeployment ? plugins.uglify() : plugins.util.noop()) // [2]
+    .pipe(isDeployment ? plugins.uglify() : plugins.util.noop()) /* 2 */
     .pipe(gulp.dest(paths.app.libs + 'vendor/'));
 });
 

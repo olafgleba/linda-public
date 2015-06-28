@@ -65,6 +65,10 @@
 
 // scss-lint:enable DuplicateProperty
 
+
+
+
+
 /**
  * Generate media queries from the aliases and conditions defined in
  * `_core.variables.scss`.
@@ -159,4 +163,102 @@ $use-fractions: true !default;
       }
     }
   }
+}
+
+
+
+
+/**
+ * Spawn a group of modifiers (tiny, small, large, huge) to arbitrary
+ * classes, based on our base spacing unit settings. Pass any appropriate
+ * attributes as argument.
+ *
+ * Don't use this on buttons or grid abstractions. These abstractions have
+ * their own set of size modifiers.
+ *
+ * Usage example:
+ *
+ *  .foo {
+ *    @include sizes(padding);
+ *
+ *    padding: $base-spacing-unit;
+ *  }
+ *
+ * Output:
+ *  .foo--tiny {
+ *    padding: ...
+ *  }
+ *  .foo--small {
+ *    padding: ...
+ *  }
+ *
+ *  a.s.o.
+ *
+ * ===
+ *
+ *  .foo {
+ *    @include sizes(padding-left, padding-right);
+ *
+ *    padding-top: $base-spacing-unit;
+ *    padding-bottom: $base-spacing-unit;
+ *  }
+ *
+ * Output:
+ *  .foo--tiny {
+ *    padding-left: ...
+ *    padding-right: ...
+ *  }
+ *  .foo--small {
+ *    padding-left: ...
+ *    padding-right: ...
+ *  }
+ *
+ *  a.s.o.
+ *
+ * ===
+ *
+ *  .foo {
+ *    @include sizes(line-height);
+ *
+ *    line-height: $base-spacing-unit;
+ *  }
+ *
+ * Output:
+ *  .foo--tiny {
+ *    line-height: ...
+ *  }
+ *  .foo--small {
+ *    line-height: ...
+ *  }
+ *
+ *  a.s.o.
+ *
+ */
+
+@mixin sizes($properties...) {
+
+  &--tiny {
+    @each $property in $properties {
+      #{$property}: $base-spacing-unit--tiny;
+    }
+  }
+
+  &--small {
+    @each $property in $properties {
+      #{$property}: $base-spacing-unit--small;
+    }
+  }
+
+  &--large {
+    @each $property in $properties {
+      #{$property}: $base-spacing-unit--large;
+    }
+  }
+
+  &--huge {
+    @each $property in $properties {
+      #{$property}: $base-spacing-unit--huge;
+    }
+  }
+
 }
