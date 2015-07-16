@@ -9,6 +9,7 @@ $button-font-size:        $base-font-size !default;
 $button-border-width:     1px !default;
 $button-border-style:     solid !default;
 $button-border-radius:    0 !default;
+$button-border-color:     currentColor !default;
 $button-color:            currentColor !default;
 $button-bg-color:         transparent !default;
 $button-disabled-opacity: 0.5 !default;
@@ -46,6 +47,7 @@ $button-padding--huge:  quadruple($button-padding) !default;
   border-color: $button-color;
   border-style: $button-border-style;
   border-width: $button-border-width;
+  border-color: $button-border-color;
   box-sizing: border-box; /* 2 */
   color: $button-color; /* 3 */
   cursor: pointer;

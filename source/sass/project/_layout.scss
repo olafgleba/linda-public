@@ -57,13 +57,15 @@ body { }
  * Enable automativ calculation of `srcset` and `sizes`
  */
 
+// scss-lint:disable QualifyingElement
+
 img[data-sizes="auto"] {
   display: block;
   max-width: none;
   width: 100%;
   height: auto;
 }
-
+// scss-lint:enable QualifyingElement
 
 
 /**
@@ -221,4 +223,3 @@ img[data-sizes="auto"] {
 //   line-height: 1;
 //   margin-bottom: 0;
 // }
-

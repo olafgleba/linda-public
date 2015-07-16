@@ -1,3 +1,298 @@
 /**
- * Abstraction table
+ * Core table component
+ *
+ * Several raw table abstractions which solves daily "bread and butter"
+ * lists. Additionally these abstractions helps us to build meaningful
+ * components.
  */
+
+$table-border-style: solid !default;
+$table-border-width: 1px !default;
+$table-border-color: $base-border-color !default;
+$table-background-color: #f2f2f2 !default;
+$table-padding: $base-spacing-unit !default;
+
+// Cell sizes
+$table-padding--tiny:  quarter($table-padding) !default;
+$table-padding--small: halve($table-padding) !default;
+$table-padding--large: double($table-padding) !default;
+$table-padding--huge:  quadruple($table-padding) !default;
+
+/**
+ * Base declarations
+ *
+ * 1. Initially table cells are vertically top aligned
+ */
+
+.table {
+  width: 100%;
+
+  th,
+  td {
+    vertical-align: top; /* 1 */
+    padding: $table-padding;
+
+    // delete first left and last right padding by default
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-child {
+      padding-right: 0;
+    }
+
+    @include media-query(palm) {
+      padding-right: 0;
+      padding-left: 0;
+    }
+  }
+}
+
+
+
+.table--border {
+    border: $table-border-width $table-border-style $table-border-color;
+}
+
+
+
+.table--stripe {
+    tbody tr:nth-of-type(even) {
+      background-color: $table-background-color;
+    }
+}
+
+
+
+.table--border,
+.table--stripe {
+  th,
+  td {
+    &:first-child {
+      padding-left: $table-padding;
+    }
+
+    &:last-child {
+      padding-right: $table-padding;
+    }
+  }
+}
+
+
+
+
+.table--fixed {
+  table-layout: fixed;
+}
+
+
+
+
+.table--border-column {
+  th,
+  td {
+    border-right: $table-border-width $table-border-style $table-border-color;
+
+    &:last-child {
+      border-right: 0;
+    }
+  }
+}
+
+.table--border-row {
+  th,
+  td {
+    border-bottom: $table-border-width $table-border-style $table-border-color;
+  }
+
+  tr:last-child {
+    td {
+      border-bottom: 0;
+
+      @include media-query(palm) {
+        border-bottom: $table-border-width $table-border-style $table-border-color;
+      }
+    }
+  }
+}
+
+
+
+
+
+.table--composite-calendular {
+  table-layout: fixed;
+  border: $table-border-width $table-border-style $table-border-color;
+
+  @include media-query(palm) {
+    border: 0;
+  }
+
+  th,
+  td {
+    vertical-align: middle;
+    text-align: center;
+    border-right: $table-border-width $table-border-style $table-border-color;
+    border-bottom: $table-border-width $table-border-style $table-border-color;
+
+    &:first-child {
+      padding-left: $table-padding;
+    }
+
+    &:last-child {
+      padding-right: $table-padding;
+      border-right: 0;
+    }
+
+    @include media-query(palm) {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      border-right: 0;
+    }
+  }
+
+  tr:last-child {
+    td {
+      border-bottom: 0;
+
+      @include media-query(palm) {
+        border-bottom: $table-border-width $table-border-style $table-border-color;
+      }
+    }
+  }
+
+}
+
+
+
+
+
+
+/**
+ * Modifiers: Align the content of cells
+ */
+
+.table--align-left {
+  th,
+  td {
+    text-align: left;
+  }
+}
+
+.table--align-center {
+  th,
+  td {
+    text-align: center;
+  }
+}
+
+.table--align-right {
+  th,
+  td {
+    text-align: right;
+  }
+}
+
+
+
+/**
+ * Modifiers: Blow/shrink table cells
+ *
+ * Generic size utilities. Is applicable on every table abstraction.
+ *
+ * Example:
+ *   <div class="table table--tiny"></div>
+ *   <div class="table table--fixed table--large"></div>
+ */
+
+.table--tiny {
+  th,
+  td {
+    padding: $table-padding--tiny;
+  }
+}
+
+.table--tiny.table--border,
+.table--tiny.table--stripe,
+.table--tiny.table--composite-calendular {
+  th,
+  td {
+    &:first-child {
+      padding-left: $table-padding--tiny;
+    }
+
+    &:last-child {
+      padding-right: $table-padding--tiny;
+    }
+  }
+}
+
+
+.table--small {
+  th,
+  td {
+    padding: $table-padding--small;
+  }
+}
+
+.table--small.table--border,
+.table--small.table--stripe,
+.table--small.table--composite-calendular {
+  th,
+  td {
+    &:first-child {
+      padding-left: $table-padding--small;
+    }
+
+    &:last-child {
+      padding-right: $table-padding--small;
+    }
+  }
+}
+
+
+.table--large {
+  th,
+  td {
+    padding: $table-padding--large;
+  }
+}
+
+.table--large.table--border,
+.table--large.table--stripe,
+.table--large.table--composite-calendular {
+  th,
+  td {
+    &:first-child {
+      padding-left: $table-padding--large;
+    }
+
+    &:last-child {
+      padding-right: $table-padding--large;
+    }
+  }
+}
+
+
+
+.table--huge {
+  th,
+  td {
+    padding: $table-padding--huge;
+  }
+}
+
+.table--huge.table--border,
+.table--huge.table--stripe,
+.table--huge.table--composite-calendular {
+  th,
+  td {
+    &:first-child {
+      padding-left: $table-padding--huge;
+    }
+
+    &:last-child {
+      padding-right: $table-padding--huge;
+    }
+  }
+}

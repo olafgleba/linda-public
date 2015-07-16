@@ -9,6 +9,9 @@ var plugins = require('gulp-load-plugins')();
  * Load non `gulp-*` prefixed plugins
  */
 
+// Uncomment for debugging
+//require('time-require');
+
 var autoprefixer = require('autoprefixer-core');
 var bs = require('browser-sync').create();
 var opn = require('opn');
@@ -158,6 +161,7 @@ gulp.task('compile:sass', function() {
 
 gulp.task('process:images', function() {
   return gulp.src([paths.src.img + '*.{svg,png,jpg}'])
+    .pipe(plugins.newer(paths.app.img))
     .pipe(plugins.imagemin({
       progressive: true,
       use: [pngquant()]
@@ -188,6 +192,7 @@ gulp.task('process:images', function() {
 
 gulp.task('process:icons', function() {
   return gulp.src(paths.src.img + 'icon-sprite/*.svg')
+    .pipe(plugins.newer(paths.app.img))
     .pipe(plugins.imagemin({
       svgoPlugins: [{removeViewBox: false}]
     }))
@@ -233,6 +238,7 @@ gulp.task('process:modernizr', function() {
 
 gulp.task('process:base', function() {
   return gulp.src(paths.src.libs + 'base.js')
+    .pipe(plugins.newer(paths.app.libs))
     .pipe(plugins.rename({suffix: '.min'}))
     .pipe(isDeployment ? plugins.uglify() : plugins.util.noop()) /* 1 */
     .pipe(gulp.dest(paths.app.libs));
@@ -266,8 +272,9 @@ gulp.task('concat:plugins', function() {
       '**/fastclick.js',
       '*'
     ]))
-    .pipe(plugins.concat('plugins.js'))
-    .pipe(plugins.rename({suffix: '.min'}))
+    .pipe(plugins.newer(paths.app.libs + 'vendor/plugins.min.js'))
+    .pipe(plugins.concat('plugins.min.js'))
+    //.pipe(plugins.rename({suffix: '.min'}))
     .pipe(isDeployment ? plugins.uglify() : plugins.util.noop()) /* 2 */
     .pipe(gulp.dest(paths.app.libs + 'vendor/'));
 });
@@ -286,8 +293,9 @@ gulp.task('concat:plugins', function() {
 
 gulp.task('concat:plugins-respimages', function() {
   return gulp.src(mainBowerFiles({filter: '**/{lazysizes,respimage}.js'}), { base: 'bower_components'})
-    .pipe(plugins.concat('plugins.images.js'))
-    .pipe(plugins.rename({suffix: '.min'}))
+    .pipe(plugins.newer(paths.app.libs + 'vendor/plugins.images.min.js'))
+    .pipe(plugins.concat('plugins.images.min.js'))
+    //.pipe(plugins.rename({suffix: '.min'}))
     .pipe(plugins.uglify())
     .pipe(gulp.dest(paths.app.libs + 'vendor/'));
 });
@@ -348,7 +356,8 @@ gulp.task('watch', function() {
   ).on('change', bs.reload);
 
 
-  gulp.watch(paths.app + '**/*.php').on('change', bs.reload);
+  gulp.watch(app + '**/*.php').on('change', bs.reload);
+
 });
 
 
@@ -392,9 +401,9 @@ gulp.task('build', function() {
     runSequence('clean:assets', 'process:modernizr',
       [
         'lint:scss',
+        'lint:js',
         'compile:sass',
         'copy:jquery',
-        'lint:js',
         'process:base',
         'concat:plugins',
         'concat:plugins-respimages',

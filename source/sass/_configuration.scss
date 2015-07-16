@@ -23,6 +23,7 @@
  */
 $white:  #fff;
 $black:  #000;
+$gray:   #ccc;
 $orange: #f60;
 
 
@@ -33,9 +34,11 @@ $orange: #f60;
 $base-link-color:       $orange;
 $base-link-hover-color: lighten($orange, 10%);
 
-$btn-color:             $orange;
-$btn-bg-color:          $white;
-$btn-color-hover:       lighten($orange, 10%);
+$base-border-color: $gray;
+
+// $btn-color:             $orange;
+// $btn-bg-color:          $white;
+// $btn-color-hover:       lighten($orange, 10%);
 
 
 
@@ -47,8 +50,6 @@ $btn-color-hover:       lighten($orange, 10%);
  *
  * Define element default values
  */
-
-// ...
 
 
 
@@ -122,11 +123,11 @@ $use-fractions: true;
 
 // See `_utils.sizes.scss`
 $widths-columns: (
-    1,
-    2,
-    3,
-    4,
-    5
+  1,
+  2,
+  3,
+  4,
+  5
 );
 
 
@@ -151,11 +152,12 @@ $grid-gutter-size:        $base-spacing-unit !default;
 // Button
 $button-font:             inherit !default;
 $button-font-size:        $base-font-size !default;
-$button-border-width:     1px;
+$button-border-width:     1px !default;
 $button-border-style:     solid !default;
 $button-border-radius:    0 !default;
-$button-color:            $btn-color;
-$button-bg-color:         $btn-bg-color;
+$button-border-color:     $orange;
+$button-color:            $orange;
+$button-bg-color:         $white;
 $button-disabled-opacity: 0.5 !default;
 $button-padding:          $base-spacing-unit !default;
 
@@ -170,3 +172,12 @@ $button-group-border-radius: 0 !default;
 // List
 $list-padding:   $base-spacing-unit !default;
 $list-font-size: $base-font-size !default;
+
+
+
+// Table
+$table-padding:      $base-spacing-unit !default;
+$table-border-width: 1px !default;
+$table-border-width: $base-font-size !default;
+$table-border-style: solid !default;
+$table-border-color: $base-border-color !default;

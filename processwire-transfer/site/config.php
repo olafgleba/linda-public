@@ -85,7 +85,7 @@ $config->httpHosts = array('127.0.0.1','localhost', 'dev.olafgleba.de');
  * @var string
  *
  */
-$config->prependTemplateFile = 'prepend/functions.php';
+$config->prependTemplateFile = '_init.php';
 
 /**
  * Append template file

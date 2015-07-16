@@ -114,6 +114,7 @@ $list-padding--huge:  quadruple($list-padding) !default;
   display: table;
   table-layout: fixed; /* 1 */
   width: 100%; /* 2 */
+  text-align: center;
 
   > li {
     @extend %list-table__item;
@@ -200,6 +201,12 @@ $list-padding--huge:  quadruple($list-padding) !default;
  * Modifiers: Align the content of list items
  */
 
+.list--align-left {
+  > li {
+    text-align: left;
+  }
+}
+
 .list--align-center {
   > li {
     text-align: center;
@@ -218,6 +225,13 @@ $list-padding--huge:  quadruple($list-padding) !default;
 
 /**
  * Modifiers: Blow/shrink list items
+ *
+ * Generic size utilities. Is applicable on every list abstraction except
+ * where flex box is involved.
+ *
+ * Example:
+ *   <div class="list-table list--tiny"></div>
+ *   <div class="list-stacked list--large"></div>
  */
 
 .list--tiny {
