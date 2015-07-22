@@ -13,4 +13,4 @@
 
 * `$ gulp build --production`
 
-The Processwire CMS is not part of the environment. Place a fresh installation copy within the `app/`` folder, unzip a site profile file (within folder `processwire-profiles/...`) and put the extracted profile folder into the `app/` folder. Start the installation within a browser and choose the added side profile. Go ahead with the installation process.
+The Processwire CMS is not part of the environment. Place a fresh installation copy within the `app/` folder, unzip a site profile file (within folder `processwire-profiles/...`) and put the extracted profile folder into the `app/` folder. Start the installation within a browser and choose the added side profile. Go ahead with the installation process.
