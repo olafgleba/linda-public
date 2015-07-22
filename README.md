@@ -13,4 +13,4 @@
 
 * `$ gulp build --production`
 
-The Processwire CMS is not part of the environment. Install a fresh copy within the **app/** folder. When the installation is done replace site folder files (`app/site/`) with their counterparts you find in the **processwire-transfer** folder. At least enter your DB credentials in the `config.php` file.
+The Processwire CMS is not part of the environment. Place a fresh installation copy within the `app/`` folder, unzip a site profile file (within folder `processwire-profiles/...`) and put the extracted profile folder into the `app/` folder. Start the installation within a browser and choose the added side profile. Go ahead with the installation process.
