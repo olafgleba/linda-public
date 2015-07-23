@@ -47,17 +47,17 @@ if(plugins.util.env.production === true) {
  * Base vars and paths
  */
 
-var app = 'app/site/templates/';
+var tpls = 'app/site/templates/';
 var src = 'source/';
 
 var paths = {
   app: {
     root: 'app/',
     local: 'localhost/devel-environments/linda/app/',
-    assets: app + 'assets/',
-    css: app + 'assets/css/',
-    libs: app + 'assets/libs/',
-    img: app + 'assets/img/'
+    assets: tpls + 'assets/',
+    css: tpls + 'assets/css/',
+    libs: tpls + 'assets/libs/',
+    img: tpls + 'assets/img/'
   },
   src: {
     sass: src + 'sass/',
@@ -79,7 +79,7 @@ var paths = {
 gulp.task('connect-sync', function() {
   plugins.connectPhp.server({
     base: paths.app.root,
-    port: 8080
+    port: 9000
     }, function (){
     bs.init({
       proxy: paths.app.local /* 1 */
@@ -356,7 +356,7 @@ gulp.task('watch', function() {
   ).on('change', bs.reload);
 
 
-  gulp.watch(app + '**/*.php').on('change', bs.reload);
+  gulp.watch(tpls + '**/*.php').on('change', bs.reload);
 
 });
 
