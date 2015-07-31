@@ -1,11 +1,24 @@
 *Linda* is a frontend development environment to build Processwire + Gulp driven project.
 
-## Getting started
+## Setting up the environment
 
-* Clone the git repo: `$ git clone https://github.com/olafgleba/linda.git`
-* `npm install`, `bower install`
+* `$ git clone https://github.com/olafgleba/linda.git`
+* Delete `.git` folder
+* `$ npm install`, `$ bower install`
+* `$ cd app/`
+* Delete any hidden file (e.g. `.*`)
+* `$ git clone https://github.com/ryancramerdesign/ProcessWire ./`
+* Delete Processwire `.git` folder
+* Copy .gitignore files
+* Goto root level folder `processwire-profiles`:
+* * Unzip desired site profile, shove it to folder `app/`
+* * Shove gitignore.txt to folder `app/`, rename it to `.gitignore`
+* Launch path in browser to install processwire
+* Choose your site profile and go ahead with the installation (chmod 775, 666)
+* Init new local repo (`$ git init`)
 
-## Development
+
+## Development.DS_Store
 
 * `$ gulp build`
 
@@ -13,4 +26,6 @@
 
 * `$ gulp build --production`
 
-The Processwire CMS is not part of the environment. Place a fresh installation copy within the `app/` folder, unzip a site profile file (within folder `processwire-profiles/...`) and put the extracted profile folder into the `app/` folder. Start the installation within a browser and choose the added side profile. Go ahead with the installation process.
+## Info
+
+The Processwire CMS is not part of the environment. Place a fresh installation copy within the `app/` folder.

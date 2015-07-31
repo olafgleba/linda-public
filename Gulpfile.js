@@ -2,7 +2,7 @@
  * Require plugins and assign them to variables
  */
 
-var gulp = require('gulp');
+var gulp    = require('gulp');
 var plugins = require('gulp-load-plugins')();
 
 /**
@@ -12,14 +12,14 @@ var plugins = require('gulp-load-plugins')();
 // Uncomment for debugging
 //require('time-require');
 
-var autoprefixer = require('autoprefixer-core');
-var bs = require('browser-sync').create();
-var opn = require('opn');
+var autoprefixer   = require('autoprefixer-core');
+var bs             = require('browser-sync').create();
+var opn            = require('opn');
 var mainBowerFiles = require('main-bower-files');
-var merge = require('merge-stream');
-var runSequence = require('run-sequence');
-var del = require('del');
-var pngquant = require('imagemin-pngquant');
+var merge          = require('merge-stream');
+var runSequence    = require('run-sequence');
+var del            = require('del');
+var pngquant       = require('imagemin-pngquant');
 
 
 
@@ -48,21 +48,21 @@ if(plugins.util.env.production === true) {
  */
 
 var tpls = 'app/site/templates/';
-var src = 'source/';
+var src  = 'source/';
 
 var paths = {
   app: {
-    root: 'app/',
-    local: 'localhost/devel-environments/linda/app/',
+    root:   'app/',
+    local:  'localhost/devel-environments/linda/app/',
     assets: tpls + 'assets/',
-    css: tpls + 'assets/css/',
-    libs: tpls + 'assets/libs/',
-    img: tpls + 'assets/img/'
+    css:    tpls + 'assets/css/',
+    libs:   tpls + 'assets/libs/',
+    img:    tpls + 'assets/img/'
   },
   src: {
     sass: src + 'sass/',
     libs: src + 'libs/',
-    img: src + 'img/'
+    img:  src + 'img/'
   }
 }
 

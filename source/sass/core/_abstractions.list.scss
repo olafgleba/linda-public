@@ -85,12 +85,18 @@ $list-padding--huge:  quadruple($list-padding) !default;
 }
 
 /**
- * Child of `.list-stacked`
+ * Children of `.list-stacked`
+ *
+ * 1. Dedicated link takes all available space
  */
 
 .list-stacked__item,
 %list-stacked__item {
   display: block;
+}
+
+.list-stacked__block-link {
+  display: block; /* 1 */
 }
 
 
@@ -122,7 +128,7 @@ $list-padding--huge:  quadruple($list-padding) !default;
 }
 
 /**
- * Childs of `.list-table`
+ * Children of `.list-table`
  *
  * 1. Automatic divide words with hyphenation.
  * 2. Dedicated link takes all available space
@@ -135,7 +141,7 @@ $list-padding--huge:  quadruple($list-padding) !default;
   hyphens: auto; /* 1 */
 }
 
-.list-table__link {
+.list-table__block-link {
   display: block; /* 2 */
 }
 
