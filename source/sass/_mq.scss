@@ -1,0 +1,38 @@
+/**
+ * Core media queries
+ *
+ * This assumes a global switch of the base font size and line-height
+ * accordingly. As some core abstractions contains font-size declaration
+ * within its class declarations, we must list them here to
+ * redeclare.
+ */
+
+
+
+/**
+ * Media query for smaller mobile devices (e.g. < 720px (44.9375em), 16px default)
+ *
+ * 1. Adjust those base values as needed
+ * 2. All elements inherits from HTML DOM node declarations
+ * 3. Classes of several core abstractions. The parents of those
+ *    classes utilize the inline-block approach. All listed class
+ *    comprises font-size declaration to fix the inline-block
+ *    whitespace issue of the abstraction. Add any abstraction class
+ *    which may be extend the core by and by.
+ */
+@media screen and (max-width: 44.9375em) {
+
+  /**
+   * Redclare default variables
+   */
+  $base-font-size:   16px; /* 1 */
+  $base-line-height: 24px; /* 1 */
+
+  html, /* 2 */
+  .grid__cell, /* 3 */
+  .button-group__item /* 3 */
+  {
+    font-size: $base-font-size;
+    line-height: $base-line-height;
+  }
+}
