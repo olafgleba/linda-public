@@ -8,10 +8,10 @@
 * Delete `.git` folder (`$ rm -rf .git`)
 * `$ npm install`, `$ bower install`
 * `$ cd app/`
-* Delete the `.gitignore` file
+* Delete `.gitignore` file
 * `$ git clone https://github.com/ryancramerdesign/ProcessWire ./`
 * Delete Processwire `.git` folder and `.gitignore`file
-* Goto root level folder `processwire-profiles`:
+* Goto root level folder `processwire-profiles`
 * Unzip desired site profile, shove the extracted folder to folder `app/`
 * Launch path in browser to install processwire
 * Choose your site profile and go ahead with the installation (chmod 775, 664)
