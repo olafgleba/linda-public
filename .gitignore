@@ -1,6 +1,10 @@
-.sass-cache
 **/*.DS_Store
-*.sublime-project
-*.sublime-workspace
-node_modules
+.sass-cache
+app/.htaccess
+app/site/modules/
+app/site/assets/files
+app/site/assets/sessions
+app/site/assets/cache
+app/wire
 bower_components
+node_modules
