@@ -18,7 +18,7 @@
 * Init new local repo (`$ git init`)
 
 
-## Development.DS_Store
+## Development
 
 * `$ gulp build`
 
