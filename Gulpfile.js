@@ -47,8 +47,8 @@ if(plugins.util.env.production === true) {
  * Base vars and paths
  */
 
-var tpls = 'app/site/templates/';
-var src  = 'source/';
+var tpls   = 'app/site/templates/';
+var source = 'source/';
 
 var paths = {
   app: {
@@ -60,9 +60,9 @@ var paths = {
     img:    tpls + 'assets/img/'
   },
   src: {
-    sass: src + 'sass/',
-    libs: src + 'libs/',
-    img:  src + 'img/'
+    sass: source + 'sass/',
+    libs: source + 'libs/',
+    img:  source + 'img/'
   }
 }
 
@@ -328,7 +328,7 @@ gulp.task('watch', function() {
 
   gulp.watch(paths.src.sass + '**/*.scss',
     [
-      'lint:scss',
+      //'lint:scss',
       'compile:sass'
     ]
   );
