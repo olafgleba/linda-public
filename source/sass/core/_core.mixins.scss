@@ -58,7 +58,7 @@
     }
 
     @elseif ($line-height != none and $line-height != false) {
-      @warn "D’oh! '#{$line-height}' is not a valid value for `line-height`."
+      @warn "D’oh! '#{$line-height}' is not a valid value for `line-height`.";
     }
   }
 }
@@ -111,7 +111,7 @@
 
   // If the user specifies a non-exitent alias, send them a warning.
   @if $breakpoint-found == false {
-    @warn "Oops! Breakpoint '#{$mq}' does not exist."
+    @warn "Oops! Breakpoint '#{$mq}' does not exist.";
   }
 
 }
@@ -179,7 +179,7 @@ $use-fractions: true !default;
  * Usage example:
  *
  *  .foo {
- *    @include sizes(padding);
+ *    @include size-modifiers(padding);
  *
  *    padding: $base-spacing-unit;
  *  }
@@ -197,7 +197,7 @@ $use-fractions: true !default;
  * ===
  *
  *  .foo {
- *    @include sizes(padding-left, padding-right);
+ *    @include size-modifiers(padding-left, padding-right);
  *
  *    padding-top: $base-spacing-unit;
  *    padding-bottom: $base-spacing-unit;
@@ -218,7 +218,7 @@ $use-fractions: true !default;
  * ===
  *
  *  .foo {
- *    @include sizes(line-height);
+ *    @include size-modifiers(line-height);
  *
  *    line-height: $base-spacing-unit;
  *  }
@@ -235,7 +235,7 @@ $use-fractions: true !default;
  *
  */
 
-@mixin sizes($properties...) {
+@mixin size-modifiers($properties...) {
 
   &--tiny {
     @each $property in $properties {
