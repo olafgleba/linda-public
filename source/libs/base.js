@@ -62,6 +62,19 @@ $(function() {
   });
 
 
+  // Init fluidbox
+  $('a[rel="fluidbox"]').fluidbox({
+    immediateOpen: true
+  })
+  .one('openstart', function() {
+    $(this).find('.fluidbox-ghost')
+    .append('<div class="is-loading-fluidbox"><div class="progress progress--large"></div></div>');
+  })
+  .on('imageloaddone', function() {
+    $(this).find('.is-loading-fluidbox').remove();
+  });
+
+
   // Init carousel demo
   $('.owl-carousel').owlCarousel({
     itemsCustom: [

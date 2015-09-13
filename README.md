@@ -1,6 +1,6 @@
 *Linda* is a frontend development environment to build Processwire + Gulp driven projects.
 
-## Setting up the environment
+## Setup
 
 * `$ mkdir name-of-project-folder`
 * `$ cd name-of-project-folder`
@@ -25,7 +25,3 @@
 ## Production
 
 * `$ gulp build --production`
-
-## Info
-
-The Processwire CMS is not part of the environment. Place a fresh installation copy within the `app/` folder.

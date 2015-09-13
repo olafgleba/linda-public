@@ -1,5 +1,5 @@
 /**
- * Core table component
+ * Core table abstraction
  *
  * Several raw table abstractions which solves daily "bread and butter"
  * lists. Additionally these abstractions helps us to build meaningful
@@ -26,6 +26,7 @@ $table-padding--huge:  quadruple($table-padding) !default;
 
 .table {
   width: 100%;
+  border-collapse: collapse;
 
   th,
   td {
@@ -70,10 +71,18 @@ $table-padding--huge:  quadruple($table-padding) !default;
   td {
     &:first-child {
       padding-left: $table-padding;
+
+      @include media-query(palm) {
+        padding-left: 0;
+      }
     }
 
     &:last-child {
       padding-right: $table-padding;
+
+      @include media-query(palm) {
+        padding-right: 0;
+      }
     }
   }
 }
@@ -175,21 +184,21 @@ $table-padding--huge:  quadruple($table-padding) !default;
 .table--align-left {
   th,
   td {
-    text-align: left;
+    text-align: left !important;
   }
 }
 
 .table--align-center {
   th,
   td {
-    text-align: center;
+    text-align: center !important;
   }
 }
 
 .table--align-right {
   th,
   td {
-    text-align: right;
+    text-align: right !important;
   }
 }
 

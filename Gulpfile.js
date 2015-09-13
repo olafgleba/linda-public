@@ -45,6 +45,8 @@ if(plugins.util.env.production === true) {
 
 /**
  * Base vars and paths
+ *
+ * 1. Adapt path to fit the environment
  */
 
 var tpls   = 'app/site/templates/';
@@ -53,7 +55,7 @@ var source = 'source/';
 var paths = {
   app: {
     root:   'app/',
-    local:  'localhost/devel-environments/linda/app/',
+    local:  'localhost/devel-environments/linda/app/', /* 1 */
     assets: tpls + 'assets/',
     css:    tpls + 'assets/css/',
     libs:   tpls + 'assets/libs/',
@@ -72,8 +74,6 @@ var paths = {
 /**
  * Connect to localhost to serve php files
  * and start syncing
- *
- * 1. Adapt path to fit the environment
  */
 
 gulp.task('connect-sync', function() {
@@ -82,7 +82,7 @@ gulp.task('connect-sync', function() {
     port: 9000
     }, function (){
     bs.init({
-      proxy: paths.app.local /* 1 */
+      proxy: paths.app.local
     });
   });
 });
@@ -212,7 +212,7 @@ gulp.task('process:icons', function() {
  * task has to run before any compilation or concatenation, e.g.
  * outside the runSequenze task array.
  *
- * 1. Set classes on html tag related to found attributes
+ * 1. Condition wether to execute a plugin or passthru
  */
 
 gulp.task('process:modernizr', function() {
@@ -222,6 +222,7 @@ gulp.task('process:modernizr', function() {
           "setClasses" /* 1 */
         ]
     }))
+    .pipe(isDeployment ? plugins.uglify() : plugins.util.noop()) /* 1 */
     .pipe(gulp.dest(paths.src.libs + 'vendor'))
 });
 
@@ -268,13 +269,11 @@ gulp.task('concat:plugins', function() {
     gulp.src(paths.src.libs + 'vendor/*.js')
     )
     .pipe(plugins.order([ /* 1 */
-      '**/modernizr-custom.js',
       '**/fastclick.js',
       '*'
     ]))
     .pipe(plugins.newer(paths.app.libs + 'vendor/plugins.min.js'))
     .pipe(plugins.concat('plugins.min.js'))
-    //.pipe(plugins.rename({suffix: '.min'}))
     .pipe(isDeployment ? plugins.uglify() : plugins.util.noop()) /* 2 */
     .pipe(gulp.dest(paths.app.libs + 'vendor/'));
 });
@@ -295,7 +294,6 @@ gulp.task('concat:plugins-respimages', function() {
   return gulp.src(mainBowerFiles({filter: '**/{lazysizes,respimage}.js'}), { base: 'bower_components'})
     .pipe(plugins.newer(paths.app.libs + 'vendor/plugins.images.min.js'))
     .pipe(plugins.concat('plugins.images.min.js'))
-    //.pipe(plugins.rename({suffix: '.min'}))
     .pipe(plugins.uglify())
     .pipe(gulp.dest(paths.app.libs + 'vendor/'));
 });
@@ -328,7 +326,7 @@ gulp.task('watch', function() {
 
   gulp.watch(paths.src.sass + '**/*.scss',
     [
-      //'lint:scss',
+      'lint:scss',
       'compile:sass'
     ]
   );
@@ -337,7 +335,8 @@ gulp.task('watch', function() {
   gulp.watch(paths.src.libs + 'base.js',
     [
       'lint:js',
-      'process:base'
+      'process:base',
+      'concat:plugins'
     ]
   ).on('change', bs.reload);
 

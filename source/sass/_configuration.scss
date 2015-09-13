@@ -36,12 +36,6 @@ $base-link-hover-color: lighten($orange, 10%);
 
 $base-border-color: $gray;
 
-// $btn-color:             $orange;
-// $btn-bg-color:          $white;
-// $btn-color-hover:       lighten($orange, 10%);
-
-
-
 
 
 
@@ -51,7 +45,15 @@ $base-border-color: $gray;
  * Define element default values
  */
 
+// Buttons
+$btn-color:             $orange;
+$btn-bg-color:          $white;
+$btn-border-color:      $orange;
+$btn-color-hover:       lighten($orange, 10%);
 
+// Loading progress animation
+$progress-border-color:     $white;
+$progress-border-top-color: $orange;
 
 
 
@@ -154,9 +156,9 @@ $button-font:             inherit !default;
 $button-border-width:     1px !default;
 $button-border-style:     solid !default;
 $button-border-radius:    0 !default;
-$button-border-color:     $orange;
-$button-color:            $orange;
-$button-bg-color:         $white;
+$button-border-color:     $btn-border-color;
+$button-color:            $btn-color;
+$button-bg-color:         $btn-bg-color;
 $button-disabled-opacity: 0.5 !default;
 $button-padding:          $base-spacing-unit !default;
 

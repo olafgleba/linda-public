@@ -2,14 +2,15 @@
   "name": "Linda",
   "description": "Gulp Development with Processwire",
   "dependencies": {
-    "lazysizes": "~1.1.2",
-    "jquery": "~2.1.4",
-    "respimage": "~1.4.0",
     "fastclick": "~1.0.6",
+    "fluidbox": "~1.4.3",
     "fluidvids": "2.2.0",
-    "svg4everybody": "~1.0.0",
+    "jquery": "~2.1.4",
     "jquery-smooth-scroll": "~1.5.5",
+    "lazysizes": "~1.1.2",
     "owl-carousel": "~1.3.2",
+    "respimage": "~1.4.0",
+    "svg4everybody": "~1.0.0",
     "tablesaw": "~1.0.4"
   },
   "overrides": {
@@ -24,6 +25,9 @@
     },
     "fluidvids": {
       "main": "dist/fluidvids.js"
+    },
+    "fluidbox": {
+      "main": "jquery.fluidbox.js"
     },
     "svg4everybody": {
       "main": "svg4everybody.js"

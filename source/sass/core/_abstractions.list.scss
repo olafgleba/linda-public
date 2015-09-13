@@ -1,5 +1,5 @@
 /**
- * Core list component
+ * Core list abstraction
  *
  * Several raw list abstractions which solves daily "bread and butter"
  * lists. Additionally these abstractions helps us to build meaningful
@@ -205,6 +205,9 @@ $list-padding--huge:  quadruple($list-padding) !default;
 
 /**
  * Modifiers: Align the content of list items
+ *
+ * Example:
+ *   <ul class="list-table list--[align-left]"></ul>
  */
 
 .list--align-left {
@@ -235,32 +238,47 @@ $list-padding--huge:  quadruple($list-padding) !default;
  * Generic size utilities. Is applicable on every list abstraction except
  * where flex box is involved.
  *
+ * 1. Expand list item paddings
+ * 2. Ommit left/right padding of first/last item
+ *
  * Example:
- *   <div class="list-table list--tiny"></div>
- *   <div class="list-stacked list--large"></div>
+ *   <ul class="list-table list--[tiny]"></ul>
+ *   <ul class="list-stacked list--[tiny] list--skip-vertical"></ul>
  */
 
 .list--tiny {
   > li {
-    padding: $list-padding--tiny;
+    padding: $list-padding--tiny; /* 1 */
   }
 }
 
 .list--small {
   > li {
-    padding: $list-padding--small;
+    padding: $list-padding--small; /* 1 */
   }
 }
 
 .list--large {
   > li {
-    padding: $list-padding--large;
+    padding: $list-padding--large; /* 1 */
   }
 }
 
 .list--huge {
   > li {
-    padding: $list-padding--huge;
+    padding: $list-padding--huge; /* 1 */
+  }
+}
+
+.list--skip-vertical { /* 2 */
+  > li {
+    &:first-of-type {
+      padding-left: 0;
+    }
+
+    &:last-of-type {
+      padding-right: 0;
+    }
   }
 }
 

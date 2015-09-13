@@ -8,12 +8,25 @@ html { }
 body { }
 
 
+
+// a {
+//   transition: background-color 0.15s;
+//   text-decoration: underline;
+//   color: $base-link-color;
+//
+//   &:hover, &:active, &:focus {
+//     color: $base-link-hover-color;
+//     text-decoration: none;
+//   }
+// }
+
+
+
 .page {
   margin: 0 auto;
   max-width: 64em;
   padding: $base-spacing-unit;
 }
-
 
 
 
@@ -35,20 +48,21 @@ body { }
   }
 }
 
+.icon--large {
+  width: (($base-font-size * 2) / 16px) * 1em;
+  height: (($base-font-size * 2) / 16px) * 1em;
+}
+
+.icon--huge {
+  width: (($base-font-size * 4) / 16px) * 1em;
+  height: (($base-font-size * 4) / 16px) * 1em;
+}
 
 
-
-// a {
-//   transition: all 0.5s;
-//   text-decoration: none;
-
-//   &:hover {
-//     color: $orange;
-//   }
-// }
-
-
-
+/**
+ * Single icons
+ */
+// ...
 
 
 
@@ -79,26 +93,26 @@ img[data-sizes="auto"] {
 
 .lazyloaded {
   opacity: 1;
-  transition: opacity 0.5s ease-in !important;
+  transition: opacity 0.25s ease-in !important;
 }
 
 
 
 
 
-
+/**
+ * Framework related styles
+ */
 
 // just testing, remove if ready
-.grid__cell > div {
+.framework .grid__cell > div {
   background-color: $orange;
   margin-bottom: 1em;
 }
 
-.grid__cell {
+.framework .grid__cell {
   margin-bottom: 1em;
 }
-
-
 
 
 
@@ -108,43 +122,142 @@ img[data-sizes="auto"] {
  * list of headings
  * @string {String}
  */
-// $headings: "h1, h2, h3, h4, h5, h6";
+$headings: "h1, h2, h3, h4, h5, h6";
 
-// @each $item in $headings {
-//  #{$item} {
-//    font-style: normal;
-//    font-weight: inherit;
-//  }
-// }
+@each $item in $headings {
+ #{$item} {
+   font-style: normal;
+   font-weight: inherit;
+ }
+}
+
+
+
+
+
+// overwrite fluidbox vendor declaration
+// s. _jquery.fluidboy.scss, line 51
+.fluidbox-ghost {
+  transition-duration: $transition-duration, $transition-duration;
+}
+
+
 
 
 
 /**
- * Processwire related
+ * Container for status loading animation, s. next below `progress`
+ *
+ * Dynamic append this class to fluidbox loading event
  */
-// ul, ol {
-//   margin-left: 0;
-//   padding-left: 0;
-//   list-style: none;
-// }
+.is-loading-fluidbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
 
-// Styles in CKEditor => mystyles.js
-//
-// scss-lint:disable SelectorFormat
-//
-.align_right {
-  float: left;
-  margin-right: $base-spacing-unit;
-  margin-bottom: $base-spacing-unit;
 
-  @include media-query(desk) {
-    float: right;
-    margin-left: $base-spacing-unit--large;
-    margin-bottom: $base-spacing-unit;
+
+
+
+/**
+ * Loading spinner, css animation
+ *
+ * Markup:
+ *   <div class="progress [progress--large][progress--small]"></div>
+ */
+@keyframes progress {
+  to {transform: rotate(360deg);}
+}
+
+.progress {
+  position: relative;
+  min-width: 50px;
+  min-height: 50px;
+}
+
+.progress:before {
+  content: 'Loading...';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 24px;
+  height: 24px;
+  margin-top: -13px; /* width/2 + 1 */
+  margin-left: -13px; /* width/2 + 1 */
+}
+
+.progress:not(:required):before {
+  content: '';
+  border-radius: 50%;
+  border-style: solid;
+  border-color: $progress-border-color;
+  border-top-color: $progress-border-top-color;
+  animation: progress .6s linear infinite;
+}
+
+// Modifier
+.progress--large {
+  &::before {
+    width: 48px;
+    height: 48px;
+    margin-top: -25px; /* width/2 + 1 */
+    margin-left: -25px; /* width/2 + 1 */
+  }
+
+  &:not(:required):before {
+    border-width: 6px;
   }
 }
 
-// scss-lint:enable SelectorFormat
+.progress--small {
+  &::before {
+    width: 16px;
+    height: 16px;
+    margin-top: -9px; /* width/2 + 1 */
+    margin-left: -9px; /* width/2 + 1 */
+  }
+
+  &:not(:required):before {
+    border-width: 2px;
+  }
+}
+
+
+
+
+
+/**
+ * Image Gallery (fluidbox)
+ */
+.gallery {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.gallery a {
+  margin-bottom: 1%;
+}
+
+.col-4 {
+  width: 49%;
+  // fallback for .no-flexbox browser
+  display: inline-block;
+
+  @include media-query (lap) {
+    width: 32%;
+  }
+
+  @include media-query (desk) {
+    width: 24%;
+  }
+}
+
+
+
+
 
 
 
@@ -153,6 +266,15 @@ img[data-sizes="auto"] {
 }
 
 /*header*/.page-header--banner {
+
+}
+
+/*main*/.page-content {
+
+}
+
+
+/*aside*/.sidebar {
 
 }
 
@@ -166,46 +288,9 @@ img[data-sizes="auto"] {
 }
 
 
-// .nav {
-
-//   li {
-//     margin-right: $base-spacing-unit;
-
-//     &:last-of-type {
-//       margin-right: 0;
-//     }
-//   }
-
-//   a, .current {
-//     color: $base-link-color;
-//     text-decoration: none;
-//     transition: all 0.1s;
-
-//     &:hover, &:active, &:focus {
-//       color: $base-link-hover-color;
-//     }
-//   }
-// }
-
-
-
-
-/*main*/.page-content {
-
-}
-
-
-
-/*aside*/.sidebar {
-
-}
-
-
-
 /*hx*/.section-heading {
 
 }
-
 
 
 /*div*/.section-body {

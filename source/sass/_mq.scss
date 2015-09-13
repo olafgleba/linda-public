@@ -29,6 +29,9 @@
   html, /* 2 */
   .grid__cell, /* 3 */
   .button-group__item /* 3 */
+  .list-inline-block__item, /* 3 */
+  .list-inline-block > li, /* 3 */
+  .breadcrumb--horizontal > li /* 3 */
   {
     font-size: $base-font-size;
     line-height: $base-line-height;
