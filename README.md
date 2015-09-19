@@ -11,11 +11,16 @@
 * Delete `.gitignore` file
 * `$ git clone https://github.com/ryancramerdesign/ProcessWire ./`
 * Delete Processwire `.git` folder and `.gitignore`file
-* Goto root level folder `processwire-profiles`
-* Unzip desired site profile, shove the extracted folder to folder `app/`
-* Launch path in browser to install processwire
+* Goto root level folder `processwire-profiles`:
+* - Unzip desired site profile, shove the extracted folder to folder `app/`
+* - Shove `gitignore.txt` to folder `app/`, rename it to `.gitignore`
+* Launch directive path in browser to install processwire
 * Choose your site profile and go ahead with the installation (chmod 775, 664)
 * Init new local repo (`$ git init`)
+
+## Configuration (Processwire)
+* Adapt local path (`paths.app.local`) in `Gulpfile.js`
+* Adapt path to CKEditor theme (`site/modules/InputfieldCKEditor/[config.js, config-body.js]`)
 
 
 ## Development
