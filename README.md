@@ -11,11 +11,11 @@
 * Delete `.gitignore` file
 * `$ git clone https://github.com/ryancramerdesign/ProcessWire ./`
 * Delete Processwire `.git` folder and `.gitignore`file
-* Goto root level folder `processwire-profiles`:
-* - Unzip desired site profile, shove the extracted folder to folder `app/`
-* - Shove `gitignore.txt` to folder `app/`, rename it to `.gitignore`
+* Goto root level folder `processwire-profiles`, do:
+* - `$ unzip <name-of-profile>.zip -d ../app`
+* - `$ mv gitignore.txt ../.gitignore`
 * Launch directive path in browser to install processwire
-* Choose your site profile and go ahead with the installation (chmod 775, 664)
+* Choose your extracted site profile and go ahead with the installation (chmod 775, 664)*
 * Init new local repo (`$ git init`)
 
 ## Configuration (Processwire)
@@ -30,3 +30,7 @@
 ## Production
 
 * `$ gulp build --production`
+
+
+
+*) Alter permission to fit the environment if needed
