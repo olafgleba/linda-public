@@ -29,7 +29,6 @@ $grid-gutter-size--huge:  quadruple($grid-gutter-size) !default;
  * 3. Ensure consistent default alignment.
  */
 
-
 .grid {
   display: block; /* 1 */
   font-size: 0; /* 2 */
@@ -38,27 +37,21 @@ $grid-gutter-size--huge:  quadruple($grid-gutter-size) !default;
   text-align: left; /* 3 */
 }
 
-/**
- * Modifier: Center align all grid cells
- */
 
-.grid--align-center {
-  text-align: center;
-}
+
 
 /**
- * Modifier: Right align all grid cells
+ * Modifier: Root alignments
+ *
+ * Alignment modifiers for the root element. Will effect all child elements.
+ * NOTE: To apply individual alignments, s.below `Modifier: Cell alignments`.
  */
-
-.grid--align-right {
-  text-align: right;
-}
 
 /**
  * Modifier: middle-align grid cells
  */
 
-.grid--align-middle > .grid__cell {
+.grid--middle > .grid__cell {
   vertical-align: middle;
 }
 
@@ -66,9 +59,26 @@ $grid-gutter-size--huge:  quadruple($grid-gutter-size) !default;
  * Modifier: Bottom-align grid cells
  */
 
-.grid--align-bottom > .grid__cell {
+.grid--bottom > .grid__cell {
   vertical-align: bottom;
 }
+
+/**
+ * Modifier: Push all grid cells content to center
+ */
+
+.grid--text-center > .grid__cell {
+  text-align: center;
+}
+
+/**
+ * Modifier: Push all grid cells content to right
+ */
+
+.grid--text-right > .grid__cell {
+  text-align: right;
+}
+
 
 
 
@@ -81,11 +91,11 @@ $grid-gutter-size--huge:  quadruple($grid-gutter-size) !default;
  */
 
 .grid--gutter {
-  margin: 0 calc(-0.5 * #{$grid-gutter-size});
+  margin-left: (-$grid-gutter-size);
 }
 
 .grid--gutter > .grid__cell {
-  padding: 0 calc(0.5 * #{$grid-gutter-size});
+  padding-left: $grid-gutter-size;
 }
 
 
@@ -94,39 +104,39 @@ $grid-gutter-size--huge:  quadruple($grid-gutter-size) !default;
  */
 
 // tiny
-.grid--gutter--tiny {
-  margin: 0 calc(-0.5 * #{$grid-gutter-size--tiny});
+.grid--gutter-tiny {
+  margin-left: (-$grid-gutter-size--tiny);
 }
 
-.grid--gutter--tiny > .grid__cell {
-  padding: 0 calc(0.5 * #{$grid-gutter-size--tiny});
+.grid--gutter-tiny > .grid__cell {
+  padding-left: (-$grid-gutter-size--tiny);
 }
 
 // small
-.grid--gutter--small {
-  margin: 0 calc(-0.5 * #{$grid-gutter-size--small});
+.grid--gutter-small {
+  margin-left: (-$grid-gutter-size--small);
 }
 
-.grid--gutter--small > .grid__cell {
-  padding: 0 calc(0.5 * #{$grid-gutter-size--small});
+.grid--gutter-small > .grid__cell {
+  padding-left: $grid-gutter-size--small;
 }
 
 // large
-.grid--gutter--large {
-  margin: 0 calc(-0.5 * #{$grid-gutter-size--large});
+.grid--gutter-large {
+  margin-left: (-$grid-gutter-size--large);
 }
 
-.grid--gutter--large > .grid__cell {
-  padding: 0 calc(0.5 * #{$grid-gutter-size--large});
+.grid--gutter-large > .grid__cell {
+  padding-left: $grid-gutter-size--large;
 }
 
 // huge
-.grid--gutter--huge {
-  margin: 0 calc(-0.5 * #{$grid-gutter-size--huge});
+.grid--gutter-huge {
+  margin-left: (-$grid-gutter-size--huge);
 }
 
-.grid--gutter--huge > .grid__cell {
-  padding: 0 calc(0.5 * #{$grid-gutter-size--huge});
+.grid--gutter-huge > .grid__cell {
+  padding-left: $grid-gutter-size--huge;
 }
 
 
@@ -166,4 +176,45 @@ $grid-gutter-size--huge:  quadruple($grid-gutter-size) !default;
 .grid__cell--center {
   display: block;
   margin: 0 auto;
+}
+
+
+
+/**
+ * Modifier: Cell alignments
+ *
+ * Individual alignment for grid cells. To apply alignments to the
+ * grid root, s. `Modifier: Root alignments` above.
+ */
+
+/**
+ * Modifier: Bottom align grid cell
+ */
+
+.grid__cell--bottom {
+  vertical-align: bottom;
+}
+
+/**
+ * Modifier: Middle align grid cell
+ */
+
+.grid__cell--middle {
+  vertical-align: middle;
+}
+
+/**
+ * Modifier: Push grid cell content to center
+ */
+
+.grid__cell--text-center {
+  text-align: center;
+}
+
+/**
+ * Modifier: Push grid cell content to right
+ */
+
+.grid__cell--text-right {
+  text-align: right;
 }

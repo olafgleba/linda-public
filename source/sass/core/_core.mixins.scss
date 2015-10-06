@@ -149,6 +149,7 @@ $use-fractions: true !default;
     @if ($widths-denominator == 1) {
       .u-1#{$widths-delimiter}1#{$widths-breakpoint} {
         width: 100% !important;
+        flex: none !important;
       }
     } @else {
 
@@ -159,6 +160,7 @@ $use-fractions: true !default;
         // Build a class in the format `.u-3/4` or `.u-3-of-4`.
         .u-#{$widths-numerator}#{$widths-delimiter}#{$widths-denominator}#{$widths-breakpoint} {
           width: ($widths-numerator / $widths-denominator) * 100% !important;
+          flex: none !important;
         }
       }
     }

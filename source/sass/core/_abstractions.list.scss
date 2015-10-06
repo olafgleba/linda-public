@@ -47,7 +47,8 @@ $list-padding--huge:  quadruple($list-padding) !default;
  * 2. Reset font size change made in `list-inline-block`.
  */
 
-.list-inline-block {
+.list-inline-block,
+%list-inline-block {
   @extend %list-bare;
 
   font-size: 0; /* 1 */
@@ -76,7 +77,8 @@ $list-padding--huge:  quadruple($list-padding) !default;
  * Set a list in vertical block mode.
  */
 
-.list-stacked {
+.list-stacked,
+%list-stacked {
   @extend %list-bare;
 
   > li {
@@ -114,7 +116,8 @@ $list-padding--huge:  quadruple($list-padding) !default;
  * 2. Spread parent element to available space.
  */
 
-.list-table {
+.list-table,
+%list-table {
   @extend %list-bare;
 
   display: table;
@@ -162,7 +165,8 @@ $list-padding--huge:  quadruple($list-padding) !default;
  * 1. By default children take all the available space of parent.
  */
 
-.list-chart {
+.list-chart,
+%list-chart {
   @extend %list-bare;
 
   display: flex;
@@ -196,7 +200,7 @@ $list-padding--huge:  quadruple($list-padding) !default;
 }
 
 .list-chart--around {
-  justify-content: flex-start;
+  justify-content: space-around;
 }
 
 
@@ -244,6 +248,7 @@ $list-padding--huge:  quadruple($list-padding) !default;
  * Example:
  *   <ul class="list-table list--[tiny]"></ul>
  *   <ul class="list-stacked list--[tiny] list--skip-vertical"></ul>
+ *   <ul class="list-inline-block list--[tiny]-vertical list--skip-vertical"></ul>
  */
 
 .list--tiny {
@@ -269,6 +274,39 @@ $list-padding--huge:  quadruple($list-padding) !default;
     padding: $list-padding--huge; /* 1 */
   }
 }
+
+
+
+.list--tiny-vertical {
+  > li {
+    padding-left:  $list-padding--tiny; /* 1 */
+    padding-right: $list-padding--tiny; /* 1 */
+  }
+}
+
+.list--small-vertical {
+  > li {
+    padding-left:  $list-padding--small; /* 1 */
+    padding-right: $list-padding--small; /* 1 */
+  }
+}
+
+.list--large-vertical {
+  > li {
+    padding-left:  $list-padding--large; /* 1 */
+    padding-right: $list-padding--large; /* 1 */
+  }
+}
+
+.list--huge-vertical {
+  > li {
+    padding-left:  $list-padding--huge; /* 1 */
+    padding-right: $list-padding--huge; /* 1 */
+  }
+}
+
+
+
 
 .list--skip-vertical { /* 2 */
   > li {

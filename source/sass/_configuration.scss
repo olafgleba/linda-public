@@ -55,6 +55,12 @@ $btn-color-hover:       lighten($orange, 10%);
 $progress-border-color:     $white;
 $progress-border-top-color: $orange;
 
+// Icons
+$icon-fill-color: $black;
+
+// Framework
+$framework-accent-color: $orange;
+
 
 
 
@@ -94,7 +100,7 @@ $base-spacing-unit--huge:  round($base-spacing-unit * 4);
 // See `_core.defaults.scss`
 
 $heading-size-1: 36px !default;
-$heading-size-2: 30px !default;
+$heading-size-2: 28px !default;
 $heading-size-3: 24px !default;
 $heading-size-4: 20px !default;
 $heading-size-5: 16px !default;
@@ -148,6 +154,12 @@ $widths-columns: (
 // Grid
 $grid-font-size:          $base-font-size !default;
 $grid-gutter-size:        $base-spacing-unit !default;
+
+
+
+// Flexgrid
+$flexgrid-font-size:   $base-font-size !default;
+$flexgrid-gutter-size: $base-spacing-unit !default;
 
 
 

@@ -1,0 +1,210 @@
+/**
+ * Core flex grid abstraction
+ *
+ * To leave the abstraction pure no fallback for non capable browsers
+ * is applied. If you need to provide a fallback define this in
+ * your `layout.scss` (or whatever is appropriate).
+ */
+
+$flexgrid-font-size:   $base-font-size !default;
+$flexgrid-gutter-size: $base-spacing-unit !default;
+
+// Gutter modifiers
+$flexgrid-gutter-size--tiny:  quarter($flexgrid-gutter-size) !default;
+$flexgrid-gutter-size--small: halve($flexgrid-gutter-size) !default;
+$flexgrid-gutter-size--large: double($flexgrid-gutter-size) !default;
+$flexgrid-gutter-size--huge:  quadruple($flexgrid-gutter-size) !default;
+
+
+/**
+ * Flexgrid container
+ *
+ * All content must be contained within child `flexgrid__cell` elements at least.
+ * If paddings are desired apply them on a container within `flexgrid__cell`.
+ *
+ * 1. Account for browser defaults of elements that might be the root node of
+ *    the component.
+ */
+
+.flexgrid {
+  display: flex; /* 1 */
+  flex-wrap: wrap;
+  margin: 0; /* 1 */
+  padding: 0; /* 1 */
+}
+
+
+
+/**
+ * Modifier: Root alignments
+ *
+ * Alignment modifiers for the root element. Will effect all child elements.
+ * NOTE: To apply individual alignments, s.below `Modifier: Cell alignments`.
+ *
+ *
+ */
+
+/**
+ * Modifier: Top align flexgrid cells
+ */
+
+.flexgrid--top {
+  align-items: flex-start;
+}
+
+/**
+ * Modifier: Bottom align flexgrid cells
+ */
+
+.flexgrid--bottom {
+  align-items: flex-end;
+}
+
+/**
+ * Modifier: Center align flexgrid cells
+ */
+
+.flexgrid--center {
+  align-items: center;
+}
+
+/**
+ * Modifier: Center align all flexgrid cells content
+ */
+
+.flexgrid--text-center > .flexgrid__cell {
+  text-align: center;
+}
+
+/**
+ * Modifier: Right align all grid cells content
+ */
+
+.flexgrid--text-right > .flexgrid__cell {
+  text-align: right;
+}
+
+
+
+/**
+ * Modifier: Gutters
+ *
+ * NOTE: this can trigger a horizontal scrollbar if the component is as wide as
+ * the viewport. Use padding on a container, or `overflow-x:hidden` to protect
+ * against it.
+ */
+
+.flexgrid--gutter {
+  margin-left: (-$flexgrid-gutter-size);
+}
+
+.flexgrid--gutter > .flexgrid__cell {
+  padding-left: $flexgrid-gutter-size;
+}
+
+
+/**
+ * Modifiers: Blow/shrink gutters
+ */
+
+// tiny
+.flexgrid--gutter-tiny {
+  margin-left: (-$flexgrid-gutter-size--tiny);
+}
+
+.flexgrid--gutter-tiny > .flexgrid__cell {
+  padding-left: $flexgrid-gutter-size--tiny;
+}
+
+// small
+.flexgrid--gutter-small {
+  margin-left: (-$flexgrid-gutter-size--small);
+}
+
+.flexgrid--gutter-small > .flexgrid__cell {
+  padding-left: $flexgrid-gutter-size--small;
+}
+
+// large
+.flexgrid--gutter-large {
+  margin-left: (-$flexgrid-gutter-size--large);
+}
+
+.flexgrid--gutter-large > .flexgrid__cell {
+  padding-left: $flexgrid-gutter-size--large;
+}
+
+// huge
+.flexgrid--gutter-huge {
+  margin-left: (-$flexgrid-gutter-size--huge);
+}
+
+.flexgrid--gutter-huge > .flexgrid__cell {
+  padding-left: $flexgrid-gutter-size--huge;
+}
+
+
+
+
+/**
+ * Grid cell
+ *
+ * By default cells take any space available. Rely on combining
+ * `flexgrid__cell` with a dimension utility or a component class that
+ * extends 'flexgrid', s. `_utils.sizes.scss`.
+ *
+ * 1. Makes cells as a child of flex container.
+ */
+
+.flexgrid__cell {
+  flex: 1; /* 1 */
+}
+
+
+
+/**
+ * Modifier: Cell alignments
+ *
+ * Individual alignment for flexgrid cells. To apply alignments to the
+ * flexgrid root, s. `Modifier: Root alignments` above.
+ */
+
+/**
+ * Modifier: Top align flexgrid cell
+ */
+
+.flexgrid__cell--top {
+  align-self: flex-start;
+}
+
+/**
+ * Modifier: Bottom align flexgrid cell
+ */
+
+.flexgrid__cell--bottom {
+  align-self: flex-end;
+}
+
+/**
+ * Modifier: Center align flexgrid cell
+ */
+
+.flexgrid__cell--center {
+  align-self: center;
+}
+
+/**
+ * Modifier: Center align flexgrid cell content
+ */
+
+.flexgrid__cell--text-center {
+  text-align: center;
+}
+
+/**
+ * Modifier: Right align grid cell content
+ */
+
+.flexgrid__cell--text-right {
+  text-align: right;
+}

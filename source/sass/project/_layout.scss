@@ -2,7 +2,9 @@
  * layout.scss
  */
 
-html { }
+html {
+  font-family: 'proxima-nova-1', 'proxima-nova-2', sans-serif;
+}
 
 
 body { }
@@ -41,10 +43,10 @@ body { }
   display: inline-block;
 
   transition: all 0.25s;
-  fill: $black;
+  fill: $icon-fill-color;
 
   a:hover & {
-    fill: lighten($black, 40%);
+    fill: lighten($icon-fill-color, 40%);
   }
 }
 
@@ -98,26 +100,6 @@ img[data-sizes="auto"] {
 
 
 
-
-
-/**
- * Framework related styles
- */
-
-// just testing, remove if ready
-.framework .grid__cell > div {
-  background-color: $orange;
-  margin-bottom: 1em;
-}
-
-.framework .grid__cell {
-  margin-bottom: 1em;
-}
-
-
-
-
-
 /**
  * list of headings
  * @string {String}
@@ -148,7 +130,7 @@ $headings: "h1, h2, h3, h4, h5, h6";
 /**
  * Container for status loading animation, s. next below `progress`
  *
- * Dynamic append this class to fluidbox loading event
+ * Appended dynamically to fluidbox loading event state (s. base.js)
  */
 .is-loading-fluidbox {
   display: flex;
@@ -308,3 +290,48 @@ $headings: "h1, h2, h3, h4, h5, h6";
 //   line-height: 1;
 //   margin-bottom: 0;
 // }
+
+
+
+
+
+/**
+ * Framework related styles
+ */
+.framework .grid,
+.framework .flexgrid {
+  margin-bottom: 3em;
+}
+
+.framework .grid__cell > div,
+.framework .flexgrid__cell > div {
+  background-color: $framework-accent-color;
+  //margin-bottom: 1em;
+}
+
+.framework .grid__cell .grid__cell > div,
+.framework .flexgrid__cell .flexgrid__cell > div {
+  background-color: green;
+  //margin-bottom: 1em;
+}
+
+.framework .grid__cell,
+.framework .flexgrid__cell {
+  //margin-bottom: 2em;
+}
+
+
+
+
+
+/**
+ * Override some defaults for the CKEditor
+ */
+/*body*/.cke_editable {
+    margin: $base-spacing-unit--tiny;
+    background-color: #fff;
+
+    ul {
+      margin-left: 15px;
+    }
+}
