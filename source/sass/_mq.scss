@@ -26,6 +26,8 @@
   $base-font-size:   16px; /* 1 */
   $base-line-height: 24px; /* 1 */
 
+  // scss-lint:disable SpaceBeforeBrace
+
   html, /* 2 */
   .grid__cell, /* 3 */
   .button-group__item /* 3 */
@@ -36,4 +38,6 @@
     font-size: $base-font-size;
     line-height: $base-line-height;
   }
+
+  // scss-lint:enable SpaceBeforeBrace
 }

@@ -16,7 +16,9 @@
     "space-before-function-paren": [2, "never"],
     // bad: foo( 'bar' ), good: foo('bar')
     "space-in-parens": [2, "never"],
-    // bad: [ 'bar' ] or { 'bar' }, good: ['bar'] or {'bar'}
-    "space-in-brackets": [2, "never"]
+    // bad: [ 'bar' ], good: ['bar']
+    "array-bracket-spacing": [2, "never"],
+    // bad: { 'bar' }, good: {'bar'}
+    "object-curly-spacing": [2, "never"]
   }
 }

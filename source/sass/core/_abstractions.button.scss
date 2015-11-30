@@ -67,10 +67,14 @@ $button-padding--huge:  quadruple($button-padding) !default;
  * Remove excess padding and border in Firefox 4+
  */
 
+// scss-lint:disable PseudoElement
+
 .button::-moz-focus-inner {
   border: 0;
   padding: 0;
 }
+
+// scss-lint:enable PseudoElement
 
 /**
  * Work around a Firefox/IE bug where the transparent `button` background

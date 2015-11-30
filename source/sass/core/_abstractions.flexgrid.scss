@@ -23,11 +23,12 @@ $flexgrid-gutter-size--huge:  quadruple($flexgrid-gutter-size) !default;
  *
  * 1. Account for browser defaults of elements that might be the root node of
  *    the component.
+ * 2. Respect the natural flow of rows, e.g. wrap flex grid cells
  */
 
 .flexgrid {
   display: flex; /* 1 */
-  flex-wrap: wrap;
+  flex-wrap: wrap; /* 2 */
   margin: 0; /* 1 */
   padding: 0; /* 1 */
 }

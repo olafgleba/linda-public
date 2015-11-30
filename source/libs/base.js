@@ -58,7 +58,7 @@ $(function() {
 
   // Init smooth scrolling
   $('a').smoothScroll({
-      speed: 500
+    speed: 500
   });
 
 
@@ -96,7 +96,8 @@ $(function() {
     navigation: true, // Show next and prev buttons
     slideSpeed: 300,
     paginationSpeed: 400,
-    singleItem: true
+    singleItem: true,
+    autoHeight: true
   });
 
 

@@ -37,6 +37,9 @@
 @import 'core/abstractions.list';
 @import 'core/abstractions.table';
 
+// Core components
+@import 'core/component.breadcrumb';
+
 // Utility classes, e.g. text, align etc.
 @import 'core/utils.classes';
 

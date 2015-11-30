@@ -43,6 +43,10 @@ linters:
   SingleLinePerSelector:
     enabled: false
 
+  SpaceAfterPropertyColon:
+    enabled: true
+    style: at_least_one_space
+
   StringQuotes:
     enabled: true
     style: single_quotes
@@ -75,4 +79,3 @@ linters:
       - background-size
       - opacity
     separate_groups: false
-

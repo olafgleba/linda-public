@@ -2,8 +2,7 @@
  * Core table abstraction
  *
  * Several raw table abstractions which solves daily "bread and butter"
- * lists. Additionally these abstractions helps us to build meaningful
- * components.
+ * needs.
  */
 
 $table-border-style: solid !default;
@@ -33,6 +32,11 @@ $table-padding--huge:  quadruple($table-padding) !default;
     vertical-align: top; /* 1 */
     padding: $table-padding;
 
+    @include media-query(palm) {
+      padding-right: 0;
+      padding-left: 0;
+    }
+
     // delete first left and last right padding by default
     &:first-child {
       padding-left: 0;
@@ -41,26 +45,21 @@ $table-padding--huge:  quadruple($table-padding) !default;
     &:last-child {
       padding-right: 0;
     }
-
-    @include media-query(palm) {
-      padding-right: 0;
-      padding-left: 0;
-    }
   }
 }
 
 
 
 .table--border {
-    border: $table-border-width $table-border-style $table-border-color;
+  border: $table-border-width $table-border-style $table-border-color;
 }
 
 
 
 .table--stripe {
-    tbody tr:nth-of-type(even) {
-      background-color: $table-background-color;
-    }
+  tbody tr:nth-of-type(even) {
+    background-color: $table-background-color;
+  }
 }
 
 
@@ -90,7 +89,8 @@ $table-padding--huge:  quadruple($table-padding) !default;
 
 
 
-.table--fixed {
+.table--fixed,
+%table--fixed {
   table-layout: fixed;
 }
 
@@ -130,7 +130,7 @@ $table-padding--huge:  quadruple($table-padding) !default;
 
 
 .table--composite-calendular {
-  table-layout: fixed;
+  @extend %table--fixed;
   border: $table-border-width $table-border-style $table-border-color;
 
   @include media-query(palm) {
@@ -144,18 +144,18 @@ $table-padding--huge:  quadruple($table-padding) !default;
     border-right: $table-border-width $table-border-style $table-border-color;
     border-bottom: $table-border-width $table-border-style $table-border-color;
 
+    @include media-query(palm) {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      border-right: 0;
+    }
+
     &:first-child {
       padding-left: $table-padding;
     }
 
     &:last-child {
       padding-right: $table-padding;
-      border-right: 0;
-    }
-
-    @include media-query(palm) {
-      padding-left: 0 !important;
-      padding-right: 0 !important;
       border-right: 0;
     }
   }
@@ -169,7 +169,6 @@ $table-padding--huge:  quadruple($table-padding) !default;
       }
     }
   }
-
 }
 
 
@@ -181,21 +180,21 @@ $table-padding--huge:  quadruple($table-padding) !default;
  * Modifiers: Align the content of cells
  */
 
-.table--align-left {
+.table--text-left {
   th,
   td {
     text-align: left !important;
   }
 }
 
-.table--align-center {
+.table--text-center {
   th,
   td {
     text-align: center !important;
   }
 }
 
-.table--align-right {
+.table--text-right {
   th,
   td {
     text-align: right !important;

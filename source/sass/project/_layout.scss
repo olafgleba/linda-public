@@ -104,28 +104,23 @@ img[data-sizes="auto"] {
  * list of headings
  * @string {String}
  */
-$headings: "h1, h2, h3, h4, h5, h6";
+$headings: 'h1, h2, h3, h4, h5, h6';
 
 @each $item in $headings {
- #{$item} {
-   font-style: normal;
-   font-weight: inherit;
- }
+  #{$item} {
+    font-style: normal;
+    font-weight: inherit;
+  }
 }
-
 
 
 
 
 // overwrite fluidbox vendor declaration
-// s. _jquery.fluidboy.scss, line 51
+// s. _fluidbox.scss (v. 1.4.3), line 56
 .fluidbox-ghost {
   transition-duration: $transition-duration, $transition-duration;
 }
-
-
-
-
 
 /**
  * Container for status loading animation, s. next below `progress`
@@ -139,14 +134,10 @@ $headings: "h1, h2, h3, h4, h5, h6";
   height: 100%;
 }
 
-
-
-
-
 /**
  * Loading spinner, css animation
  *
- * Markup:
+ * Markup dynamically set in base.js:
  *   <div class="progress [progress--large][progress--small]"></div>
  */
 @keyframes progress {
@@ -159,7 +150,7 @@ $headings: "h1, h2, h3, h4, h5, h6";
   min-height: 50px;
 }
 
-.progress:before {
+.progress::before {
   content: 'Loading...';
   position: absolute;
   top: 50%;
@@ -170,13 +161,13 @@ $headings: "h1, h2, h3, h4, h5, h6";
   margin-left: -13px; /* width/2 + 1 */
 }
 
-.progress:not(:required):before {
+.progress:not(:required)::before {
   content: '';
   border-radius: 50%;
   border-style: solid;
   border-color: $progress-border-color;
   border-top-color: $progress-border-top-color;
-  animation: progress .6s linear infinite;
+  animation: progress 0.6s linear infinite;
 }
 
 // Modifier
@@ -188,7 +179,7 @@ $headings: "h1, h2, h3, h4, h5, h6";
     margin-left: -25px; /* width/2 + 1 */
   }
 
-  &:not(:required):before {
+  &:not(:required)::before {
     border-width: 6px;
   }
 }
@@ -201,7 +192,7 @@ $headings: "h1, h2, h3, h4, h5, h6";
     margin-left: -9px; /* width/2 + 1 */
   }
 
-  &:not(:required):before {
+  &:not(:required)::before {
     border-width: 2px;
   }
 }
@@ -298,6 +289,11 @@ $headings: "h1, h2, h3, h4, h5, h6";
 /**
  * Framework related styles
  */
+
+// scss-lint:disable SelectorDepth
+// scss-lint:disable ColorKeyword
+// scss-lint:disable ColorVariable
+
 .framework .grid,
 .framework .flexgrid {
   margin-bottom: 3em;
@@ -320,18 +316,29 @@ $headings: "h1, h2, h3, h4, h5, h6";
   //margin-bottom: 2em;
 }
 
-
+// scss-lint:enable SelectorDepth
+// scss-lint:enable ColorKeyword
+// scss-lint:enable ColorVariable
 
 
 
 /**
  * Override some defaults for the CKEditor
  */
-/*body*/.cke_editable {
-    margin: $base-spacing-unit--tiny;
-    background-color: #fff;
 
-    ul {
-      margin-left: 15px;
-    }
+// scss-lint:disable SelectorFormat
+// scss-lint:disable ColorKeyword
+// scss-lint:disable ColorVariable
+
+/*body*/.cke_editable {
+  margin: $base-spacing-unit--tiny;
+  background-color: white;
+
+  ul {
+    margin-left: 15px;
+  }
 }
+
+// scss-lint:enable SelectorFormat
+// scss-lint:enable ColorKeyword
+// scss-lint:enable ColorVariable

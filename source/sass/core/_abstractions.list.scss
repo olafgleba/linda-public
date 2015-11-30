@@ -211,22 +211,22 @@ $list-padding--huge:  quadruple($list-padding) !default;
  * Modifiers: Align the content of list items
  *
  * Example:
- *   <ul class="list-table list--[align-left]"></ul>
+ *   <ul class="list-table list--[text-left]"></ul>
  */
 
-.list--align-left {
+.list--text-left {
   > li {
     text-align: left;
   }
 }
 
-.list--align-center {
+.list--text-center {
   > li {
     text-align: center;
   }
 }
 
-.list--align-right {
+.list--text-right {
   > li {
     text-align: right;
   }

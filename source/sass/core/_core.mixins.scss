@@ -44,6 +44,7 @@
  */
 
 // scss-lint:disable DuplicateProperty
+// scss-lint:disable ElsePlacement
 
 @mixin font-size($font-size, $line-height: auto) {
   font-size: $font-size;
@@ -64,7 +65,7 @@
 }
 
 // scss-lint:enable DuplicateProperty
-
+// scss-lint:enable ElsePlacement
 
 
 

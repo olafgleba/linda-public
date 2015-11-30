@@ -1,0 +1,113 @@
+/**
+ * Core breacrumb component
+ *
+ * Several raw list abstractions which solves daily "bread and butter"
+ * lists. Additionally these abstractions helps us to build meaningful
+ * components.
+ */
+
+$breadcrumb-margin:         $base-spacing-unit !default;
+$breadcrumb-separator:      '/' !default;
+$breadcrumb-root-separator: '«' !default;
+
+$breadcrumb-margin--tiny:   quarter($breadcrumb-margin) !default;
+$breadcrumb-margin--small:  halve($breadcrumb-margin) !default;
+$breadcrumb-margin--large:  double($breadcrumb-margin) !default;
+$breadcrumb-margin--huge:   quadruple($breadcrumb-margin) !default;
+
+
+.c-breadcrumb {
+  @extend %list-bare;
+
+  display: flex;
+  flex-wrap: wrap;
+
+  > li {
+    @extend %c-breadcrumb__item;
+  }
+}
+
+.c-breadcrumb__item,
+%c-breadcrumb__item {
+
+  flex: 0 0 auto;
+  margin-right: $breadcrumb-margin;
+
+  &::after {
+    content: $breadcrumb-separator;
+    margin-left: $breadcrumb-margin;
+  }
+
+  &:last-of-type::after {
+    content: '';
+  }
+}
+
+.c-breadcrumb__root {
+  &::after {
+    content: '';
+  }
+
+  &::before {
+    content: $breadcrumb-root-separator;
+  }
+}
+
+.c-breadcrumb__current {
+  //
+}
+
+
+
+
+
+/**
+ * Modifiers: Blow/shrink breadcrumb items
+ *
+ * Generic size utilities. Is applicable on every list abstraction except
+ * where flex box is involved.
+ *
+ * Example:
+ *   <div class="list-table list--tiny"></div>
+ *   <div class="list-stacked list--large"></div>
+ */
+
+.c-breadcrumb--tiny {
+  > li {
+    margin-right: $breadcrumb-margin--tiny;
+
+    &::after {
+      margin-left: $breadcrumb-margin--tiny;
+    }
+  }
+}
+
+.c-breadcrumb--small {
+  > li {
+    margin-right: $breadcrumb-margin--small;
+
+    &::after {
+      margin-left: $breadcrumb-margin--small;
+    }
+  }
+}
+
+.c-breadcrumb--large {
+  > li {
+    margin-right: $breadcrumb-margin--large;
+
+    &::after {
+      margin-left: $breadcrumb-margin--large;
+    }
+  }
+}
+
+.c-breadcrumb--huge {
+  > li {
+    margin-right: $breadcrumb-margin--huge;
+
+    &::after {
+      margin-left: $breadcrumb-margin--huge;
+    }
+  }
+}
