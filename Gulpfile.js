@@ -12,7 +12,6 @@ var plugins = require('gulp-load-plugins')();
 // Uncomment for debugging
 //require('time-require');
 
-//var autoprefixer   = require('autoprefixer-core');
 var bs             = require('browser-sync').create();
 var opn            = require('opn');
 var mainBowerFiles = require('main-bower-files');

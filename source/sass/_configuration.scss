@@ -7,11 +7,9 @@
  * INTERFACE    - Element variables
  * CORE         - Define/override core values to fit project requirements
  * ABSTRACTIONS - Defaults values for abstractions
- * COMPONENTS   - Defaults values for components
  */
 
 
-/* ==========================================================================*/
 
 /**
  * $COLORS
@@ -32,13 +30,13 @@ $orange: #f60;
 /**
  * 2. Project aware colors
  */
+
 $base-link-color:       $orange;
 $base-link-hover-color: lighten($orange, 10%);
 
 $base-border-color: $gray;
 
 
-/* ==========================================================================*/
 
 
 /**
@@ -64,7 +62,7 @@ $icon-fill-color: $black;
 $framework-accent-color: $orange;
 
 
-/* ==========================================================================*/
+
 
 
 /**
@@ -78,14 +76,18 @@ $framework-accent-color: $orange;
  */
 
 // See `_core.variables.scss`
+
 $base-font-size:        16px !default;
 $base-line-height:      24px !default;
 $base-text-color:       $black;
 $base-background-color: $white;
 
 
+
+
 // Redefine those core variables related to possible overrides within
 // the above section.
+
 $base-spacing-unit:        $base-line-height;
 $base-spacing-unit--tiny:  round($base-spacing-unit / 4);
 $base-spacing-unit--small: round($base-spacing-unit / 2);
@@ -93,7 +95,10 @@ $base-spacing-unit--large: round($base-spacing-unit * 2);
 $base-spacing-unit--huge:  round($base-spacing-unit * 4);
 
 
+
+
 // See `_core.defaults.scss`
+
 $heading-size-1: 36px !default;
 $heading-size-2: 28px !default;
 $heading-size-3: 24px !default;
@@ -102,7 +107,10 @@ $heading-size-5: 16px !default;
 $heading-size-6: 14px !default;
 
 
+
+
 // See `_core.variables.scss`
+
 $breakpoints: (
   'palm'          'screen and (max-width: 44.9375em)',
   'lap'           'screen and (min-width: 45em) and (max-width: 63.9375em)',
@@ -113,8 +121,12 @@ $breakpoints: (
 ) !default;
 
 
+
+
 // See `_core.mixins.scss`, @mixin widths
 $use-fractions: true;
+
+
 
 
 // See `_utils.sizes.scss`
@@ -127,7 +139,7 @@ $widths-columns: (
 );
 
 
-/* ==========================================================================*/
+
 
 
 /**
@@ -144,8 +156,10 @@ $grid-font-size:          $base-font-size !default;
 $grid-gutter-size:        $base-spacing-unit !default;
 
 
+
 // Flexgrid
 $flexgrid-gutter-size: $base-spacing-unit !default;
+
 
 
 // Button
@@ -160,14 +174,17 @@ $button-disabled-opacity: 0.5 !default;
 $button-padding:          $base-spacing-unit !default;
 
 
+
 // Button group
 $button-group-font-size:     $base-font-size !default;
 $button-group-border-radius: 0 !default;
 
 
+
 // List
 $list-padding:   $base-spacing-unit !default;
 $list-font-size: $base-font-size !default;
+
 
 
 // Table
@@ -176,22 +193,3 @@ $table-border-width: 1px !default;
 $table-border-width: $base-font-size !default;
 $table-border-style: solid !default;
 $table-border-color: $base-border-color !default;
-
-
-/* ==========================================================================*/
-
-
-/**
- * $COMPONENTS
- *
- * Override default variable values.
- *
- * Whenever a value is adjusted, remove the `!default` flag. Otherwise
- * leave it as is to pass by the defaults.
- */
-
-
-// Breadcrumb
-$breadcrumb-margin:         $base-spacing-unit !default;
-$breadcrumb-separator:      '/' !default;
-$breadcrumb-root-separator: '«' !default;
