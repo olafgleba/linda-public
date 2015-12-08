@@ -79,7 +79,7 @@ var paths = {
 gulp.task('connect-sync', function() {
   plugins.connectPhp.server({
     base: paths.app.root,
-    port: 9000
+    port: 8001
     }, function (){
     bs.init({
       proxy: paths.app.local
@@ -209,24 +209,21 @@ gulp.task('process:icons', function() {
 
 /**
  * Spawn over all `scss` and `js` files for relevant attributes
- * and build a custom modernizr build. Shove it to source vendor
- * folder, so it can be concatenated in `plugins.min.js` afterwards,
- * e.g. we don't want to reference it as a seperate file. So this
- * task has to run before any compilation or concatenation, e.g.
- * outside the runSequenze task array.
+ * and build a custom modernizr build. Shove it to app libs vendor
+ * folder as we need this within the <head> of the page.
  *
  * 1. Condition wether to execute a plugin or passthru
  */
 
 gulp.task('process:modernizr', function() {
   return gulp.src(paths.src.root + '**/*.{js,scss}')
-    .pipe(plugins.modernizr('modernizr-custom.js', {
+    .pipe(plugins.modernizr('modernizr-custom.min.js', {
         "options": [
           "setClasses" /* 1 */
         ]
     }))
     .pipe(isDeployment ? plugins.uglify() : plugins.util.noop()) /* 1 */
-    .pipe(gulp.dest(paths.src.libs + 'vendor/'))
+    .pipe(gulp.dest(paths.app.libs + 'vendor/'))
 });
 
 
@@ -330,6 +327,7 @@ gulp.task('watch', function() {
   gulp.watch(paths.src.sass + '**/*.scss',
     [
       'lint:scss',
+      'process:modernizr',
       'compile:sass'
     ]
   );
@@ -338,6 +336,7 @@ gulp.task('watch', function() {
   gulp.watch(paths.src.libs + 'base.js',
     [
       'lint:js',
+      'process:modernizr',
       'process:base',
       'concat:plugins'
     ]
