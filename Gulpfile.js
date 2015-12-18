@@ -22,6 +22,17 @@ var pngquant       = require('imagemin-pngquant');
 
 
 
+/**
+ * Prepare gulp-plumber option
+ * s. http://blog.ibangspacebar.com/handling-errors-with-gulp-watch-and-gulp-plumber/
+ */
+var onError = function(err) {
+  console.log(err);
+  this.emit('end');
+}
+
+
+
 
 /**
  * Some state variables
@@ -141,6 +152,7 @@ gulp.task('lint:scss', function() {
 
 gulp.task('compile:sass', function() {
   return gulp.src(paths.src.sass + '**/*.scss')
+    .pipe(plugins.plumber({errorHandler: onError}))
     .pipe(isDeployment ? plugins.util.noop() : plugins.sourcemaps.init()) /* 1 */
     .pipe(plugins.sass({outputStyle: 'expanded' }))
     .pipe(plugins.rename({suffix: '.min'}))
@@ -239,6 +251,7 @@ gulp.task('process:modernizr', function() {
 
 gulp.task('process:base', function() {
   return gulp.src(paths.src.libs + 'base.js')
+    .pipe(plugins.plumber({errorHandler: onError}))
     .pipe(plugins.newer(paths.app.libs))
     .pipe(plugins.rename({suffix: '.min'}))
     .pipe(isDeployment ? plugins.uglify() : plugins.util.noop()) /* 1 */
