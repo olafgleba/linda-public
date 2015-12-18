@@ -27,6 +27,9 @@ var App = (function() {
     // FastClick initialisation
     FastClick.attach(document.body);
 
+    // svg4everybody initialisation
+    svg4everybody();
+
     // Fluidvids initialisation
     // fluidvids.init({
     //   selector: 'iframe', // runs querySelectorAll()
