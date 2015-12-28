@@ -61,8 +61,8 @@
     <main role="main" class="page-content">
 
       <?php
-      if ($p->layout) {
-        include("./markup/layouts/{$p->layout}.php");
+      if ($page->layout) {
+        include("./markup/layouts/{$page->layout}.php");
       } else {
         include("./markup/layouts/default.php");
       }
