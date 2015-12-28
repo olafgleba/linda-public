@@ -20,6 +20,14 @@ var runSequence    = require('run-sequence');
 var del            = require('del');
 var pngquant       = require('imagemin-pngquant');
 
+// We need to require this explicitely, because we must
+// init a new class instance with this variable
+var cacheBuster    = require('gulp-cachebust');
+
+//  Init cachebust
+var cachebust = new cacheBuster();
+
+
 
 
 /**
@@ -44,10 +52,10 @@ var onError = function(err) {
  * (s. comments for task `build` also).
  */
 
-var isDeployment = false;
+var isProduction = false;
 
 if(plugins.util.env.production === true) {
-  isDeployment = true;
+  isProduction = true;
 }
 
 
@@ -59,23 +67,24 @@ if(plugins.util.env.production === true) {
  * 1. Adapt path to fit the environment
  */
 
-var tpls   = 'app/site/templates/';
+var app   = 'app/site/templates/';
 var source = 'source/';
 
 var paths = {
   app: {
-    root:   'app/',
     local:  'localhost/devel-environments/linda/app/', /* 1 */
-    assets: tpls + 'assets/',
-    css:    tpls + 'assets/css/',
-    libs:   tpls + 'assets/libs/',
-    img:    tpls + 'assets/img/'
+    root:   app,
+    assets: app + 'assets/',
+    css:    app + 'assets/css/',
+    libs:   app + 'assets/libs/',
+    img:    app + 'assets/img/'
   },
   src: {
     root: source,
     sass: source + 'sass/',
     libs: source + 'libs/',
-    img:  source + 'img/'
+    img:  source + 'img/',
+    tpls: source + 'templates/'
   }
 }
 
@@ -105,8 +114,8 @@ gulp.task('connect-sync', function() {
  * Clean assets folder
  */
 
-gulp.task('clean:assets', function(ca) {
-    return del(paths.app.assets + '/{css,libs,img,fonts,docs}/**/*', ca)
+gulp.task('clean:app', function(ca) {
+    return del([paths.app.assets + '/{css,libs,img,fonts,docs}/**/*', paths.app.root + 'markup/*.php'], ca)
 });
 
 
@@ -150,17 +159,42 @@ gulp.task('lint:scss', function() {
  * 1. Condition wether to execute a plugin or passthru
  */
 
-gulp.task('compile:sass', function() {
+gulp.task('compile:sass', ['process:modernizr'], function() {
   return gulp.src(paths.src.sass + '**/*.scss')
     .pipe(plugins.plumber({errorHandler: onError}))
-    .pipe(isDeployment ? plugins.util.noop() : plugins.sourcemaps.init()) /* 1 */
+    .pipe(isProduction ? plugins.util.noop() : plugins.sourcemaps.init()) /* 1 */
     .pipe(plugins.sass({outputStyle: 'expanded' }))
     .pipe(plugins.rename({suffix: '.min'}))
     .pipe(plugins.autoprefixer({ browsers: ['last 2 version'] }))
-    .pipe(isDeployment ? plugins.util.noop() : plugins.sourcemaps.write('./')) /* 1 */
-    .pipe(isDeployment ? plugins.csso() : plugins.util.noop()) /* 1 */
+    .pipe(isProduction ? cachebust.resources() : plugins.util.noop())
+    .pipe(isProduction ? plugins.util.noop() : plugins.sourcemaps.write('./')) /* 1 */
+    .pipe(isProduction ? plugins.csso() : plugins.util.noop()) /* 1 */
     .pipe(gulp.dest(paths.app.css))
-    .pipe(isDeployment ? plugins.util.noop() : bs.stream({match: '**/*.css'}));
+    .pipe(isProduction ? plugins.util.noop() : bs.stream({match: '**/*.css'}));
+});
+
+
+
+
+/**
+ * Get the templates source files, bust cache (depending on task
+ * state (dev/production)) and shove it to the destination folder.
+ * Bust cache means, that the implied references to files we like to
+ * cache (e.g. css/js) will get updated (if those target files were modified)
+ * within the template files.
+ *
+ * NOTE: NEVER modify `.php` files within the first layer of the `app/markup`
+ * folder (e.g. `index.php`, `framework.php`). Instead solely edit the source
+ * files (`source/templates/`).
+ *
+ * 1. Condition wether to execute a plugin or pipe passthru
+ */
+
+gulp.task('process:templates', function() {
+  return gulp.src(paths.src.tpls + '**/*.tpl')
+    .pipe(isProduction ? cachebust.references() : plugins.util.noop()) /* 1 */
+    .pipe(plugins.rename({extname: '.php'}))
+    .pipe(gulp.dest(paths.app.root + 'markup/'));
 });
 
 
@@ -220,9 +254,10 @@ gulp.task('process:icons', function() {
 
 
 /**
- * Spawn over all `scss` and `js` files for relevant attributes
- * and build a custom modernizr build. Shove it to app libs vendor
- * folder as we need this within the <head> of the page.
+ * Spawn over all `scss` and `js` files for relevant attributes, bust
+ * cache (depending on task state (dev/production)) and build a custom
+ * modernizr build. Shove it to app libs vendor folder as we need this
+ * within the <head> of the page.
  *
  * 1. Condition wether to execute a plugin or passthru
  */
@@ -234,7 +269,8 @@ gulp.task('process:modernizr', function() {
           "setClasses" /* 1 */
         ]
     }))
-    .pipe(isDeployment ? plugins.uglify() : plugins.util.noop()) /* 1 */
+    .pipe(isProduction ? plugins.uglify() : plugins.util.noop()) /* 1 */
+    .pipe(isProduction ? cachebust.resources() : plugins.util.noop())
     .pipe(gulp.dest(paths.app.libs + 'vendor/'))
 });
 
@@ -254,7 +290,8 @@ gulp.task('process:base', function() {
     .pipe(plugins.plumber({errorHandler: onError}))
     .pipe(plugins.newer(paths.app.libs))
     .pipe(plugins.rename({suffix: '.min'}))
-    .pipe(isDeployment ? plugins.uglify() : plugins.util.noop()) /* 1 */
+    .pipe(isProduction ? cachebust.resources() : plugins.util.noop())
+    .pipe(isProduction ? plugins.uglify() : plugins.util.noop()) /* 1 */
     .pipe(gulp.dest(paths.app.libs));
 });
 
@@ -287,7 +324,8 @@ gulp.task('concat:plugins', function() {
     ]))
     .pipe(plugins.newer(paths.app.libs + 'vendor/plugins.min.js'))
     .pipe(plugins.concat('plugins.min.js'))
-    .pipe(isDeployment ? plugins.uglify() : plugins.util.noop()) /* 2 */
+    .pipe(isProduction ? cachebust.resources() : plugins.util.noop())
+    .pipe(isProduction ? plugins.uglify() : plugins.util.noop()) /* 2 */
     .pipe(gulp.dest(paths.app.libs + 'vendor/'));
 });
 
@@ -307,7 +345,8 @@ gulp.task('concat:plugins-respimages', function() {
   return gulp.src(mainBowerFiles({filter: '**/{lazysizes,respimage}.js'}), { base: 'bower_components'})
     .pipe(plugins.newer(paths.app.libs + 'vendor/plugins.images.min.js'))
     .pipe(plugins.concat('plugins.images.min.js'))
-    .pipe(isDeployment ? plugins.uglify() : plugins.util.noop()) /* 1 */
+    .pipe(isProduction ? cachebust.resources() : plugins.util.noop())
+    .pipe(isProduction ? plugins.uglify() : plugins.util.noop()) /* 1 */
     .pipe(gulp.dest(paths.app.libs + 'vendor/'));
 });
 
@@ -340,7 +379,6 @@ gulp.task('watch', function() {
   gulp.watch(paths.src.sass + '**/*.scss',
     [
       'lint:scss',
-      'process:modernizr',
       'compile:sass'
     ]
   );
@@ -370,7 +408,14 @@ gulp.task('watch', function() {
   ).on('change', bs.reload);
 
 
-  gulp.watch(tpls + '**/*.php').on('change', bs.reload);
+  gulp.watch(paths.src.tpls + '**/*.tpl',
+    [
+      'process:templates'
+    ]
+  ).on('change', bs.reload);
+
+
+  gulp.watch([paths.app.root + '**/*.php']).on('change', bs.reload);
 
 });
 
@@ -396,9 +441,9 @@ gulp.task('watch', function() {
 
 gulp.task('build', function() {
 
-  if (isDeployment) {
+  if (isProduction) {
 
-    runSequence('clean:assets', 'process:modernizr',
+    runSequence('clean:app', 'process:modernizr',
       [
         'compile:sass',
         'copy:jquery',
@@ -407,12 +452,13 @@ gulp.task('build', function() {
         'concat:plugins-respimages',
         'process:images',
         'process:icons'
-      ]
+      ],
+      'process:templates'
     );
 
   } else {
 
-    runSequence('clean:assets', 'process:modernizr',
+    runSequence('clean:app', 'process:modernizr', 'process:templates',
       [
         'lint:scss',
         'lint:js',
