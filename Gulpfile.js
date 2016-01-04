@@ -152,9 +152,9 @@ gulp.task('lint:scss', function() {
 
 
 /**
- * Compile sass files, process prefixing, generate sourcemaps
- * and minify it (depending on task state (dev/production)).
- * Shove it to destination folder at least.
+ * Compile sass files, process prefixing, generate sourcemaps,
+ * bust cache and minify it (depending on task state (dev/production))
+ * and shove it to destination folder at least.
  *
  * 1. Condition wether to execute a plugin or passthru
  */
@@ -183,9 +183,9 @@ gulp.task('compile:sass', ['process:modernizr'], function() {
  * cache (e.g. css/js) will get updated (if those target files were modified)
  * within the template files.
  *
- * NOTE: NEVER modify `.php` files within the first layer of the `app/markup`
+ * NOTE: NEVER modify `*.php` files within the first layer of the `app/markup`
  * folder (e.g. `index.php`, `framework.php`). Instead solely edit the source
- * files (`source/templates/`).
+ * files (e.g. `source/templates/index.tpl`, `source/templates/framwork.tpl`).
  *
  * 1. Condition wether to execute a plugin or pipe passthru
  */
@@ -279,8 +279,8 @@ gulp.task('process:modernizr', function() {
 
 
 /**
- * Minify our base javascript file (depending on task state (dev/production))
- * and shove it to destination folder.
+ * Bust cache, minify our base javascript file (depending on task
+ * state (dev/production)) and shove it to the destination folder.
  *
  * 1. Condition wether to execute a plugin or passthru
  */
@@ -304,8 +304,8 @@ gulp.task('process:base', function() {
  * which might be exist in the source vendor folder and
  * merge both paths. Then define what order we like them to have
  * in our plugin file. Finally concatenate the merged files
- * to a new file, minify it (depending on task state (dev/production))
- * and shove it to destination folder.
+ * to a new file, bust cache, minify it (depending on task state
+ * (dev/production)) and shove it to the destination folder.
  *
  * 1. Source code order within the plugin file
  * 2. Condition wether to execute minification or pipe passthru
@@ -334,9 +334,9 @@ gulp.task('concat:plugins', function() {
 
 /**
  * Get a dedicated set of vendor javascript plugins (respimages) which
- * are available in `bower_components`, concatenate
- * them to a new file, minify it and shove it to destination
- * folder.
+ * are available in `bower_components`, concatenate them to a new file,
+ * bust cache, minify it (depending on task state (dev/production))
+ * and shove it to the destination folder.
  *
  * 1. Condition wether to execute a plugin or pipe passthru
  */

@@ -18,7 +18,6 @@
   <script>
     window.lazySizesConfig = window.lazySizesConfig || {};
     window.lazySizesConfig.expand = 100;
-    };
   </script>
   <script src="<?php echo $config->urls->templates?>assets/libs/vendor/plugins.images.min.js" async=""></script>
 </head>
