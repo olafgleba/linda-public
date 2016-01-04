@@ -77,8 +77,9 @@ $framework-accent-color: $orange;
 
 // See `_core.variables.scss`
 
-$base-font-size:        16px !default;
-$base-line-height:      24px !default;
+$base-font-size:        16px;
+$base-line-height:      24px;
+$base-font-family:      'Arial, sans-serif';
 $base-text-color:       $black;
 $base-background-color: $white;
 
@@ -152,26 +153,26 @@ $widths-columns: (
  */
 
 // Grid
-$grid-font-size:          $base-font-size !default;
-$grid-gutter-size:        $base-spacing-unit !default;
+$grid-font-size:             $base-font-size !default;
+$grid-gutter-size:           $base-spacing-unit !default;
 
 
 
 // Flexgrid
-$flexgrid-gutter-size: $base-spacing-unit !default;
+$flexgrid-gutter-size:       $base-spacing-unit !default;
 
 
 
 // Button
-$button-font:             inherit !default;
-$button-border-width:     1px !default;
-$button-border-style:     solid !default;
-$button-border-radius:    0 !default;
-$button-border-color:     $btn-border-color;
-$button-color:            $btn-color;
-$button-bg-color:         $btn-bg-color;
-$button-disabled-opacity: 0.5 !default;
-$button-padding:          $base-spacing-unit !default;
+$button-font:                inherit !default;
+$button-border-width:        1px !default;
+$button-border-style:        solid !default;
+$button-border-radius:       0 !default;
+$button-border-color:        $btn-border-color;
+$button-color:               $btn-color;
+$button-bg-color:            $btn-bg-color;
+$button-disabled-opacity:    0.5 !default;
+$button-padding:             $base-spacing-unit !default;
 
 
 
@@ -182,14 +183,14 @@ $button-group-border-radius: 0 !default;
 
 
 // List
-$list-padding:   $base-spacing-unit !default;
-$list-font-size: $base-font-size !default;
+$list-padding:               $base-spacing-unit !default;
+$list-font-size:             $base-font-size !default;
 
 
 
 // Table
-$table-padding:      $base-spacing-unit !default;
-$table-border-width: 1px !default;
-$table-border-width: $base-font-size !default;
-$table-border-style: solid !default;
-$table-border-color: $base-border-color !default;
+$table-padding:              $base-spacing-unit !default;
+$table-border-width:         1px !default;
+$table-border-width:         $base-font-size !default;
+$table-border-style:         solid !default;
+$table-border-color:         $base-border-color !default;
