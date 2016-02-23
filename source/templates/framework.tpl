@@ -10,16 +10,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link rel="canonical" href="<?php echo $canonical_url; ?>">
+  <?php buildHreflang($languages); ?>
+
   <link rel="stylesheet" href="<?php echo $config->urls->templates?>assets/css/styles.min.css">
 
-  <script src="//use.typekit.net/bzi7ull.js"></script>
-  <script>try{Typekit.load();}catch(e){}</script>
-
-  <script>
-    window.lazySizesConfig = window.lazySizesConfig || {};
-    window.lazySizesConfig.expand = 100;
-  </script>
   <script src="<?php echo $config->urls->templates?>assets/libs/vendor/plugins.images.min.js" async=""></script>
+
+  <script src="//use.typekit.net/tos1rrw.js"></script>
+  <script>try{Typekit.load();}catch(e){}</script>
 </head>
 
 <body class="framework">
