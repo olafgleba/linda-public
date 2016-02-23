@@ -22,7 +22,7 @@
   <script src="<?php echo $config->urls->templates?>assets/libs/vendor/plugins.images.min.js" async=""></script>
 </head>
 
-<body>
+<body class="framework">
 
   <div class="page">
 

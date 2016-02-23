@@ -2,24 +2,22 @@
 <html lang="de">
 <head>
   <meta charset="utf-8">
-  <title><?php echo $title; ?></title>
+  <title><?php echo ($page->seo_meta_title) ? $page->seo_meta_title : $page->title ?> <?php echo ($page->seo_meta_sitename) ? "| ".$page->seo_meta_sitename : "| ".$config_sitename ?></title>
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-  <meta name="robots" content="index, follow" />
-  <meta name="description" content="" />
+  <meta name="robots" content="<?php echo ($page->seo_meta_robots) ? $page->seo_meta_robots : "index, follow" ?>" />
+  <meta name="description" content="<?php echo ($page->seo_meta_description) ? $page->seo_meta_description : $config_description; ?>" />
   <meta name="author" content="Olaf Gleba, <og@olafgleba.de>" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link rel="canonical" href="<?php echo $canonical_url; ?>">
+  <?php buildHreflang($languages); ?>
+  
   <link rel="stylesheet" href="<?php echo $config->urls->templates?>assets/css/styles.min.css">
+
+  <script src="<?php echo $config->urls->templates?>assets/libs/vendor/plugins.images.min.js" async=""></script>
 
   <script src="//use.typekit.net/bzi7ull.js"></script>
   <script>try{Typekit.load();}catch(e){}</script>
-
-  <script>
-    window.lazySizesConfig = window.lazySizesConfig || {};
-    window.lazySizesConfig.expand = 100;
-  </script>
-  <script src="<?php echo $config->urls->templates?>assets/libs/vendor/plugins.images.min.js" async=""></script>
 </head>
 
 <body>
@@ -27,12 +25,12 @@
   <div class="page">
 
     <header role="banner" class="page-head page-head--banner">
-      <div class="grid">
-        <div class="grid__cell u-1/4 u-1/1-palm">
+      <div class="flexgrid">
+        <div class="flexgrid__cell u-1/4 u-1/1-palm">
           <h1 class="logo">Logo</h1>
         </div>
-        <div class="grid__cell u-3/4 u-1/1-palm">
-          <nav role="navigation">
+        <div class="flexgrid__cell u-3/4 u-1/1-palm">
+          <nav>
             <ul class="list-inline-block list--small">
               <?php
                 $root = $pages->get("/");
@@ -51,7 +49,7 @@
         </div>
       </div>
 
-      <ul class="c-breadcrumb c-breadcrumb--small list-inline-block">
+      <ul class="c-breadcrumb">
         <?php breadcrumb(); ?>
       </ul>
 
