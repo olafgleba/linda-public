@@ -9,7 +9,7 @@
   <meta name="author" content="Olaf Gleba, <og@olafgleba.de>" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="canonical" href="<?php echo $canonical_url; ?>">
+  <link rel="canonical" href="<?php echo $config_canonical_url; ?>">
   <?php buildHreflang($languages); ?>
 
   <link rel="stylesheet" href="<?php echo $config->urls->templates?>assets/css/styles.min.css">
