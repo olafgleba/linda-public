@@ -12,9 +12,8 @@
 * `$ git clone https://github.com/ryancramerdesign/ProcessWire ./`
 * Delete Processwire `.git` folder, `.gitignore`file and `.htaccess|.htaccess`
 * Goto root level folder `processwire-profiles` and do
- `$ unzip <name-of-profile>.zip -d ../app`
- * Goto root level folder `processwire-profiles` and do
-  `$ mv htaccess.txt ../app/.htaccess`
+  * `$ unzip <name-of-profile>.zip -d ../app`
+  * `$ mv htaccess.txt ../app/.htaccess`
 * Launch directive path in browser to install processwire
 * Choose your extracted site profile and go ahead with the installation (chmod 775, 664)*
 * Init new local repo (`$ git init`)
