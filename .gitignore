@@ -1,8 +1,5 @@
 **/*.DS_Store
 .sass-cache
-app/.htaccess
-app/site/modules/
-app/site/assets/files
 app/site/assets/sessions
 app/site/assets/cache
 app/wire
