@@ -20,6 +20,7 @@
 ## Configuration (Processwire)
 * Adapt local path (`paths.app.local`) in `Gulpfile.js`
 * Adapt path to CKEditor theme (`site/modules/InputfieldCKEditor/[config.js, config-body.js]`)
+* Configure `$config_sitename`, `$config_description`, `$config_canonical_url` in `site/templates/_init.php`
 
 
 ## Development
