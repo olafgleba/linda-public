@@ -176,6 +176,29 @@ gulp.task('compile:sass', ['process:modernizr'], function() {
 
 
 
+
+/**
+ * Compile sass files, process prefixing, minify it and shove it to
+ * destination folder at least.
+ *
+ * This extra styles file is meant ONLY to be used for the CKEditor in PW.
+ * This avoids the neseccity to change the path for the editor file every
+ * time the css has got a new cache busted name.
+ */
+
+gulp.task('compile:sass-editor', ['process:modernizr'], function() {
+  return gulp.src(paths.src.sass + '**/*.scss')
+    .pipe(plugins.sass({outputStyle: 'expanded' }))
+    .pipe(plugins.rename({suffix: '.min.editor'}))
+    .pipe(plugins.autoprefixer({ browsers: ['last 2 version'] }))
+    .pipe(plugins.csso())
+    .pipe(gulp.dest(paths.app.css));
+});
+
+
+
+
+
 /**
  * Get the templates source files, bust cache (depending on task
  * state (dev/production)) and shove it to the destination folder.
@@ -378,7 +401,7 @@ gulp.task('watch', function() {
 
   gulp.watch(paths.src.sass + '**/*.scss',
     [
-      'lint:scss',
+      //'lint:scss',
       'compile:sass'
     ]
   );
@@ -430,7 +453,7 @@ gulp.task('watch', function() {
  * only have one build task both for development and
  * production. The development fork starts a server,
  * sync files and watch for changes while the production
- * fork mainly minifies several files and data.
+ * fork mainly minifies several files and compiles the templates.
  *
  * // Start developing
  * `$ gulp build`
@@ -446,6 +469,7 @@ gulp.task('build', function() {
     runSequence('clean:app', 'process:modernizr',
       [
         'compile:sass',
+        'compile:sass-editor',
         'copy:jquery',
         'process:base',
         'concat:plugins',
