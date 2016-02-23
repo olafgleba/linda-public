@@ -1,28 +1,112 @@
 /**
- * layout.scss
+ * ==========================================================
+ * Element defaults / Tags
+ * ==========================================================
  */
 
 html {
-  font-family: 'proxima-nova-1', 'proxima-nova-2', sans-serif;
+  font-weight: 400;
 }
 
 
 body { }
 
 
-
-// a {
-//   transition: background-color 0.15s;
-//   text-decoration: underline;
-//   color: $base-link-color;
-//
-//   &:hover, &:active, &:focus {
-//     color: $base-link-hover-color;
-//     text-decoration: none;
-//   }
-// }
+strong, b {
+  font-weight: 700;
+}
 
 
+a {
+  transition: background-color 0.15s;
+  text-decoration: underline;
+  color: $base-link-color;
+
+  &:hover, &:active, &:focus {
+    color: $base-link-hover-color;
+    text-decoration: none;
+  }
+}
+
+
+// Neutralize all linked images
+a > img {
+  border-bottom: 0;
+  display: block;
+  line-height: 0;
+}
+
+
+/**
+ * Disable if we get respimages on track, but leave it when
+ * we are only lazyloading (lazysizes.js)
+ */
+img {
+  height: auto;
+  max-width: 100%;
+}
+
+
+/**
+ * Enable automativ calculation of `srcset` and `sizes`,
+ * e.g. we are using respimages
+ */
+
+// scss-lint:disable QualifyingElement
+img[data-sizes="auto"] {
+  display: block;
+  max-width: none;
+  width: 100%;
+  height: auto;
+}
+// scss-lint:enable QualifyingElement
+
+
+
+
+
+/**
+ * ==========================================================
+ * Element defaults / Headings
+ * ==========================================================
+ */
+
+/**
+ * list of headings
+ * @string {String}
+ */
+$headings: 'h1, h2, h3, h4, h5, h6';
+
+@each $item in $headings {
+  #{$item} {
+    font-style: normal;
+    font-weight: 700;
+    hyphens: auto;
+   }
+}
+
+
+
+
+
+/**
+ * ==========================================================
+ * Core Elements/Components /  Redeclare attributes
+ * ==========================================================
+ */
+
+// ...
+
+
+
+
+
+
+/**
+ * ==========================================================
+ * Structure /  Page
+ * ==========================================================
+ */
 
 .page {
   margin: 0 auto;
@@ -32,10 +116,29 @@ body { }
 
 
 
+
+/**
+ * ==========================================================
+ * Components
+ * ==========================================================
+ */
+
+// ...
+
+
+
+
+
+
+/**
+ * ==========================================================
+ * Classes
+ * ==========================================================
+ */
+
 /**
  * SVG icon sprite
  */
-
 .icon {
   width: ($base-font-size / 16px) * 1em;
   height: ($base-font-size / 16px) * 1em;
@@ -50,39 +153,19 @@ body { }
   }
 }
 
+// Modifier
 .icon--large {
   width: (($base-font-size * 2) / 16px) * 1em;
   height: (($base-font-size * 2) / 16px) * 1em;
 }
 
+// Modifier
 .icon--huge {
   width: (($base-font-size * 4) / 16px) * 1em;
   height: (($base-font-size * 4) / 16px) * 1em;
 }
 
 
-/**
- * Single icons
- */
-// ...
-
-
-
-
-/**
- * Enable automativ calculation of `srcset` and `sizes`
- */
-
-// scss-lint:disable QualifyingElement
-
-img[data-sizes="auto"] {
-  display: block;
-  max-width: none;
-  width: 100%;
-  height: auto;
-}
-
-// scss-lint:enable QualifyingElement
 
 
 /**
@@ -101,32 +184,19 @@ img[data-sizes="auto"] {
 
 
 
+
 /**
- * list of headings
- * @string {String}
+ * Overwrite fluidbox vendor declaration,
+ * s. `vendor/_fluidbox.scss`, line 55
  */
-$headings: 'h1, h2, h3, h4, h5, h6';
-
-@each $item in $headings {
-  #{$item} {
-    font-style: normal;
-    font-weight: inherit;
-  }
-}
-
-
-
-
-// overwrite fluidbox vendor declaration
-// s. _fluidbox.scss (v. 1.4.3), line 56
 .fluidbox-ghost {
   transition-duration: $transition-duration, $transition-duration;
 }
 
+
 /**
- * Container for status loading animation, s. next below `progress`
- *
- * Appended dynamically to fluidbox loading event state (s. base.js)
+ * Container for loading animation, s. next below `progress`.
+ * Appended dynamically to fluidbox loading event (s. `base.js`)
  */
 .is-loading-fluidbox {
   display: flex;
@@ -135,11 +205,13 @@ $headings: 'h1, h2, h3, h4, h5, h6';
   height: 100%;
 }
 
+
+
 /**
- * Loading spinner, css animation
+ * Loading spinner, CSS animation
  *
  * Markup dynamically set in base.js:
- *   <div class="progress [progress--large][progress--small]"></div>
+ *   `<div class="progress [progress--large][progress--small]"></div>`
  */
 @keyframes progress {
   to {transform: rotate(360deg);}
@@ -185,6 +257,7 @@ $headings: 'h1, h2, h3, h4, h5, h6';
   }
 }
 
+// Modifier
 .progress--small {
   &::before {
     width: 16px;
@@ -205,6 +278,7 @@ $headings: 'h1, h2, h3, h4, h5, h6';
 /**
  * Image Gallery (fluidbox)
  */
+
 .gallery {
   display: flex;
   flex-flow: row wrap;
