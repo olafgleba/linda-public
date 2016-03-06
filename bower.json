@@ -11,7 +11,8 @@
     "fluidbox": "1.4.3",
     "svg4everybody": "~2.0.0",
     "jquery-smooth-scroll": "^1.7.2",
-    "lazysizes": "^1.4.0"
+    "lazysizes": "^1.4.0",
+    "jquery-validation": "^1.15.0"
   },
   "overrides": {
     "respimage": {
@@ -21,6 +22,11 @@
       "main": [
         "dist/jquery.min.js",
         "dist/jquery.min.map"
+      ]
+    },
+    "jquery-validation": {
+      "main": [
+        "dist/jquery.validate.js"
       ]
     },
     "fluidvids": {

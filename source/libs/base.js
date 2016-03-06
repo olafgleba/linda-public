@@ -104,4 +104,31 @@ $(function() {
   });
 
 
+  // Formular Validation
+  $('#guestbook-form').validate({
+    rules: {
+      name: {
+        required: true
+      },
+      email: {
+        required: true,
+        email: true
+      },
+      mesg: "required"
+    },
+    messages: {
+      name: {
+        required: "Bitte tragen Sie Ihren Namen ein"
+      },
+      email: {
+        required: "Bitte geben Sie Ihre E-Mail Adresse an",
+        email: "Sicher, dass die E-Mail Adresse richtig geschrieben ist?"
+      },
+      mesg: {
+        required: "Ein Gästebucheintrag ohne Nachricht...? ;-)"
+      }
+    }
+  });
+
+
 });

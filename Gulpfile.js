@@ -99,7 +99,7 @@ var paths = {
 gulp.task('connect-sync', function() {
   plugins.connectPhp.server({
     base: paths.app.root,
-    port: 8002
+    port: 8003
     }, function (){
     bs.init({
       proxy: paths.app.local

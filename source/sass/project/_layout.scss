@@ -18,7 +18,7 @@ strong, b {
 
 
 a {
-  transition: background-color 0.15s;
+  transition: all 0.15s;
   text-decoration: underline;
   color: $base-link-color;
 
@@ -123,7 +123,72 @@ $headings: 'h1, h2, h3, h4, h5, h6';
  * ==========================================================
  */
 
-// ...
+
+ /*
+   =====================================================
+   Component / Forms
+   =====================================================
+ */
+
+ .c-form {
+   @extend %margin-bottom;
+ }
+
+ // scss-lint:disable QualifyingElement
+ input[type="text"],
+ input[type="email"],
+ textarea {
+   width: 100%;
+   font-size: inherit;
+   border: 1px solid $form-input-border-color;
+   color: inherit;
+   background-color: inherit;
+   padding: $base-spacing-unit--tiny;
+   transition: all 0.25s;
+   border-radius: 0;
+   -webkit-appearance: none;
+
+   &:placeholder {
+     color: $form-input-placeholder-color;
+     font-size: $base-font-size - 1;
+   }
+
+   &:focus, &:active {
+     border-color: $form-input-border-color-focus;
+     outline: 0;
+   }
+ }
+ // scss-lint:enable QualifyingElement
+
+ .c-form__field {
+   margin-bottom: $base-spacing-unit;
+ }
+
+ .c-form__note {
+   font-size: $base-font-size - 1;
+ }
+
+ .button--submit {
+   font-weight: 700;
+ }
+
+
+ /**
+  * jquery-validation lib related
+  */
+
+ // Styling the default error class
+ .error {
+   //...
+ }
+
+ // Spam protection, honeypot
+ .c-form__field__highlight + .c-form__field {
+   display: none;
+ }
+
+
+
 
 
 
