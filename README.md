@@ -9,7 +9,7 @@
 * `$ npm install`, `$ bower install`
 * `$ cd app/`
 * Delete placeholder `.gitignore` file (`$ rm .gitignore`)
-* `$ git clone https://github.com/ryancramerdesign/ProcessWire ./`
+* `$ git clone https://github.com/processwire/processwire.git ./`
 * Delete Processwire `.git` folder, `.gitignore` file and `.htaccess|htaccess.txt`
 * Goto root level folder `processwire-profiles` and do
   * `$ unzip <name-of-profile>.zip -d ../app`
