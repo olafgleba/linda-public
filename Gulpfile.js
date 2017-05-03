@@ -67,8 +67,10 @@ if(plugins.util.env.production === true) {
  * 1. Adapt path to fit the environment
  */
 
-var app   = 'app/site/templates/';
-var source = 'source/';
+var app     = 'app/site/templates/';
+var source  = 'source/';
+var portPHP = '8010';
+var portBS  = '9000';
 
 var paths = {
   app: {
@@ -96,17 +98,25 @@ var paths = {
  * and start syncing
  */
 
-gulp.task('connect-sync', function() {
-  plugins.connectPhp.server({
-    base: paths.app.root,
-    port: 8005
-    }, function (){
-    bs.init({
-      proxy: paths.app.local
-    });
-  });
-});
+ gulp.task('connect-php', function() {
+   plugins.connectPhp.server({
+     base: paths.app.root,
+     keepalive: true
+   });
+ });
 
+
+ gulp.task('browser-sync', ['connect-php'], function() {
+   bs.init({
+     proxy: paths.app.local,
+     port: portBS,
+     open: true,
+     notify: false,
+     ui: {
+       port: portBS
+     }
+   });
+ });
 
 
 
@@ -343,6 +353,7 @@ gulp.task('concat:plugins', function() {
     )
     .pipe(plugins.order([ /* 1 */
       '**/fastclick.js',
+      '**/jquery.ba-throttle-debounce.js',
       '*'
     ]))
     .pipe(plugins.newer(paths.app.libs + 'vendor/plugins.min.js'))
@@ -484,7 +495,7 @@ gulp.task('build', function() {
 
     runSequence('clean:app', 'process:modernizr', 'process:templates',
       [
-        'lint:scss',
+        //'lint:scss',
         'lint:js',
         'compile:sass',
         'copy:jquery',
@@ -495,7 +506,7 @@ gulp.task('build', function() {
         'process:icons',
         'watch'
       ],
-      'connect-sync'
+      'browser-sync'
     );
 
   }

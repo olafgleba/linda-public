@@ -1,3 +1,4 @@
+<?php namespace ProcessWire; ?>
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -25,11 +26,11 @@
   <div class="page">
 
     <header role="banner" class="page-head page-head--banner">
-      <div class="flexgrid">
-        <div class="flexgrid__cell u-1/4 u-1/1-palm">
+      <div class="grid">
+        <div class="grid__cell u-1of4 u-1of1-palm">
           <h1 class="logo">Logo</h1>
         </div>
-        <div class="flexgrid__cell u-3/4 u-1/1-palm">
+        <div class="grid__cell u-3of4 u-1of1-palm">
           <nav>
             <ul class="list-inline-block list--small">
               <?php
@@ -67,7 +68,7 @@
 
     </main> <!-- /main -->
 
-    <footer role="contentinfo" class="page-footer page-footer--contentinfo">
+    <footer id="footer" role="contentinfo" class="page-footer page-footer--contentinfo">
       <ul class="list-inline-block list--tiny-vertical list--skip-vertical">
         <?php languageListing($languages); ?>
       </ul>

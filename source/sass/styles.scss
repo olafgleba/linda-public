@@ -3,19 +3,83 @@
  * the main CSS stylesheet to adress in your HTML
  */
 
+
+ /**
+ * Import project configuration
+ *
+ * Import the `_configuration.scss` file first. It holds
+ * all project wide variables and component override
+ * variables.
+ */
+
 // Project configuration
 @import 'configuration';
 
-// Global bootstrap core modules
-@import 'bootstrap';
+
+/**
+ * Import core files
+ *
+ * Import core files (order matters) right after the
+ * configuration as the project related files are usally
+ * build on those core abstractions and components.
+ * `utils.x` classes are added at the end of this file
+ * to handle the specificity graph.
+ */
+
+// Settings
+@import 'core/core.variables';
+@import 'core/core.placeholders';
+
+// Tools
+@import 'core/core.functions';
+@import 'core/core.mixins';
+
+// Normalize browser default
+@import 'core/core.normalize';
+
+// Reset browser default on several elements
+@import 'core/core.resets';
+
+// Establish vertical rhythm
+@import 'core/core.rhythm';
+
+// Default high-level declaration, e.g. html, box-sizing etc.
+@import 'core/core.html';
+
+// Default headings high-level declaration
+@import 'core/elements.heading';
+
+// Core abstractions
+@import 'core/abstractions.grid';
+@import 'core/abstractions.button';
+@import 'core/abstractions.button-group';
+@import 'core/abstractions.list';
+@import 'core/abstractions.table';
+
+// Core components
+@import 'core/component.breadcrumb';
+
 
 // Include vendor styles
 @import 'vendor/owl.carousel';
 @import 'vendor/tablesaw.bare';
 @import 'vendor/fluidbox';
 
+
 // project section styles
 @import 'project/layout';
 
+
 // project media queries
 @import 'mq';
+
+
+// Utility classes
+@import 'core/utils.text';
+@import 'core/utils.align';
+@import 'core/utils.display';
+@import 'core/utils.offset';
+@import 'core/utils.flex';
+
+// Size utility classes, automatically generated
+@import 'core/utils.size';

@@ -1,13 +1,11 @@
 /**
  * Core grid abstraction
  *
- * Heavily inspired by <https://github.com/suitcss/components-grid/>
- *
- * DO NOT apply dimension or offset utilities to the `grid` element. All cell
- * widths and offsets should be applied to child grid cells only.
+ * To leave the abstraction pure no fallback for non capable browsers
+ * is applied. If you need to provide a fallback define this in
+ * your `layout.scss` (or whatever is appropriate).
  */
 
-$grid-font-size:   $base-font-size !default;
 $grid-gutter-size: $base-spacing-unit !default;
 
 // Gutter modifiers
@@ -18,23 +16,21 @@ $grid-gutter-size--huge:  quadruple($grid-gutter-size) !default;
 
 
 /**
- * Grid container
+ * grid container
  *
- * All content must be contained within child `grid__cell` elements.
+ * All content must be contained within child `grid__cell` elements at least.
+ * If paddings are desired apply them on a container within `grid__cell`.
  *
  * 1. Account for browser defaults of elements that might be the root node of
  *    the component.
- * 2. Remove inter-cell whitespace that appears between `inline-block` child
- *    elements.
- * 3. Ensure consistent default alignment.
+ * 2. Respect the natural flow of rows, e.g. wrap flex grid cells
  */
 
 .grid {
-  display: block; /* 1 */
-  font-size: 0; /* 2 */
+  display: flex; /* 1 */
+  flex-flow: row wrap; /* 2 */
   margin: 0; /* 1 */
   padding: 0; /* 1 */
-  text-align: left; /* 3 */
 }
 
 
@@ -44,40 +40,43 @@ $grid-gutter-size--huge:  quadruple($grid-gutter-size) !default;
  * Modifier: Root alignments
  *
  * Alignment modifiers for the root element. Will effect all child elements.
- * NOTE: To apply individual alignments, s.below `Modifier: Cell alignments`.
+ * NOTE: To apply individual cell alignments, s.below `utils.flexbox`.
+ *
+ *
  */
+
+ /**
+  * Modifier: Center horizontal align grid cells
+  */
+
+ .grid--center {
+   justify-content: center;
+ }
 
 /**
- * Modifier: middle-align grid cells
+ * Modifier: Right horizontal align grid cells
  */
 
-.grid--middle > .grid__cell {
-  vertical-align: middle;
+.grid--right {
+  justify-content: flex-end;
+}
+
+ /**
+ * Modifier: Bottom align grid cells
+ */
+
+.grid--bottom {
+  align-items: flex-end;
 }
 
 /**
- * Modifier: Bottom-align grid cells
+ * Modifier: Center align grid cells
  */
 
-.grid--bottom > .grid__cell {
-  vertical-align: bottom;
+.grid--middle {
+  align-items: center;
 }
 
-/**
- * Modifier: Push all grid cells content to center
- */
-
-.grid--text-center > .grid__cell {
-  text-align: center;
-}
-
-/**
- * Modifier: Push all grid cells content to right
- */
-
-.grid--text-right > .grid__cell {
-  text-align: right;
-}
 
 
 
@@ -91,11 +90,11 @@ $grid-gutter-size--huge:  quadruple($grid-gutter-size) !default;
  */
 
 .grid--gutter {
-  margin-left: (-$grid-gutter-size);
+  margin: 0 calc(-0.5 * #{$grid-gutter-size});
 }
 
 .grid--gutter > .grid__cell {
-  padding-left: $grid-gutter-size;
+  padding: 0 calc(0.5 * #{$grid-gutter-size});
 }
 
 
@@ -105,38 +104,38 @@ $grid-gutter-size--huge:  quadruple($grid-gutter-size) !default;
 
 // tiny
 .grid--gutter-tiny {
-  margin-left: (-$grid-gutter-size--tiny);
+  margin: 0 calc(-0.5 * #{$grid-gutter-size--tiny});
 }
 
 .grid--gutter-tiny > .grid__cell {
-  padding-left: (-$grid-gutter-size--tiny);
+  padding: 0 calc(0.5 * #{$grid-gutter-size--tiny});
 }
 
 // small
 .grid--gutter-small {
-  margin-left: (-$grid-gutter-size--small);
+  margin: 0 calc(-0.5 * #{$grid-gutter-size--small});
 }
 
 .grid--gutter-small > .grid__cell {
-  padding-left: $grid-gutter-size--small;
+  padding: 0 calc(0.5 * #{$grid-gutter-size--small});
 }
 
 // large
 .grid--gutter-large {
-  margin-left: (-$grid-gutter-size--large);
+  margin: 0 calc(-0.5 * #{$grid-gutter-size--large});
 }
 
 .grid--gutter-large > .grid__cell {
-  padding-left: $grid-gutter-size--large;
+  padding: 0 calc(0.5 * #{$grid-gutter-size--large});
 }
 
 // huge
 .grid--gutter-huge {
-  margin-left: (-$grid-gutter-size--huge);
+  margin: 0 calc(-0.5 * #{$grid-gutter-size--huge});
 }
 
 .grid--gutter-huge > .grid__cell {
-  padding-left: $grid-gutter-size--huge;
+  padding: 0 calc(0.5 * #{$grid-gutter-size--huge});
 }
 
 
@@ -145,76 +144,42 @@ $grid-gutter-size--huge:  quadruple($grid-gutter-size) !default;
 /**
  * Grid cell
  *
- * No explicit width by default. Rely on combining `grid__cell`
- * with a dimension utility or a component class that extends 'grid',
- * s. `_utils.sizes.scss`.
+ * By default cells take any space available. Rely on combining
+ * `grid__cell` with a dimension utility or a component class that
+ * extends 'grid', s. `_utils.size.scss`.
  *
- * 1. Fundamentals of the non-float grid layout.
- * 2. Reset font size change made in `grid`.
- * 3. Keeps content correctly aligned with the grid direction.
- * 4. Controls vertical positioning of units.
- * 5. Make cells full-width by default.
+ * 1. Fix issue where elements with overflow extend past the
+ *    `grid__cell` container, s. https://git.io/vw5oF
  */
 
 .grid__cell {
-  box-sizing: border-box;
-  display: inline-block; /* 1 */
-  font-size: $grid-font-size; /* 2 */
-  margin: 0;
-  padding: 0;
-  text-align: left; /* 3 */
-  vertical-align: top; /* 4 */
-  width: 100%; /* 5 */
-}
-
-/**
- * Modifier: Horizontally center one unit
- * Set a specific unit to be horizontally centered. Doesn't affect
- * any other units. Can still contain a child `grid` object.
- */
-
-.grid__cell--center {
-  display: block;
-  margin: 0 auto;
+  flex-basis: 100%;
+  min-height: 0; /* 1 */
 }
 
 
 
 /**
- * Modifier: Cell alignments
+ * Grid cell modifiers
  *
- * Individual alignment for grid cells. To apply alignments to the
- * grid root, s. `Modifier: Root alignments` above.
+ * 1. Use `0%` to avoid bug in IE10/11 with unitless flex basis
+ * s. http://git.io/vllWx
  */
 
-/**
- * Modifier: Bottom align grid cell
- */
+ /**
+  * Grid cell modifier: Distribute cells to available space by default
+  *
+  * 1. Use `0%` to avoid bug in IE10/11 with unitless flex basis
+  * s. http://git.io/vllWx
+  */
 
-.grid__cell--bottom {
-  vertical-align: bottom;
+.grid--fit > .grid__cell {
+  flex: 1 1 0%; /* 1 */
 }
 
 /**
- * Modifier: Middle align grid cell
+ * Grid cell modifier: Equal height of grid cells
  */
-
-.grid__cell--middle {
-  vertical-align: middle;
-}
-
-/**
- * Modifier: Push grid cell content to center
- */
-
-.grid__cell--text-center {
-  text-align: center;
-}
-
-/**
- * Modifier: Push grid cell content to right
- */
-
-.grid__cell--text-right {
-  text-align: right;
+.grid--equal-height > .grid__cell {
+  display: flex;
 }

@@ -34,7 +34,7 @@ $orange: #f60;
 $base-link-color:       $orange;
 $base-link-hover-color: lighten($orange, 10%);
 
-$base-border-color: $gray;
+$base-border-color:     $gray;
 
 
 
@@ -46,25 +46,25 @@ $base-border-color: $gray;
  */
 
 // Buttons
-$btn-color:             $orange;
-$btn-bg-color:          $white;
-$btn-border-color:      $orange;
-$btn-color-hover:       lighten($orange, 10%);
+$btn-color:                     $orange;
+$btn-bg-color:                  $white;
+$btn-border-color:              $orange;
+$btn-color-hover:               lighten($orange, 10%);
 
 // Loading progress animation
-$progress-border-color:     $white;
-$progress-border-top-color: $orange;
+$progress-border-color:         $white;
+$progress-border-top-color:     $orange;
 
 // Icons
-$icon-fill-color: $black;
+$icon-fill-color:               $black;
 
 // Forms
-$form-input-border-color: $black;
+$form-input-border-color:       $black;
 $form-input-border-color-focus: rgba($black, 0.5);
-$form-input-placeholder-color: rgba($black, 0.5);
+$form-input-placeholder-color:  rgba($black, 0.5);
 
 // Framework
-$framework-accent-color: $orange;
+$framework-accent-color:        $orange;
 
 
 
@@ -82,12 +82,13 @@ $framework-accent-color: $orange;
 
 // See `_core.variables.scss`
 
-$base-font-size:        16px;
-$base-line-height:      24px;
-$base-font-family:      'proxima-nova-1', 'proxima-nova-2', sans-serif;
-$base-font-weight:      400;
-$base-text-color:       $black;
-$base-background-color: $white;
+$base-font-size:           16px;
+$base-line-height:         24px;
+$base-font-family:         verdana, sans-serif;
+$base-font-family-webfont: 'proxima-nova-1', 'proxima-nova-2', sans-serif;
+$base-font-weight:         400;
+$base-text-color:          $black;
+$base-background-color:    $white;
 
 
 
@@ -158,14 +159,8 @@ $widths-columns: (
  * leave it as is to pass by the defaults.
  */
 
-// Grid
-$grid-font-size:             $base-font-size !default;
-$grid-gutter-size:           $base-spacing-unit !default;
-
-
-
-// Flexgrid
-$flexgrid-gutter-size:       $base-spacing-unit !default;
+ // Grid (Flex)
+ $grid-gutter-size:       $base-spacing-unit !default;
 
 
 

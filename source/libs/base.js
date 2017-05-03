@@ -30,12 +30,6 @@ var App = (function() {
     // svg4everybody initialisation
     svg4everybody();
 
-    // Fluidvids initialisation
-    // fluidvids.init({
-    //   selector: 'iframe', // runs querySelectorAll()
-    //   players: ['player.vimeo.com'] // players to support
-    // });
-
   };
 
   // Public API
@@ -69,12 +63,23 @@ $(function() {
   $('a[rel="fluidbox"]').fluidbox({
     immediateOpen: true
   })
-  .one('openstart', function() {
-    $(this).find('.fluidbox-ghost')
+  .on('openstart.fluidbox', function() {
+
+    // Apply img loader
+    $(this).find('.fluidbox__ghost')
     .append('<div class="is-loading-fluidbox"><div class="progress progress--large"></div></div>');
+
+    // Apply caption
+    var $img = $(this).find('img').attr('alt');
+    $(this).find('.fluidbox__ghost')
+    .append('<div class="fluidbox-caption-wrap"><div class="fluidbox-caption">' + $img + '</div></div>');
+
   })
-  .on('imageloaddone', function() {
+  .on('imageloaddone.fluidbox', function() {
     $(this).find('.is-loading-fluidbox').remove();
+  })
+  .on('closestart.fluidbox', function() {
+    $(this).find('.fluidbox-caption-wrap').remove();
   });
 
 

@@ -25,14 +25,6 @@ $widths-columns: (
 
 /**
  * Iterate over given columns and create static width classes.
- *
- * Output:
- *
- * // $use-fraction: true;
- * .u-1/2
- *
- * // $use-fraction: false;
- * .u-1of2
  */
 
 @each $widths-column in $widths-columns {
@@ -44,14 +36,6 @@ $widths-columns: (
 /**
  * Iterate over given columns and breakpoints and create
  * responsive width classes.
- *
- * Output:
- *
- * // $use-fraction: true;
- * .u-1/2-palm
- *
- * // $use-fraction: false;
- * .u-1of2-palm
  */
 
 @each $breakpoint in $breakpoints {

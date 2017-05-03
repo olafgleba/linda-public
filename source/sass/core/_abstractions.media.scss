@@ -1,0 +1,22 @@
+/**
+ * Abstraction arrange
+ *
+ * DEVELOPMENT ONLY!
+ */
+
+
+.media {
+  display: flex;
+  background-color: tomato;
+}
+
+.media__img {
+  flex: 0 0 auto;
+  background-color: red;
+  width: 200px;
+}
+
+.media__content {
+  flex: 1;
+  background-color: green;
+}

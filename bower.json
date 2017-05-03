@@ -1,18 +1,18 @@
 {
-  "name": "Linda",
+  "name": "linda",
   "description": "Gulp Development with Processwire",
   "dependencies": {
     "fastclick": "~1.0.6",
-    "fluidvids": "2.2.0",
     "jquery": "~2.1.4",
-    "owl-carousel": "~1.3.2",
+    "jquery-throttle-debounce": "*",
     "respimage": "~1.4.0",
-    "tablesaw": "~1.0.4",
-    "fluidbox": "1.4.3",
-    "svg4everybody": "~2.0.0",
-    "jquery-smooth-scroll": "^1.7.2",
-    "lazysizes": "^1.4.0",
-    "jquery-validation": "^1.15.0"
+    "fluidbox": "^2.0.5",
+    "jquery-smooth-scroll": "^2.1.2",
+    "lazysizes": "^3.0.0",
+    "jquery-validation": "^1.15.0",
+    "owl.carousel": "^2.2.1",
+    "tablesaw": "^3.0.0",
+    "svg4everybody": "^2.1.4"
   },
   "overrides": {
     "respimage": {
@@ -29,17 +29,23 @@
         "dist/jquery.validate.js"
       ]
     },
-    "fluidvids": {
-      "main": "dist/fluidvids.js"
-    },
     "fluidbox": {
-      "main": "jquery.fluidbox.js"
+      "main": "src/js/jquery.fluidbox.js"
     },
     "svg4everybody": {
       "main": "dist/svg4everybody.js"
     },
-    "owl-carousel": {
-      "main": "owl-carousel/owl.carousel.js"
+    "owl.carousel": {
+      "main": "dist/owl.carousel.js"
+    },
+    "jquery-throttle-debounce": {
+      "main": "jquery.ba-throttle-debounce.js"
+    },
+    "tablesaw": {
+      "main": [
+        "dist/tablesaw-init.js",
+        "dist/tablesaw.jquery.js"
+      ]
     }
   },
   "ignore": [
