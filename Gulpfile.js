@@ -495,6 +495,7 @@ gulp.task('build', function() {
         //'lint:scss',
         'lint:js',
         'compile:sass',
+        'compile:sass-editor',
         'copy:jquery',
         'process:base',
         'concat:plugins',
