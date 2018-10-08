@@ -70,7 +70,7 @@ if(plugins.util.env.production === true) {
 var app     = 'app/site/templates/';
 var source  = 'source/';
 var portPHP = '8010';
-var portBS  = '9000';
+var portBS  = '3000';
 
 var paths = {
   app: {
@@ -111,10 +111,7 @@ var paths = {
      proxy: paths.app.local,
      port: portBS,
      open: true,
-     notify: false,
-     ui: {
-       port: portBS
-     }
+     notify: false
    });
  });
 
