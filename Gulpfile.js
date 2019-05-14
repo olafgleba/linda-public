@@ -417,7 +417,7 @@ gulp.task('watch', function() {
 
   gulp.watch(paths.src.libs + 'base.js',
     [
-      'lint:js',
+      //'lint:js',
       'process:modernizr',
       'process:base',
       'concat:plugins'
@@ -493,7 +493,7 @@ gulp.task('build', function() {
     runSequence('clean:app', 'process:modernizr', 'process:templates',
       [
         //'lint:scss',
-        'lint:js',
+        //'lint:js',
         'compile:sass',
         'compile:sass-editor',
         'copy:jquery',
