@@ -3,12 +3,12 @@
   "description": "Gulp Development with Processwire",
   "dependencies": {
     "fastclick": "~1.0.6",
-    "jquery": "~2.1.4",
+    "jquery": "^3.4.1",
     "jquery-throttle-debounce": "*",
     "respimage": "~1.4.0",
     "fluidbox": "^2.0.5",
     "jquery-smooth-scroll": "^2.1.2",
-    "lazysizes": "^3.0.0",
+    "lazysizes": "^5.1.1",
     "jquery-validation": "^1.15.0",
     "owl.carousel": "^2.2.1",
     "tablesaw": "^3.0.0",
@@ -20,8 +20,7 @@
     },
     "jquery": {
       "main": [
-        "dist/jquery.min.js",
-        "dist/jquery.min.map"
+        "dist/jquery.min.js"
       ]
     },
     "jquery-validation": {
@@ -40,6 +39,9 @@
     },
     "jquery-throttle-debounce": {
       "main": "jquery.ba-throttle-debounce.js"
+    },
+    "van11y-accessible-accordion-aria": {
+      "main": "dist/van11y-accessible-accordion-aria.es6.js"
     },
     "tablesaw": {
       "main": [

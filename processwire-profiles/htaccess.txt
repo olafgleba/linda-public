@@ -129,8 +129,8 @@ DirectoryIndex index.php index.html index.htm
   # For example: http://processwire.com/ would be redirected to http://www.processwire.com/
   # -----------------------------------------------------------------------------------------------
 
-  # RewriteCond %{HTTP_HOST} ^www\. [NC]
-  # RewriteRule ^ http://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+  # RewriteCond %{HTTP_HOST} !^www\. [NC]
+  # RewriteRule ^ http://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
   # -----------------------------------------------------------------------------------------------
   # 14. OPTIONAL: Send URLs with non-ASCII name-format characters to 404 page (optimization)

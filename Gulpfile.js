@@ -3,6 +3,7 @@
  */
 
 var gulp    = require('gulp');
+var ftp     = require('vinyl-ftp');
 var plugins = require('gulp-load-plugins')();
 
 /**
@@ -37,6 +38,24 @@ var cachebust = new cacheBuster();
 var onError = function(err) {
   console.log(err);
   this.emit('end');
+}
+
+
+
+
+/**
+ * Functions
+ *
+ * Miscellaneous functions to support tasks
+ */
+
+/**
+ * Generates random number
+ * @return {string} random number
+ */
+
+function randomHash() {
+    return Math.random()*0xfff|0;
 }
 
 
@@ -117,6 +136,36 @@ var paths = {
 
 
 
+
+
+ /**
+  * FTP copy to dev server
+  */
+
+ gulp.task('deploy', function(ca) {
+
+   var conn = ftp.create( {
+       host:     '',
+       user:     '',
+       password: ''
+   });
+
+   var globs = [
+     'app/.htaccess',
+     'app/index.php',
+     'app/site/**',
+     '!app/site/assets/sessions/**',
+     'app/wire/**'
+   ];
+
+   return gulp.src(globs, { base: 'app', buffer: false })
+     .pipe(conn.newer('/htdocs/dev/ps-direkt/staging'))
+     .pipe(conn.dest('/htdocs/dev/ps-direkt/staging'));
+ });
+
+
+
+
 /**
  * Clean assets folder
  */
@@ -166,13 +215,13 @@ gulp.task('lint:scss', function() {
  * 1. Condition wether to execute a plugin or passthru
  */
 
-gulp.task('compile:sass', ['process:modernizr'], function() {
+gulp.task('compile:sass', function() {
   return gulp.src(paths.src.sass + '**/*.scss')
     .pipe(plugins.plumber({errorHandler: onError}))
     .pipe(isProduction ? plugins.util.noop() : plugins.sourcemaps.init()) /* 1 */
     .pipe(plugins.sass({outputStyle: 'expanded' }))
     .pipe(plugins.rename({suffix: '.min'}))
-    .pipe(plugins.autoprefixer({ browsers: ['last 2 version'] }))
+    .pipe(plugins.autoprefixer())
     .pipe(isProduction ? cachebust.resources() : plugins.util.noop())
     .pipe(isProduction ? plugins.util.noop() : plugins.sourcemaps.write('./')) /* 1 */
     .pipe(isProduction ? plugins.csso() : plugins.util.noop()) /* 1 */
@@ -193,15 +242,27 @@ gulp.task('compile:sass', ['process:modernizr'], function() {
  * time the css has got a new cache busted name.
  */
 
-gulp.task('compile:sass-editor', ['process:modernizr'], function() {
+gulp.task('compile:sass-editor', function() {
   return gulp.src(paths.src.sass + '**/*.scss')
     .pipe(plugins.sass({outputStyle: 'expanded' }))
     .pipe(plugins.rename({suffix: '.min.editor'}))
-    .pipe(plugins.autoprefixer({ browsers: ['last 2 version'] }))
+    .pipe(plugins.autoprefixer())
     .pipe(plugins.csso())
     .pipe(gulp.dest(paths.app.css));
 });
 
+
+
+
+
+/**
+ * [manageEnvironment description]
+ * @param  {[type]} environment [description]
+ * @return {[type]}             [description]
+ */
+var expandEnv = function(environment) {
+  environment.addGlobal('randomHash', randomHash);
+}
 
 
 
@@ -213,19 +274,25 @@ gulp.task('compile:sass-editor', ['process:modernizr'], function() {
  * cache (e.g. css/js) will get updated (if those target files were modified)
  * within the template files.
  *
- * NOTE: NEVER modify `*.php` files within the first layer of the `app/markup`
- * folder (e.g. `index.php`, `framework.php`). Instead solely edit the source
- * files (e.g. `source/templates/index.tpl`, `source/templates/framwork.tpl`).
+ * NOTE: NEVER modify `*.html` files within the first layer of the `app/`
+ * folder (e.g. `index.html`, `framework.html`). Instead solely edit the source
+ * files (e.g. `source/templates/index.nunjucks`, `source/templates/framwork.nunjucks`).
  *
  * 1. Condition wether to execute a plugin or pipe passthru
  */
 
 gulp.task('process:templates', function() {
-  return gulp.src(paths.src.tpls + '**/*.tpl')
+  return gulp.src(paths.src.tpls + '*.nunjucks')
+    .pipe(plugins.plumber({errorHandler: onError}))
     .pipe(isProduction ? cachebust.references() : plugins.util.noop()) /* 1 */
-    .pipe(plugins.rename({extname: '.php'}))
+    .pipe(plugins.nunjucksRender({
+      path: paths.src.tpls,
+      ext: '.php',
+      manageEnv: expandEnv
+    }))
     .pipe(gulp.dest(paths.app.root + 'markup/'));
 });
+
 
 
 
@@ -269,16 +336,18 @@ gulp.task('process:images', function() {
  * See http://www.sitepoint.com/tips-accessible-svg/
  */
 
-gulp.task('process:icons', function() {
-  return gulp.src(paths.src.img + 'icon-sprite/*.svg')
-    .pipe(plugins.newer(paths.app.img))
-    .pipe(plugins.imagemin({
-      svgoPlugins: [{removeViewBox: false}]
-    }))
-    .pipe(plugins.rename({prefix: 'icon-'}))
-    .pipe(plugins.svgstore())
-    .pipe(gulp.dest(paths.app.img));
-});
+ gulp.task('process:icons', function() {
+   return gulp.src(paths.src.img + 'icon-sprite/*.svg')
+     .pipe(plugins.newer(paths.app.img))
+     .pipe(plugins.imagemin([
+         plugins.imagemin.svgo({
+           plugins: [{removeViewBox: false}]
+         })
+     ]))
+     .pipe(plugins.rename({prefix: 'icon-'}))
+     .pipe(plugins.svgstore({ inlineSvg: true }))
+     .pipe(gulp.dest(paths.app.img));
+ });
 
 
 
@@ -292,17 +361,17 @@ gulp.task('process:icons', function() {
  * 1. Condition wether to execute a plugin or passthru
  */
 
-gulp.task('process:modernizr', function() {
-  return gulp.src(paths.src.root + '**/*.{js,scss}')
-    .pipe(plugins.modernizr('modernizr-custom.min.js', {
-        "options": [
-          "setClasses" /* 1 */
-        ]
-    }))
-    .pipe(isProduction ? plugins.uglify() : plugins.util.noop()) /* 1 */
-    .pipe(isProduction ? cachebust.resources() : plugins.util.noop())
-    .pipe(gulp.dest(paths.app.libs + 'vendor/'))
-});
+// gulp.task('process:modernizr', function() {
+//   return gulp.src(paths.src.root + '**/*.{js,scss}')
+//     .pipe(plugins.modernizr('modernizr-custom.min.js', {
+//         "options": [
+//           "setClasses" /* 1 */
+//         ]
+//     }))
+//     .pipe(isProduction ? plugins.uglify() : plugins.util.noop()) /* 1 */
+//     .pipe(isProduction ? cachebust.resources() : plugins.util.noop())
+//     .pipe(gulp.dest(paths.app.libs + 'vendor/'))
+// });
 
 
 
@@ -418,7 +487,7 @@ gulp.task('watch', function() {
   gulp.watch(paths.src.libs + 'base.js',
     [
       //'lint:js',
-      'process:modernizr',
+      //'process:modernizr',
       'process:base',
       'concat:plugins'
     ]
@@ -439,7 +508,7 @@ gulp.task('watch', function() {
   ).on('change', bs.reload);
 
 
-  gulp.watch(paths.src.tpls + '**/*.tpl',
+  gulp.watch(paths.src.tpls + '**/*.nunjucks',
     [
       'process:templates'
     ]
@@ -474,7 +543,7 @@ gulp.task('build', function() {
 
   if (isProduction) {
 
-    runSequence('clean:app', 'process:modernizr',
+    runSequence('clean:app',
       [
         'compile:sass',
         'compile:sass-editor',
@@ -490,7 +559,7 @@ gulp.task('build', function() {
 
   } else {
 
-    runSequence('clean:app', 'process:modernizr', 'process:templates',
+    runSequence('clean:app', 'process:templates',
       [
         //'lint:scss',
         //'lint:js',
@@ -510,3 +579,34 @@ gulp.task('build', function() {
   }
 
 });
+
+
+
+
+
+/**
+ * Shove development environment to staging server
+ *
+ * // Shove it to FTP
+ * `$ gulp deploy:dev`
+ *
+ */
+
+ gulp.task('deploy:dev', function() {
+
+     runSequence('clean:app',
+       [
+         'compile:sass',
+         'compile:sass-editor',
+         'copy:jquery',
+         'process:base',
+         'concat:plugins',
+         'concat:plugins-respimages',
+         'process:images',
+         'process:icons'
+       ],
+       'process:templates',
+       'deploy'
+     );
+
+ });
